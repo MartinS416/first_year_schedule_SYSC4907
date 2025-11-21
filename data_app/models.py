@@ -1,63 +1,83 @@
 from django.db import models
 
-class Course(models.Model):
-    course_code = models.CharField(max_length=20, unique=True)
-
-    def __str__(self):
-        return self.course_code
-
-class Section(models.Model):
-    crn = models.IntegerField(unique=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="sections")
-    section_id = models.CharField(max_length=20)
-    days = models.CharField(max_length=20)
-    start_time = models.TimeField()
-    end_time = models.TimeField()
-    room_capacity = models.IntegerField()
-    enrolled = models.IntegerField()
-
-    def __str__(self):
-        return f"{self.course.course_code} - {self.section_id} ({self.crn})"
-
 
 class Program(models.Model):
-    program_id = models.IntegerField(unique=True)
-    program_name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.program_name
-
-class ProgramCourse(models.Model):
-    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name="program_courses")
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    term = models.CharField(max_length=10)
-
-    def __str__(self):
-        return f"{self.program.program_name} - {self.course.course_code} ({self.term})"
+    program_name = models.CharField(max_length=255)
+    enrolled = models.IntegerField(null=True, blank=True) 
 
 
 class Block(models.Model):
-    block_id = models.IntegerField(unique=True)
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name="blocks")
-    capacity = models.IntegerField()
-    enrolled = models.IntegerField()
+    block_name = models.CharField(max_length=255)
     ranking = models.IntegerField()
+    timestamp = models.DateTimeField()
 
-    def __str__(self):
-        return f"Block {self.block_id} ({self.program.program_name})"
 
-class BlockSection(models.Model):
-    block = models.ForeignKey(Block, on_delete=models.CASCADE, related_name="block_sections")
-    section = models.ForeignKey(Section, on_delete=models.CASCADE)
-    type = models.CharField(max_length=10)
+class Term(models.Model):
+    block = models.ForeignKey(Block, on_delete=models.CASCADE, related_name="terms")
+    term_name = models.CharField(max_length=255)
 
-    def __str__(self):
-        return f"{self.block} - {self.section} ({self.type})"
+
+class Course(models.Model):
+    course_code = models.CharField(max_length=255)
+    section = models.CharField(max_length=50)
+    term = models.CharField(max_length=50)
+    instr_type = models.CharField(max_length=50)     # LEC, LAB, TUT, PA
+    parent = models.ForeignKey(
+        "self",
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name="children"
+    )
+    days = models.CharField(max_length=50, blank=True, null=True)
+    start_time = models.CharField(max_length=50, blank=True, null=True)
+    end_time = models.CharField(max_length=50, blank=True, null=True)
+    capacity = models.IntegerField(null=True, blank=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["course_code", "section"]),
+        ]
+
+
+class TermCourses(models.Model):
+    term = models.ForeignKey(Term, on_delete=models.CASCADE, related_name="term_courses")
+    course_code = models.CharField(max_length=255)
+    section = models.CharField(max_length=50)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["term", "course_code", "section"]),
+        ]
+
+
+class ProgramCourse(models.Model):
+    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name="program_courses")
+    course_code = models.CharField(max_length=255)
+    term = models.CharField(max_length=50)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["program", "course_code"], name="unique_program_course")
+        ]
+
 
 class Student(models.Model):
     student_id = models.IntegerField(unique=True)
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name="students")
-    block_id = models.ManyToManyField(Block, related_name="students")
+    block = models.ForeignKey(Block, on_delete=models.CASCADE, related_name="students")
 
-    def __str__(self):
-        return f"Student {self.student_id} ({self.program.program_name})"
+
+class AdminUser(models.Model):
+    email = models.CharField(max_length=255, unique=True)
+    password_hash = models.CharField(max_length=255)
+    role = models.CharField(max_length=50)   # admin, superadmin, etc.
+    created_at = models.CharField(max_length=255, blank=True, null=True)
+
+
+class LogEntry(models.Model):
+    admin = models.ForeignKey(AdminUser, on_delete=models.CASCADE, related_name="logs")
+    action = models.CharField(max_length=255)
+    details = models.TextField(blank=True, null=True)
+    timestamp = models.CharField(max_length=255)
