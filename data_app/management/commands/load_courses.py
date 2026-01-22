@@ -26,7 +26,7 @@ class Command(BaseCommand):
                 course_code=course_code,
                 section=section,
                 defaults={
-                    "term": r["TERM"].strip(),
+                    "term": r["TERM"].strip().lower(),
                     "instr_type": r["INSTR_TYPE"].strip(),
                     "days": r["DAYS"].strip(),  # can be M, W, F, TR, MWF etc.
                     "start_time": r["START_TIME"].strip()
@@ -74,7 +74,7 @@ class Command(BaseCommand):
 
                 parent = Course.objects.filter(
                     course_code=course_code,
-                    term=term,
+                    term=term.lower(),
                     section=parent_section,
                     instr_type="LEC"
                 ).first()

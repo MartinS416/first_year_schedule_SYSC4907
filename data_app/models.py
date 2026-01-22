@@ -11,6 +11,7 @@ class Block(models.Model):
     block_name = models.CharField(max_length=255)
     ranking = models.IntegerField()
     timestamp = models.DateTimeField()
+    size = models.IntegerField(null=True, blank=True)
 
 
 class Term(models.Model):
@@ -33,6 +34,7 @@ class Course(models.Model):
     days = models.CharField(max_length=50, blank=True, null=True)
     start_time = models.CharField(max_length=50, blank=True, null=True)
     end_time = models.CharField(max_length=50, blank=True, null=True)
+    enrolled = models.IntegerField(default=0)
     capacity = models.IntegerField(null=True, blank=True)
 
     class Meta:

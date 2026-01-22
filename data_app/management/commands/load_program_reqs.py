@@ -40,7 +40,7 @@ class Command(BaseCommand):
                         program=program,
                         course_code=course_code,
                         defaults={
-                            "term": term
+                            "term": term.lower()
                         }
                     )
 

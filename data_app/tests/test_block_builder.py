@@ -29,4 +29,4 @@ class BlockBuilderTests(TestCase):
             terms = Term.objects.filter(block=block)
             self.assertEqual(terms.count(), 2)
             term_names = set(t.term_name for t in terms)
-            self.assertEqual(term_names, {"Fall", "Winter"})
+            self.assertEqual(term_names, {"fall", "winter"})

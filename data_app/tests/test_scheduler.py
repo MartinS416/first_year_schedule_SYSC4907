@@ -23,13 +23,13 @@ class TestFindSharedCourses(TestCase):
 
         # 3. Create Requirements (ProgramCourse)
         # MATH101 is needed by all 3 programs
-        ProgramCourse.objects.create(program=self.mech, course_code="MATH101", term="Fall")
-        ProgramCourse.objects.create(program=self.civil, course_code="MATH101", term="Fall")
-        ProgramCourse.objects.create(program=self.elec, course_code="MATH101", term="Fall")
+        ProgramCourse.objects.create(program=self.mech, course_code="MATH101", term="fall")
+        ProgramCourse.objects.create(program=self.civil, course_code="MATH101", term="fall")
+        ProgramCourse.objects.create(program=self.elec, course_code="MATH101", term="fall")
 
         # PHY101 is needed by 2 programs
-        ProgramCourse.objects.create(program=self.mech, course_code="PHY101", term="Fall")
-        ProgramCourse.objects.create(program=self.civil, course_code="PHY101", term="Fall")
+        ProgramCourse.objects.create(program=self.mech, course_code="PHY101", term="fall")
+        ProgramCourse.objects.create(program=self.civil, course_code="PHY101", term="fall")
 
     @patch('random.random')
     def test_find_shared_courses_sorting(self, mock_random):
