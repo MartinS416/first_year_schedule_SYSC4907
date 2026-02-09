@@ -1,0 +1,704 @@
+{% extends "base.html" %} {% load static %} {% block title %}Generate Schedule{%
+endblock %} {% block page_title %}Generate Schedule{% endblock %} {% block
+topbar_actions %}
+<a href="{% url 'dashboard' %}" class="btn btn-ghost btn-sm">
+    <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    >
+        <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+    Back to Dashboard
+</a>
+{% endblock %} {% block content %}
+
+<!-- Current Status -->
+{% if has_schedule %}
+<div class="alert alert-info mb-6">
+    <span>
+        <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 6px;
+            "
+        >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        A schedule already exists with
+        <strong>{{ total_scheduled }}</strong> course assignments across
+        <strong>{{ total_blocks }}</strong> blocks. Generating a new schedule
+        will replace the current one.
+    </span>
+    <button class="alert-close" onclick="this.parentElement.remove()">
+        &times;
+    </button>
+</div>
+{% endif %}
+
+<!-- Stats Summary -->
+<div class="stats-grid mb-8">
+    <div class="stat-card">
+        <div class="stat-icon stat-icon-primary">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path
+                    d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
+                ></path>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ total_programs }}</div>
+            <div class="stat-label">Programs Loaded</div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon stat-icon-warning">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ total_blocks }}</div>
+            <div class="stat-label">Existing Blocks</div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon stat-icon-success">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ total_scheduled }}</div>
+            <div class="stat-label">Course Assignments</div>
+        </div>
+    </div>
+</div>
+
+<!-- Generate Card -->
+<div class="generate-container">
+    <div class="card generate-card">
+        <div class="card-body">
+            <div class="generate-icon">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <rect
+                        x="3"
+                        y="4"
+                        width="18"
+                        height="18"
+                        rx="2"
+                        ry="2"
+                    ></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <line x1="10" y1="14" x2="14" y2="14"></line>
+                    <line x1="12" y1="12" x2="12" y2="16"></line>
+                </svg>
+            </div>
+
+            <h2 class="generate-title">Schedule Generator</h2>
+            <p class="generate-description">
+                Build optimized first-year engineering schedules across all
+                programs. The generator assigns course sections to blocks while
+                avoiding time conflicts and respecting enrollment capacities.
+            </p>
+
+            <div class="generate-actions">
+                <!-- Generate Button -->
+                <button
+                    class="btn btn-primary btn-lg"
+                    id="btn-generate"
+                    onclick="handleGenerate()"
+                    {% if total_programs == 0 %}disabled{% endif %}
+                >
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    Generate New Schedule
+                </button>
+
+                <!-- Rank Button -->
+                <button
+                    class="btn btn-success btn-lg"
+                    id="btn-rank"
+                    onclick="handleRank()"
+                    {% if not has_schedule %}disabled{% endif %}
+                >
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                    Rank All Blocks
+                </button>
+
+                {% if total_programs == 0 %}
+                <p class="text-sm text-muted mt-2">
+                    <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        style="
+                            display: inline-block;
+                            vertical-align: middle;
+                            margin-right: 4px;
+                            color: var(--warning-500);
+                        "
+                    >
+                        <path
+                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                        ></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    No programs loaded. Please load data first using the
+                    management commands described in the README.
+                </p>
+                {% endif %}
+            </div>
+
+            <!-- Console Output Area -->
+            <div
+                class="console-output"
+                id="console-output"
+                style="display: none"
+            ></div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="card mt-6">
+        <div class="card-header">
+            <div>
+                <h3 class="card-header-title">
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        style="
+                            display: inline-block;
+                            vertical-align: middle;
+                            margin-right: 6px;
+                            color: var(--primary-500);
+                        "
+                    >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    How It Works
+                </h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <div
+                style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--space-5);
+                "
+            >
+                <div
+                    style="
+                        display: flex;
+                        align-items: flex-start;
+                        gap: var(--space-4);
+                    "
+                >
+                    <div
+                        style="
+                            flex-shrink: 0;
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            background: var(--primary-100);
+                            color: var(--primary-700);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: var(--text-sm);
+                        "
+                    >
+                        1
+                    </div>
+                    <div>
+                        <h4
+                            style="
+                                font-weight: 600;
+                                color: var(--gray-900);
+                                font-size: var(--text-sm);
+                                margin-bottom: 2px;
+                            "
+                        >
+                            Build Blocks
+                        </h4>
+                        <p class="text-sm text-muted">
+                            Creates blocks of ~20 students for each program
+                            based on enrollment numbers. Each block gets a fall
+                            and winter term.
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    style="
+                        display: flex;
+                        align-items: flex-start;
+                        gap: var(--space-4);
+                    "
+                >
+                    <div
+                        style="
+                            flex-shrink: 0;
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            background: var(--primary-100);
+                            color: var(--primary-700);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: var(--text-sm);
+                        "
+                    >
+                        2
+                    </div>
+                    <div>
+                        <h4
+                            style="
+                                font-weight: 600;
+                                color: var(--gray-900);
+                                font-size: var(--text-sm);
+                                margin-bottom: 2px;
+                            "
+                        >
+                            Prioritize Courses
+                        </h4>
+                        <p class="text-sm text-muted">
+                            Shared courses (required by many programs) are
+                            scheduled first. Courses with fewer available
+                            sections are given higher priority to ensure
+                            feasibility.
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    style="
+                        display: flex;
+                        align-items: flex-start;
+                        gap: var(--space-4);
+                    "
+                >
+                    <div
+                        style="
+                            flex-shrink: 0;
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            background: var(--primary-100);
+                            color: var(--primary-700);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: var(--text-sm);
+                        "
+                    >
+                        3
+                    </div>
+                    <div>
+                        <h4
+                            style="
+                                font-weight: 600;
+                                color: var(--gray-900);
+                                font-size: var(--text-sm);
+                                margin-bottom: 2px;
+                            "
+                        >
+                            Assign Sections
+                        </h4>
+                        <p class="text-sm text-muted">
+                            For each course, the algorithm tries to assign a
+                            non-conflicting section (lecture + lab/tutorial) to
+                            every block that needs it, respecting room
+                            capacities.
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    style="
+                        display: flex;
+                        align-items: flex-start;
+                        gap: var(--space-4);
+                    "
+                >
+                    <div
+                        style="
+                            flex-shrink: 0;
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            background: var(--primary-100);
+                            color: var(--primary-700);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: var(--text-sm);
+                        "
+                    >
+                        4
+                    </div>
+                    <div>
+                        <h4
+                            style="
+                                font-weight: 600;
+                                color: var(--gray-900);
+                                font-size: var(--text-sm);
+                                margin-bottom: 2px;
+                            "
+                        >
+                            Kick &amp; Repair
+                        </h4>
+                        <p class="text-sm text-muted">
+                            When conflicts arise, the system can displace
+                            easier-to-reschedule courses and attempt to re-place
+                            them elsewhere — a "kick and repair" strategy.
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    style="
+                        display: flex;
+                        align-items: flex-start;
+                        gap: var(--space-4);
+                    "
+                >
+                    <div
+                        style="
+                            flex-shrink: 0;
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            background: var(--success-100);
+                            color: var(--success-700);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: var(--text-sm);
+                        "
+                    >
+                        5
+                    </div>
+                    <div>
+                        <h4
+                            style="
+                                font-weight: 600;
+                                color: var(--gray-900);
+                                font-size: var(--text-sm);
+                                margin-bottom: 2px;
+                            "
+                        >
+                            Rank &amp; Report
+                        </h4>
+                        <p class="text-sm text-muted">
+                            After generation, each block is scored 0–100 based
+                            on schedule quality: penalizing large gaps between
+                            classes and insufficient overnight rest between
+                            consecutive days.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block extra_scripts %}
+<script>
+    (function () {
+        var consoleEl = document.getElementById("console-output");
+        var btnGenerate = document.getElementById("btn-generate");
+        var btnRank = document.getElementById("btn-rank");
+        var isRunning = false;
+
+        function appendToConsole(text, className) {
+            if (!consoleEl) return;
+            consoleEl.style.display = "block";
+
+            if (className) {
+                var span = document.createElement("span");
+                span.className = className;
+                span.textContent = text + "\n";
+                consoleEl.appendChild(span);
+            } else {
+                consoleEl.textContent += text + "\n";
+            }
+
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        function setButtonsDisabled(disabled) {
+            if (btnGenerate) btnGenerate.disabled = disabled;
+            if (btnRank) btnRank.disabled = disabled;
+        }
+
+        window.handleGenerate = function () {
+            if (isRunning) return;
+            isRunning = true;
+
+            setButtonsDisabled(true);
+
+            if (consoleEl) {
+                consoleEl.style.display = "block";
+                consoleEl.innerHTML = "";
+            }
+
+            appendToConsole(
+                "> Starting schedule generation...",
+                "console-line-info",
+            );
+            appendToConsole(
+                "> This may take a moment — building blocks and assigning course sections.\n",
+                "console-line-info",
+            );
+
+            showLoading("Generating schedule... This may take a moment.");
+
+            ajaxPost('{% url "api_generate_schedule" %}')
+                .then(function (data) {
+                    hideLoading();
+                    isRunning = false;
+
+                    if (data.success) {
+                        if (data.log) {
+                            var lines = data.log.split("\n");
+                            lines.forEach(function (line) {
+                                if (!line.trim()) return;
+                                if (
+                                    line.indexOf("SUCCESS") !== -1 ||
+                                    line.indexOf("complete") !== -1
+                                ) {
+                                    appendToConsole(
+                                        line,
+                                        "console-line-success",
+                                    );
+                                } else if (
+                                    line.indexOf("WARNING") !== -1 ||
+                                    line.indexOf("[!]") !== -1
+                                ) {
+                                    appendToConsole(
+                                        line,
+                                        "console-line-warning",
+                                    );
+                                } else if (
+                                    line.indexOf("ERROR") !== -1 ||
+                                    line.indexOf("[x]") !== -1
+                                ) {
+                                    appendToConsole(line, "console-line-error");
+                                } else {
+                                    appendToConsole(line, "");
+                                }
+                            });
+                        }
+
+                        appendToConsole(
+                            "\n> Schedule generation complete!",
+                            "console-line-success",
+                        );
+                        showToast(
+                            "Schedule generated successfully!",
+                            "success",
+                        );
+
+                        // Enable rank button
+                        if (btnRank) btnRank.disabled = false;
+
+                        setTimeout(function () {
+                            setButtonsDisabled(false);
+                        }, 1000);
+                    } else {
+                        appendToConsole(
+                            "\n> ERROR: " +
+                                (data.error || "Generation failed."),
+                            "console-line-error",
+                        );
+                        showToast(
+                            data.error || "Schedule generation failed.",
+                            "error",
+                        );
+                        setButtonsDisabled(false);
+                    }
+                })
+                .catch(function (err) {
+                    hideLoading();
+                    isRunning = false;
+                    appendToConsole(
+                        "\n> NETWORK ERROR: " + err.message,
+                        "console-line-error",
+                    );
+                    showToast("An error occurred: " + err.message, "error");
+                    setButtonsDisabled(false);
+                });
+        };
+
+        window.handleRank = function () {
+            if (isRunning) return;
+            isRunning = true;
+
+            setButtonsDisabled(true);
+
+            if (consoleEl) {
+                consoleEl.style.display = "block";
+            }
+
+            appendToConsole(
+                "\n> Starting block ranking process...",
+                "console-line-info",
+            );
+
+            showLoading("Ranking blocks...");
+
+            ajaxPost('{% url "api_rank_blocks" %}')
+                .then(function (data) {
+                    hideLoading();
+                    isRunning = false;
+
+                    if (data.success) {
+                        if (data.log) {
+                            var lines = data.log.split("\n");
+                            lines.forEach(function (line) {
+                                if (!line.trim()) return;
+                                if (
+                                    line.indexOf("Updated") !== -1 ||
+                                    line.indexOf("complete") !== -1
+                                ) {
+                                    appendToConsole(
+                                        line,
+                                        "console-line-success",
+                                    );
+                                } else {
+                                    appendToConsole(line, "");
+                                }
+                            });
+                        }
+
+                        appendToConsole(
+                            "\n> Ranking complete! Scores saved to database.",
+                            "console-line-success",
+                        );
+                        showToast("Block ranking complete!", "success");
+
+                        setTimeout(function () {
+                            setButtonsDisabled(false);
+                        }, 1000);
+                    } else {
+                        appendToConsole(
+                            "\n> ERROR: " + (data.error || "Ranking failed."),
+                            "console-line-error",
+                        );
+                        showToast(data.error || "Ranking failed.", "error");
+                        setButtonsDisabled(false);
+                    }
+                })
+                .catch(function (err) {
+                    hideLoading();
+                    isRunning = false;
+                    appendToConsole(
+                        "\n> NETWORK ERROR: " + err.message,
+                        "console-line-error",
+                    );
+                    showToast("An error occurred: " + err.message, "error");
+                    setButtonsDisabled(false);
+                });
+        };
+    })();
+</script>
+{% endblock %}
