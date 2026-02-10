@@ -1,0 +1,294 @@
+{% extends "base.html" %} {% load static %} {% block title %}Dashboard{%
+endblock %} {% block page_title %}Dashboard{% endblock %} {% block
+topbar_actions %}
+<a href="{% url 'generate' %}" class="btn btn-primary btn-sm">
+    <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    >
+        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+    </svg>
+    Generate Schedule
+</a>
+{% endblock %} {% block content %}
+
+<!-- Stats Overview -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon stat-icon-primary">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path
+                    d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
+                ></path>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ total_programs }}</div>
+            <div class="stat-label">Programs</div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon stat-icon-success">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ total_enrolled|default:"0" }}</div>
+            <div class="stat-label">Total Students Enrolled</div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon stat-icon-warning">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ total_blocks }}</div>
+            <div class="stat-label">Schedule Blocks</div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon stat-icon-info">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ unique_courses }}</div>
+            <div class="stat-label">Unique Courses</div>
+        </div>
+    </div>
+</div>
+
+<!-- Programs Section -->
+<div class="section-header">
+    <div>
+        <h2 class="section-title">Engineering Programs</h2>
+        <p class="section-subtitle">
+            All first-year engineering programs and their scheduling status
+        </p>
+    </div>
+    <a href="{% url 'rankings' %}" class="btn btn-ghost btn-sm">
+        <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        View Rankings
+    </a>
+</div>
+
+{% if program_data %}
+<div class="programs-grid">
+    {% for item in program_data %}
+    <div
+        class="card card-clickable program-card"
+        onclick="window.location.href='{% url 'program_detail' item.program.id %}'"
+    >
+        <div
+            class="program-card-stripe"
+            style="background: {{ item.color }};"
+        ></div>
+        <div class="program-card-body">
+            <h3 class="program-name">{{ item.program.program_name }}</h3>
+            <div class="program-meta">
+                <div class="program-meta-item">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path
+                            d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                        ></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="program-meta-value"
+                        >{{ item.program.enrolled|default:"0" }}</span
+                    >
+                    enrolled
+                </div>
+                <div class="program-meta-item">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span class="program-meta-value"
+                        >{{ item.block_count }}</span
+                    >
+                    blocks
+                </div>
+                <div class="program-meta-item">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <rect
+                            x="3"
+                            y="4"
+                            width="18"
+                            height="18"
+                            rx="2"
+                            ry="2"
+                        ></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span class="program-meta-value"
+                        >{{ item.scheduled_count }}</span
+                    >
+                    scheduled
+                </div>
+            </div>
+        </div>
+        <div class="program-card-footer">
+            {% if item.avg_ranking > 0 %}
+            <span class="block-ranking ranking-{{ item.ranking_class }}">
+                <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                {{ item.avg_ranking }}/100
+            </span>
+            {% else %}
+            <span class="pill pill-neutral">Not ranked</span>
+            {% endif %}
+            <a href="{% url 'program_detail' item.program.id %}">
+                View Details
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card">
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path
+                    d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
+                ></path>
+            </svg>
+        </div>
+        <h3 class="empty-state-title">No Programs Found</h3>
+        <p class="empty-state-text">
+            It looks like no program data has been loaded yet. Follow the setup
+            instructions in the README to load data into the database.
+        </p>
+        <a href="{% url 'generate' %}" class="btn btn-primary">
+            <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            Go to Generate
+        </a>
+    </div>
+</div>
+{% endif %} {% endblock %}
