@@ -333,8 +333,12 @@ class ScheduleBuilder:
         block_size = term.block.size or 0
         current_term_courses_objects = self._get_existing_course_objects_for_term(term)
 
-        random.shuffle(bundles)
+        # Score each bundle for gap/rest penalties
 
+        # For each possible bundle, simulate adding it to the term and score for gap/rest penalties.
+        # This helps select the bundle that minimizes schedule gaps and maximizes rest between days.
+        random.shuffle(bundles)  # Randomize bundle order to break ties and increase schedule diversity
+        scored_bundles = []
         for bundle in bundles:
             if not self._has_capacity(bundle, block_size):
                 continue
@@ -342,10 +346,97 @@ class ScheduleBuilder:
             if not can_add_group_to_term(bundle, current_term_courses_objects):
                 continue
 
-            self._commit_bundle_to_term(term, bundle, block_size)
-            return True
-        
-        return False
+            # Simulate adding bundle to term
+            simulated_courses = []
+            for group in current_term_courses_objects:
+                simulated_courses.extend(group)
+            simulated_courses.extend(bundle)
+
+            # Calculate penalties
+            gap_penalty = self._calc_gap_penalty(simulated_courses)
+            sleep_penalty = self._calc_sleep_penalty(simulated_courses)
+            total_penalty = gap_penalty + sleep_penalty
+            # Store (penalty, bundle) for later sorting
+            scored_bundles.append((total_penalty, bundle))
+
+        if not scored_bundles:
+            return False
+
+        scored_bundles.sort(key=lambda x: x[0])
+        best_bundle = scored_bundles[0][1]
+        self._commit_bundle_to_term(term, best_bundle, block_size)
+        return True
+
+    def _calc_gap_penalty(self, courses):
+        """
+        Calculates penalty points for gaps between classes on the same day.
+        Penalty is applied for gaps greater than 60 minutes, with points per extra 30 minutes.
+        Returns total gap penalty for all days.
+        """
+        # Build daily grid: Mon=0, Fri=4
+        daily_grid = {0: [], 1: [], 2: [], 3: [], 4: []}
+        for c in courses:
+            days_indices = self._parse_days(c.days)
+            s_min = self._parse_time(c.start_time)
+            e_min = self._parse_time(c.end_time)
+            for d in days_indices:
+                daily_grid[d].append((s_min, e_min))
+        for d in daily_grid:
+            daily_grid[d].sort(key=lambda x: x[0])
+        penalty = 0
+        for d, classes in daily_grid.items():
+            if len(classes) < 2:
+                continue
+            for i in range(len(classes) - 1):
+                gap_mins = classes[i+1][0] - classes[i][1]
+                if gap_mins > 60:
+                    excess = gap_mins - 60
+                    # Apply penalty: 2 points per 30 minutes of excess gap
+                    pts = (excess // 30) * 2
+                    penalty += pts
+        return penalty
+
+    def _calc_sleep_penalty(self, courses):
+        """
+        Calculates penalty points for insufficient rest between consecutive days.
+        Penalty is applied if rest between last class of one day and first class of next day is less than 12 hours.
+        Returns total sleep penalty for all day transitions.
+        """
+        daily_grid = {0: [], 1: [], 2: [], 3: [], 4: []}
+        for c in courses:
+            days_indices = self._parse_days(c.days)
+            s_min = self._parse_time(c.start_time)
+            e_min = self._parse_time(c.end_time)
+            for d in days_indices:
+                daily_grid[d].append((s_min, e_min))
+        for d in daily_grid:
+            daily_grid[d].sort(key=lambda x: x[0])
+        penalty = 0
+        MIN_REST = 12 * 60 # 720 mins
+        for d in range(4): # Mon(0) -> Thu(3)
+            if not daily_grid[d] or not daily_grid[d+1]:
+                continue
+            last_end = daily_grid[d][-1][1]
+            first_start = daily_grid[d+1][0][0]
+            mins_until_midnight = 1440 - last_end
+            total_rest = mins_until_midnight + first_start
+            if total_rest < MIN_REST:
+                lost = MIN_REST - total_rest
+                # Apply penalty: 5 points per 30 minutes of lost rest
+                pts = (lost // 30) * 5
+                penalty += pts
+        return penalty
+
+    def _parse_days(self, days_str):
+        mapping = {'M': 0, 'T': 1, 'W': 2, 'R': 3, 'F': 4}
+        return [mapping[c] for c in (days_str or "").upper() if c in mapping]
+
+    def _parse_time(self, time_val):
+        try:
+            t = str(time_val).zfill(4)
+            return int(t[:2]) * 60 + int(t[2:])
+        except:
+            return 0
 
     def _get_existing_course_objects_for_term(self, term):
         scheduled_entries = TermCourses.objects.filter(term=term)
