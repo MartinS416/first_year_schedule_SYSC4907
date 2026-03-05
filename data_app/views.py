@@ -16,6 +16,7 @@ from .models import (
     Term,
     TermCourses,
 )
+from .services.log_service import log_error, log_info, log_success
 
 # ---------------------------------------------------------------------------
 #  Context Processor Helper — sidebar programs available on every page
@@ -379,6 +380,10 @@ def api_generate_schedule(request):
     """
     Trigger schedule generation via AJAX. Returns JSON with success status and log output.
     """
+    log_info(
+        "Schedule Generation Started", details="User triggered schedule generation."
+    )
+
     try:
         from .services.schedule_builder import ScheduleBuilder
 
@@ -393,6 +398,8 @@ def api_generate_schedule(request):
 
         log_output = log_buffer.getvalue()
 
+        log_success("Schedule Generation Completed", details=log_output)
+
         return JsonResponse(
             {
                 "success": True,
@@ -402,6 +409,8 @@ def api_generate_schedule(request):
         )
 
     except Exception as e:
+        log_error("Schedule Generation Failed", details=f"Error: {str(e)}")
+
         return JsonResponse(
             {
                 "success": False,
@@ -417,6 +426,8 @@ def api_rank_blocks(request):
     """
     Trigger block ranking via AJAX. Returns JSON with success status.
     """
+    log_info("Block Ranking Started", details="User triggered block ranking.")
+
     try:
         from .services.ranking import ScheduleRanker
 
@@ -429,6 +440,8 @@ def api_rank_blocks(request):
 
         log_output = log_buffer.getvalue()
 
+        log_success("Block Ranking Completed", details=log_output)
+
         return JsonResponse(
             {
                 "success": True,
@@ -438,6 +451,8 @@ def api_rank_blocks(request):
         )
 
     except Exception as e:
+        log_error("Block Ranking Failed", details=f"Error: {str(e)}")
+
         return JsonResponse(
             {
                 "success": False,
