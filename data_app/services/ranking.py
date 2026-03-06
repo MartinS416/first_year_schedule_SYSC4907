@@ -1,6 +1,5 @@
 from django.db import models
 from data_app.models import Block, Term, TermCourses, Course, ProgramCourse, Program
-import math
 
 class ScheduleRanker:
     """
@@ -10,7 +9,6 @@ class ScheduleRanker:
 
     # --- CONFIGURATION WEIGHTS ---
 
-    BASE_SCORE = 100
     # Rule weights (can be tuned)
     WEIGHTS = {
         "compactness": 80,
@@ -23,6 +21,8 @@ class ScheduleRanker:
     }
 
     GAP_CAP = 240  # 4 hours
+    LATE_EARLY_MAX_PENALTY = 100  # Used to normalize late-to-early penalty to [0, 1]
+    SLEEP_DEFICIT_PENALTY = 5  # 5 pts per 30-min sleep deficit (previously PENALTY_PER_30MIN_SLEEP_LOSS)
 
     def rank_all_blocks(self):
         """
@@ -149,7 +149,7 @@ class ScheduleRanker:
         # Late-to-early (sleep penalty)
         late_penalty, late_notes = self._calc_late_to_early_penalty(daily_grid, day_names)
         notes.extend(late_notes)
-        scores["late_to_early"] = max(0.0, 1 - (late_penalty / 100))
+        scores["late_to_early"] = max(0.0, 1 - (late_penalty / self.LATE_EARLY_MAX_PENALTY))
 
         # Lab spread (stub)
         scores["lab_spread"] = self._lab_spread_score(courses)
@@ -248,7 +248,8 @@ class ScheduleRanker:
             total_rest = mins_until_midnight + first_start
             if total_rest < MIN_REST:
                 lost = MIN_REST - total_rest
-                pts = (lost // 30) * 5  # keep penalty scale
+                # 5 pts per 30-min sleep deficit (see SLEEP_DEFICIT_PENALTY)
+                pts = (lost // 30) * self.SLEEP_DEFICIT_PENALTY
                 if pts > 0:
                     penalty += pts
                     rest_hrs = round(total_rest / 60, 1)
