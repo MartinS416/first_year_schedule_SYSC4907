@@ -167,6 +167,10 @@ class ScheduleRanker:
 
     # --- Modular rule helpers ---
     def _total_gap_minutes(self, daily_grid):
+        """
+        Rewards schedules with fewer gaps between classes in a day (prefer compact, back-to-back schedules).
+        Returns total gap minutes for all days. Used to calculate compactness score.
+        """
         total = 0
         for classes in daily_grid.values():
             if len(classes) < 2:
@@ -176,9 +180,17 @@ class ScheduleRanker:
         return total
 
     def _days_used(self, daily_grid):
+        """
+        Rewards schedules that use fewer days in the week (prefer 4-day schedules over 5-day schedules).
+        Returns the number of days with scheduled classes.
+        """
         return sum(1 for d in daily_grid if daily_grid[d])
 
     def _days_used_score(self, days_used, ideal=4, max_days=5):
+        """
+        Rewards schedules that use the ideal number of days (prefer ideal=4).
+        Returns 1.0 for ideal or fewer days, 0.0 for max_days or more, linear in between.
+        """
         if days_used <= ideal:
             return 1.0
         if days_used >= max_days:
@@ -186,6 +198,10 @@ class ScheduleRanker:
         return 1 - ((days_used - ideal) / (max_days - ideal))
 
     def _day_balance_score(self, daily_grid):
+        """
+        Rewards schedules that avoid single isolated classes on otherwise free days (prefer balanced days).
+        Returns 1.0 for no singleton days, 0.0 if all days are singletons, linear in between.
+        """
         active_days = [d for d, classes in daily_grid.items() if classes]
         if not active_days:
             return 1.0
@@ -240,7 +256,10 @@ class ScheduleRanker:
         return penalty, notes
 
     def _lab_spread_score(self, courses):
-        # Group by course_code, find LEC and LAB/TUT for each
+        """
+        Rewards schedules where labs/tutorials are scheduled close to their related lectures (prefer same or adjacent days).
+        Returns 1.0 for 0 days apart, 0.0 for 4 days apart, linear in between.
+        """
         spreads = []
         course_map = {}
         for c in courses:
