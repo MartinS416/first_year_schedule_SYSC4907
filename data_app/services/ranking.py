@@ -15,7 +15,8 @@ class ScheduleRanker:
     WEIGHTS = {
         "compactness": 80,
         "day_balance": 60,
-        "time_preference": 50,
+        "end_time_preference": 50,
+        "start_time_preference": 40,
         "late_to_early": 90,
         "lab_spread": 40,
         "days_used": 70,
@@ -139,10 +140,13 @@ class ScheduleRanker:
         # Day balance
         scores["day_balance"] = self._day_balance_score(daily_grid)
 
-        # Time preference
-        scores["time_preference"] = self._time_preference_score(daily_grid)
+        # End time preference (finish earlier)
+        scores["end_time_preference"] = self._end_time_preference(daily_grid)
 
-        # Late-to-early (sleep penalty, renamed)
+        # Start time preference (start later)
+        scores["start_time_preference"] = self._start_time_preference_score(daily_grid)
+
+        # Late-to-early (sleep penalty)
         late_penalty, late_notes = self._calc_late_to_early_penalty(daily_grid, day_names)
         notes.extend(late_notes)
         scores["late_to_early"] = max(0.0, 1 - (late_penalty / 100))
@@ -188,7 +192,11 @@ class ScheduleRanker:
         singleton_days = sum(1 for d in active_days if len(daily_grid[d]) == 1)
         return 1 - (singleton_days / len(active_days))
 
-    def _time_preference_score(self, daily_grid, target_end=1020, max_end=1290):
+    def _end_time_preference(self, daily_grid, target_end=1020, max_end=1290):
+        """
+        Rewards schedules where the latest class ends at or before the preferred time (prefer ending at or before 5 PM).
+        Returns 1.0 for ending at or before target_end, 0.0 for ending at or after max_end, linear in between.
+        """
         latest_end = 0
         for classes in daily_grid.values():
             if classes:
@@ -198,6 +206,18 @@ class ScheduleRanker:
         if latest_end >= max_end:
             return 0.0
         return 1 - ((latest_end - target_end) / (max_end - target_end))
+
+    def _start_time_preference_score(self, daily_grid, ideal_start=540, max_early=480):
+        """
+        Rewards schedules where the earliest class starts at or after the preferred time (prefer starting at or after 9 AM).
+        Returns 1.0 for starting at or after ideal_start, 0.0 for starting at or before max_early, linear in between.
+        """
+        earliest_start = min((classes[0][0] for classes in daily_grid.values() if classes), default=1440)
+        if earliest_start >= ideal_start:
+            return 1.0
+        if earliest_start <= max_early:
+            return 0.0
+        return (earliest_start - max_early) / (ideal_start - max_early)
 
     def _calc_late_to_early_penalty(self, daily_grid, day_names):
         penalty = 0
