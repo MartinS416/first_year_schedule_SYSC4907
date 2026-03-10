@@ -1,6 +1,4 @@
-{% extends "base.html" %} {% load static %} {% block title %}{{
-program.program_name }}{% endblock %} {% block page_title %}{{
-program.program_name }} Engineering{% endblock %} {% block topbar_actions %}
+{% extends "base.html" %} {% load static %} {% block title %}{{ program.program_name }}{% endblock %} {% block page_title %}{{ program.program_name }} Engineering{% endblock %} {% block topbar_actions %}
 <a href="{% url 'dashboard' %}" class="btn btn-ghost btn-sm">
     <svg
         width="16"
@@ -278,8 +276,7 @@ program.program_name }} Engineering{% endblock %} {% block topbar_actions %}
                 "
             >
                 <span class="text-xs text-muted" style="font-weight: 500">
-                    {{ term_data.courses_table|length }} course section{{
-                    term_data.courses_table|length|pluralize }}
+                    {{ term_data.courses_table|length }} course section{{ term_data.courses_table|length|pluralize }}
                 </span>
                 <button
                     class="btn btn-ghost btn-sm toggle-table-btn"
@@ -342,10 +339,11 @@ program.program_name }} Engineering{% endblock %} {% block topbar_actions %}
                             </td>
                             <td>{{ c.days }}</td>
                             <td>
-                                {% if c.start_time %} {{ c.start_time }} – {{
-                                c.end_time }} {% else %}
-                                <span class="text-muted">—</span>
-                                {% endif %}
+                                {% if c.start_time %}{{ c.start_time }} &ndash;
+                                {{ c.end_time }}{% else %}<span
+                                    class="text-muted"
+                                    >&mdash;</span
+                                >{% endif %}
                             </td>
                             <td>
                                 <div
