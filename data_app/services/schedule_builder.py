@@ -330,38 +330,62 @@ class ScheduleBuilder:
         return targets
 
     def _attempt_to_schedule_term(self, term, course_code, bundles):
+        from .ranking import ScheduleRanker
         block_size = term.block.size or 0
         current_term_courses_objects = self._get_existing_course_objects_for_term(term)
-
-        # Score each bundle for gap/rest penalties
-
-        # For each possible bundle, simulate adding it to the term and score for gap/rest penalties.
-        # This helps select the bundle that minimizes schedule gaps and maximizes rest between days.
-        random.shuffle(bundles)  # Randomize bundle order to break ties and increase schedule diversity
+        random.shuffle(bundles)
         scored_bundles = []
+        ranker = ScheduleRanker()
         for bundle in bundles:
             if not self._has_capacity(bundle, block_size):
                 continue
-
             if not can_add_group_to_term(bundle, current_term_courses_objects):
                 continue
-
             # Simulate adding bundle to term
             simulated_courses = []
             for group in current_term_courses_objects:
                 simulated_courses.extend(group)
             simulated_courses.extend(bundle)
-
-            # Calculate penalties
-            gap_penalty = self._calc_gap_penalty(simulated_courses)
-            sleep_penalty = self._calc_sleep_penalty(simulated_courses)
-            total_penalty = gap_penalty + sleep_penalty
-            # Store (penalty, bundle) for later sorting
-            scored_bundles.append((total_penalty, bundle))
-
+            # Build daily grid
+            daily_grid = {0: [], 1: [], 2: [], 3: [], 4: []}
+            for c in simulated_courses:
+                days_indices = self._parse_days(c.days)
+                s_min = self._parse_time(c.start_time)
+                e_min = self._parse_time(c.end_time)
+                for d in days_indices:
+                    daily_grid[d].append((s_min, e_min))
+            for d in daily_grid:
+                daily_grid[d].sort(key=lambda x: x[0])
+            # Modular scoring rules 
+            scores = {}
+            # Compactness
+            total_gap = ranker._total_gap_minutes(daily_grid)
+            scores["compactness"] = 1 - min(total_gap / ranker.GAP_CAP, 1)
+            # Days used
+            days_used = ranker._days_used(daily_grid)
+            scores["days_used"] = ranker._days_used_score(days_used)
+            # Day balance
+            scores["day_balance"] = ranker._day_balance_score(daily_grid)
+            # End time preference
+            scores["end_time_preference"] = ranker._end_time_preference(daily_grid)
+            # Start time preference
+            scores["start_time_preference"] = ranker._start_time_preference_score(daily_grid)
+            # Late-to-early penalty
+            late_penalty, _ = ranker._calc_late_to_early_penalty(daily_grid, ["Mon", "Tue", "Wed", "Thu", "Fri"])
+            scores["late_to_early"] = max(0.0, 1 - (late_penalty / ranker.LATE_EARLY_MAX_PENALTY))
+            # Lab spread
+            scores["lab_spread"] = ranker._lab_spread_score(simulated_courses)
+            # Weighted sum
+            weighted_sum = 0
+            weight_total = 0
+            for k, w in ranker.WEIGHTS.items():
+                weighted_sum += w * scores.get(k, 1.0)
+                weight_total += w
+            term_score = 100 * (weighted_sum / weight_total) if weight_total else 0
+            # Store (-score, bundle) for sorting
+            scored_bundles.append((-term_score, bundle))
         if not scored_bundles:
             return False
-
         scored_bundles.sort(key=lambda x: x[0])
         best_bundle = scored_bundles[0][1]
         self._commit_bundle_to_term(term, best_bundle, block_size)
