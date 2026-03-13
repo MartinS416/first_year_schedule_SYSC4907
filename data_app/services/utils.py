@@ -55,3 +55,24 @@ def slots_conflict(slots_a, slots_b):
                     return True
                 
     return False
+
+from data_app.models import Course
+from django.db.models import F
+
+def check_course_capacities():
+    exceeding_courses = Course.objects.filter(
+        capacity__isnull=False, 
+        enrolled__gt=F('capacity')
+    )
+    
+    if not exceeding_courses.exists():
+        print("All courses are perfectly within their capacity limits!")
+        return
+        
+    print(f"WARNING: Found {exceeding_courses.count()} courses exceeding capacity:")
+    print("-" * 65)
+    print(f"{'Course Code':<15} | {'Section':<8} | {'Term':<10} | {'Enrolled':<10} | {'Capacity':<10}")
+    print("-" * 65)
+    
+    for course in exceeding_courses:
+        print(f"{course.course_code:<15} | {course.section:<8} | {course.term:<10} | {course.enrolled:<10} | {course.capacity:<10}")
