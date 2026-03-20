@@ -111,3 +111,21 @@ class LogEntry(models.Model):
 
     def __str__(self):
         return f"[{self.level}] {self.action} ({self.timestamp:%Y-%m-%d %H:%M:%S})"
+
+
+class RankingConfig(models.Model):
+    # Only one row should exist (singleton config)
+    compactness = models.IntegerField(default=80)
+    day_balance = models.IntegerField(default=60)
+    end_time_preference = models.IntegerField(default=50)
+    start_time_preference = models.IntegerField(default=40)
+    late_to_early = models.IntegerField(default=90)
+    lab_spread = models.IntegerField(default=40)
+    days_used = models.IntegerField(default=70)
+
+    def __str__(self):
+        return "Ranking Weights Configuration"
+
+    class Meta:
+        verbose_name = "Ranking Configuration"
+        verbose_name_plural = "Ranking Configuration"

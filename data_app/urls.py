@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from . import views
 
@@ -47,4 +47,8 @@ urlpatterns = [
         views.api_stats,
         name="api_stats",
     ),
+    # ---------------------------------------------------------------
+    #  Ranking Config
+    # ---------------------------------------------------------------
+    path("", include("data_app.urls_ranking_config")),
 ]

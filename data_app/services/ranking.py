@@ -1,5 +1,6 @@
 from django.db import models
 from data_app.models import Block, Term, TermCourses, Course, ProgramCourse, Program
+from data_app.models.ranking_config import RankingConfig
 
 class ScheduleRanker:
     """
@@ -10,15 +11,33 @@ class ScheduleRanker:
     # --- CONFIGURATION WEIGHTS ---
 
     # Rule weights (can be tuned)
-    WEIGHTS = {
-        "compactness": 80,
-        "day_balance": 60,
-        "end_time_preference": 50,
-        "start_time_preference": 40,
-        "late_to_early": 90,
-        "lab_spread": 40,
-        "days_used": 70,
-    }
+    @property
+    def WEIGHTS(self):
+        # Try to get the singleton config from DB, else use defaults
+        try:
+            config = RankingConfig.objects.first()
+            if config:
+                return {
+                    "compactness": config.compactness,
+                    "day_balance": config.day_balance,
+                    "end_time_preference": config.end_time_preference,
+                    "start_time_preference": config.start_time_preference,
+                    "late_to_early": config.late_to_early,
+                    "lab_spread": config.lab_spread,
+                    "days_used": config.days_used,
+                }
+        except Exception:
+            pass
+        # Fallback defaults
+        return {
+            "compactness": 80,
+            "day_balance": 60,
+            "end_time_preference": 50,
+            "start_time_preference": 40,
+            "late_to_early": 90,
+            "lab_spread": 40,
+            "days_used": 70,
+        }
 
     GAP_CAP = 240  # 4 hours
     LATE_EARLY_MAX_PENALTY = 100  # Used to normalize late-to-early penalty to [0, 1]
