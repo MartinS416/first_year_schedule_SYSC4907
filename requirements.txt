@@ -1,0 +1,4 @@
+Django
+reportlab
+psycopg2
+python-decouple
