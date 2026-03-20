@@ -1,0 +1,1462 @@
+============================================================
+BLOCK: Block A  |  PROGRAM: Aerospace
+FINAL SCORE: 63 / 100
+============================================================
+  --- FALL TERM (Score: 67) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.574
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 390
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 60) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.667
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 500
+  [days_used] Days scheduled: 3
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Aerospace
+FINAL SCORE: 46 / 100
+============================================================
+  --- FALL TERM (Score: 48) ---
+  [compactness] score=0.042
+  [days_used] score=0.0
+  [day_balance] score=0.4
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 230
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 45) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=0.9
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 1400
+  [days_used] Days scheduled: 5
+  [late-to-early] Only 10.7 hrs rest Thu->Fri (Req: 12 hrs)
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Aerospace
+FINAL SCORE: 65 / 100
+============================================================
+  --- FALL TERM (Score: 64) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.0
+  [start_time_preference] score=1.0
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 750
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 66) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 380
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Aerospace
+FINAL SCORE: 49 / 100
+============================================================
+  --- FALL TERM (Score: 49) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.574
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 470
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 50) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.463
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 580
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Aerospace
+FINAL SCORE: 50 / 100
+============================================================
+  --- FALL TERM (Score: 52) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.574
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 650
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 48) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 750
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block F  |  PROGRAM: Aerospace
+FINAL SCORE: 69 / 100
+============================================================
+  --- FALL TERM (Score: 76) ---
+  [compactness] score=0.25
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.907
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 180
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 62) ---
+  [compactness] score=0.208
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=1.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 190
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block G  |  PROGRAM: Aerospace
+FINAL SCORE: 50 / 100
+============================================================
+  --- FALL TERM (Score: 49) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.574
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 470
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 51) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.574
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 760
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block H  |  PROGRAM: Aerospace
+FINAL SCORE: 58 / 100
+============================================================
+  --- FALL TERM (Score: 66) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.13
+  [start_time_preference] score=1.0
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 630
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 50) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 390
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Architectural
+FINAL SCORE: 61 / 100
+============================================================
+  --- FALL TERM (Score: 63) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 570
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 59) ---
+  [compactness] score=0.292
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=1.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 170
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Architectural
+FINAL SCORE: 44 / 100
+============================================================
+  --- FALL TERM (Score: 43) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=0.9
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 840
+  [days_used] Days scheduled: 5
+  [late-to-early] Only 10.7 hrs rest Thu->Fri (Req: 12 hrs)
+  
+  --- WINTER TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 710
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Architectural
+FINAL SCORE: 54 / 100
+============================================================
+  --- FALL TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 1220
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 62) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 450
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Bioelectrical
+FINAL SCORE: 56 / 100
+============================================================
+  --- FALL TERM (Score: 66) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 410
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=0.9
+  [lab_spread] score=0.85
+  [compactness] Total gap minutes: 690
+  [days_used] Days scheduled: 5
+  [late-to-early] Only 10.7 hrs rest Thu->Fri (Req: 12 hrs)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Bioelectrical
+FINAL SCORE: 61 / 100
+============================================================
+  --- FALL TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 840
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 76) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=1.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 270
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Biomechanical
+FINAL SCORE: 56 / 100
+============================================================
+  --- FALL TERM (Score: 66) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 510
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.241
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 350
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Biomechanical
+FINAL SCORE: 56 / 100
+============================================================
+  --- FALL TERM (Score: 64) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.875
+  [compactness] Total gap minutes: 1650
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 48) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.9
+  [compactness] Total gap minutes: 1170
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Civil
+FINAL SCORE: 46 / 100
+============================================================
+  --- FALL TERM (Score: 48) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=1.0
+  [compactness] Total gap minutes: 730
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 45) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=0.9
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 390
+  [days_used] Days scheduled: 5
+  [late-to-early] Only 10.7 hrs rest Thu->Fri (Req: 12 hrs)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Civil
+FINAL SCORE: 47 / 100
+============================================================
+  --- FALL TERM (Score: 51) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 360
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 44) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 780
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Civil
+FINAL SCORE: 51 / 100
+============================================================
+  --- FALL TERM (Score: 56) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.907
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 630
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 660
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Civil
+FINAL SCORE: 50 / 100
+============================================================
+  --- FALL TERM (Score: 54) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 600
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 640
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Civil
+FINAL SCORE: 56 / 100
+============================================================
+  --- FALL TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 870
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 66) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 490
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block F  |  PROGRAM: Civil
+FINAL SCORE: 55 / 100
+============================================================
+  --- FALL TERM (Score: 67) ---
+  [compactness] score=0.25
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 180
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 44) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=0.9
+  [lab_spread] score=0.667
+  [compactness] Total gap minutes: 810
+  [days_used] Days scheduled: 5
+  [late-to-early] Only 10.7 hrs rest Thu->Fri (Req: 12 hrs)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Communications
+FINAL SCORE: 62 / 100
+============================================================
+  --- FALL TERM (Score: 72) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=1.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 450
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 52) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.574
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 560
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Computer Systems
+FINAL SCORE: 56 / 100
+============================================================
+  --- FALL TERM (Score: 60) ---
+  [compactness] score=0.375
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.685
+  [start_time_preference] score=1.0
+  [late_to_early] score=1.0
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 150
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 53) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.907
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 500
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Computer Systems
+FINAL SCORE: 45 / 100
+============================================================
+  --- FALL TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.0
+  [start_time_preference] score=1.0
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 920
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 44) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 740
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Computer Systems
+FINAL SCORE: 57 / 100
+============================================================
+  --- FALL TERM (Score: 61) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 760
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 53) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.907
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 260
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Computer Systems
+FINAL SCORE: 45 / 100
+============================================================
+  --- FALL TERM (Score: 50) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.875
+  [compactness] Total gap minutes: 330
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 41) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 950
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Computer Systems
+FINAL SCORE: 64 / 100
+============================================================
+  --- FALL TERM (Score: 53) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.875
+  [compactness] Total gap minutes: 600
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 75) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.907
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 270
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Electrical
+FINAL SCORE: 68 / 100
+============================================================
+  --- FALL TERM (Score: 71) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.574
+  [start_time_preference] score=1.0
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 480
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 65) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=1.0
+  [compactness] Total gap minutes: 940
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Electrical
+FINAL SCORE: 54 / 100
+============================================================
+  --- FALL TERM (Score: 52) ---
+  [compactness] score=0.292
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 170
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 57) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.907
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 370
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Electrical
+FINAL SCORE: 51 / 100
+============================================================
+  --- FALL TERM (Score: 56) ---
+  [compactness] score=0.417
+  [days_used] score=0.0
+  [day_balance] score=0.4
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 140
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 47) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 580
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Electrical
+FINAL SCORE: 62 / 100
+============================================================
+  --- FALL TERM (Score: 59) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.5
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 480
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 65) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 500
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Electrical
+FINAL SCORE: 52 / 100
+============================================================
+  --- FALL TERM (Score: 43) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 710
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 62) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=1.0
+  [compactness] Total gap minutes: 750
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block F  |  PROGRAM: Electrical
+FINAL SCORE: 58 / 100
+============================================================
+  --- FALL TERM (Score: 50) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 500
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 67) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.241
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 680
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block G  |  PROGRAM: Electrical
+FINAL SCORE: 49 / 100
+============================================================
+  --- FALL TERM (Score: 51) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.4
+  [end_time_preference] score=0.907
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 260
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 48) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.241
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 660
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Environmental
+FINAL SCORE: 53 / 100
+============================================================
+  --- FALL TERM (Score: 40) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.4
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 300
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 67) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.241
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 1020
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Environmental
+FINAL SCORE: 57 / 100
+============================================================
+  --- FALL TERM (Score: 65) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 1020
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 49) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.0
+  [start_time_preference] score=1.0
+  [late_to_early] score=1.0
+  [lab_spread] score=0.9
+  [compactness] Total gap minutes: 540
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Mechanical
+FINAL SCORE: 57 / 100
+============================================================
+  --- FALL TERM (Score: 68) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.574
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 540
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 400
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Mechanical
+FINAL SCORE: 50 / 100
+============================================================
+  --- FALL TERM (Score: 54) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.13
+  [start_time_preference] score=1.0
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 710
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 760
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Mechanical
+FINAL SCORE: 53 / 100
+============================================================
+  --- FALL TERM (Score: 41) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 830
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 65) ---
+  [compactness] score=0.792
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 50
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Mechanical
+FINAL SCORE: 56 / 100
+============================================================
+  --- FALL TERM (Score: 73) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 690
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 40) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=0.9
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 760
+  [days_used] Days scheduled: 5
+  [late-to-early] Only 10.7 hrs rest Thu->Fri (Req: 12 hrs)
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Mechanical
+FINAL SCORE: 50 / 100
+============================================================
+  --- FALL TERM (Score: 54) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 590
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 370
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Physics
+FINAL SCORE: 45 / 100
+============================================================
+  --- FALL TERM (Score: 43) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.812
+  [compactness] Total gap minutes: 590
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 47) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.875
+  [compactness] Total gap minutes: 760
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: SREE A
+FINAL SCORE: 47 / 100
+============================================================
+  --- FALL TERM (Score: 47) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.13
+  [start_time_preference] score=1.0
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 440
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 48) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=1.0
+  [compactness] Total gap minutes: 460
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: SREE B
+FINAL SCORE: 63 / 100
+============================================================
+  --- FALL TERM (Score: 51) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 500
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 75) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.907
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 270
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Software
+FINAL SCORE: 48 / 100
+============================================================
+  --- FALL TERM (Score: 43) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 800
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 54) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 320
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Software
+FINAL SCORE: 65 / 100
+============================================================
+  --- FALL TERM (Score: 56) ---
+  [compactness] score=0.375
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.574
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 150
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 74) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.907
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 550
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Software
+FINAL SCORE: 51 / 100
+============================================================
+  --- FALL TERM (Score: 53) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 520
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 50) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 410
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Software
+FINAL SCORE: 60 / 100
+============================================================
+  --- FALL TERM (Score: 75) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.907
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 560
+  [days_used] Days scheduled: 4
+  
+  --- WINTER TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 1050
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Software
+FINAL SCORE: 55 / 100
+============================================================
+  --- FALL TERM (Score: 67) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.667
+  [end_time_preference] score=0.574
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 400
+  [days_used] Days scheduled: 3
+  
+  --- WINTER TERM (Score: 43) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.75
+  [compactness] Total gap minutes: 440
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block F  |  PROGRAM: Software
+FINAL SCORE: 49 / 100
+============================================================
+  --- FALL TERM (Score: 51) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=1.0
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=1.0
+  [compactness] Total gap minutes: 810
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 47) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.13
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 710
+  [days_used] Days scheduled: 5
+  
+
+
+============================================================
+BLOCK: Block G  |  PROGRAM: Software
+FINAL SCORE: 60 / 100
+============================================================
+  --- FALL TERM (Score: 51) ---
+  [compactness] score=0.292
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 170
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 69) ---
+  [compactness] score=0
+  [days_used] score=1.0
+  [day_balance] score=0.75
+  [end_time_preference] score=0.574
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=1.0
+  [compactness] Total gap minutes: 260
+  [days_used] Days scheduled: 4
+  
+
+
+============================================================
+BLOCK: Block H  |  PROGRAM: Software
+FINAL SCORE: 48 / 100
+============================================================
+  --- FALL TERM (Score: 46) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.8
+  [end_time_preference] score=0.0
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.917
+  [compactness] Total gap minutes: 1240
+  [days_used] Days scheduled: 5
+  
+  --- WINTER TERM (Score: 50) ---
+  [compactness] score=0
+  [days_used] score=0.0
+  [day_balance] score=0.6
+  [end_time_preference] score=0.685
+  [start_time_preference] score=0.583
+  [late_to_early] score=1.0
+  [lab_spread] score=0.833
+  [compactness] Total gap minutes: 410
+  [days_used] Days scheduled: 5
+  
+
+

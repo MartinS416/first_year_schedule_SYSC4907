@@ -21,4 +21,6 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("data_app.urls")),
+    path('api/export/block/<int:block_id>/term/<int:term_id>/', views.api_export_block_pdf, name='export_block_pdf'),
+    path('api/export/program/<int:program_id>/', views.api_export_program_pdf, name='export_program_pdf'),
 ]

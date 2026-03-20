@@ -7,6 +7,8 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
+from django.http import FileResponse
+from .services.pdf_exporter import SchedulePDFExporter
 
 from .models import (
     Block,
@@ -580,3 +582,104 @@ def api_stats(request):
             "avg_ranking": round(avg_ranking),
         }
     )
+
+@require_GET
+def api_export_block_pdf(request, block_id, term_id):
+    """Export a single block's schedule as PDF."""
+    try:
+        block = Block.objects.get(id=block_id)
+        term = Term.objects.get(id=term_id)
+        
+        # Get course data for this block/term
+        term_courses = TermCourses.objects.filter(
+            block=block,
+            term=term
+        ).select_related('course_section')
+        
+        # Prepare course data
+        courses_data = []
+        for tc in term_courses:
+            cs = tc.course_section
+            courses_data.append({
+                'code': cs.course.course_code,
+                'section': cs.section,
+                'type': cs.course_type,
+                'days': cs.days,
+                'start_time': str(cs.start_time) if cs.start_time else None,
+                'end_time': str(cs.end_time) if cs.end_time else None,
+                'enrolled': cs.enrolled,
+                'capacity': cs.capacity,
+            })
+        
+        # Generate PDF
+        exporter = SchedulePDFExporter()
+        pdf_buffer = exporter.export_block_to_pdf(
+            block,
+            courses_data,
+            block.program.program_name
+        )
+        
+        filename = f"{block.program.program_name}_{block.block_name}_schedule.pdf"
+        return FileResponse(
+            pdf_buffer,
+            as_attachment=True,
+            filename=filename,
+            content_type='application/pdf'
+        )
+    
+    except (Block.DoesNotExist, Term.DoesNotExist) as e:
+        return JsonResponse({'error': str(e)}, status=404)
+    except Exception as e:
+        log_error('PDF Export Failed', details=str(e))
+        return JsonResponse({'error': 'Failed to generate PDF'}, status=500)
+
+
+@require_GET
+def api_export_program_pdf(request, program_id):
+    """Export entire program schedule as PDF."""
+    try:
+        program = Program.objects.get(id=program_id)
+        
+        # Get all blocks for this program
+        blocks = Block.objects.filter(program=program)
+        blocks_data = []
+        
+        for block in blocks:
+            term_courses = TermCourses.objects.filter(block=block).select_related('course_section')
+            
+            courses_data = []
+            for tc in term_courses:
+                cs = tc.course_section
+                courses_data.append({
+                    'code': cs.course.course_code,
+                    'section': cs.section,
+                    'type': cs.course_type,
+                    'days': cs.days,
+                    'start_time': str(cs.start_time) if cs.start_time else None,
+                    'end_time': str(cs.end_time) if cs.end_time else None,
+                    'enrolled': cs.enrolled,
+                    'capacity': cs.capacity,
+                })
+            
+            blocks_data.append({
+                'block': block,
+                'courses': courses_data
+            })
+        
+        # Generate PDF
+        exporter = SchedulePDFExporter()
+        pdf_buffer = exporter.export_program_to_pdf(program, blocks_data)
+        
+        filename = f"{program.program_name}_complete_schedule.pdf"
+        return FileResponse(
+            pdf_buffer,
+            as_attachment=True,
+            filename=filename,
+            content_type='application/pdf'
+        )
+    
+    except Program.DoesNotExist:
+        return JsonResponse({'error': 'Program not found'}, status=404)
+    except Exception as e:
+        log_error('PDF Export Failed', details=str(e))
+        return JsonResponse({'error': 'Failed to generate PDF'}, status=500)
