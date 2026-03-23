@@ -24,15 +24,86 @@ class ScheduleBuilder:
 
     def optimize_schedule(self):
         """
-        Placeholder for schedule optimization logic.
-        This should improve the current schedule by refining assignments, swapping sections, etc.
+        Aggressive optimizer: Exhaustively tries all swaps and moves between all blocks in the same program/term, repeating until no further improvements are found or max iterations reached. Prioritizes tangible ranking improvements over efficiency.
         """
-        self._emit("\n=== STARTING SCHEDULE OPTIMIZATION ===", "info", pct=0)
-        # TODO: Implement actual optimization logic here
+        self._emit("\n=== STARTING AGGRESSIVE SCHEDULE OPTIMIZATION ===", "info", pct=0)
         import time
-        for pct in range(0, 101, 20):
-            self._emit(f"Optimizing... {pct}%", "info", pct=pct)
-            time.sleep(0.2)
+        from data_app.services.ranking import ScheduleRanker
+        MAX_ITERATIONS = 20  # Prevent infinite loops; can be increased for even more thoroughness
+        total_actions = 0
+        programs = Program.objects.all()
+        pct_prog = 0
+        ranker = ScheduleRanker()
+        for prog_idx, program in enumerate(programs):
+            blocks = list(Block.objects.filter(program=program))
+            for term_name in ["fall", "winter"]:
+                improved = True
+                iteration = 0
+                while improved and iteration < MAX_ITERATIONS:
+                    improved = False
+                    iteration += 1
+                    self._emit(f"Optimization pass {iteration} for {program.program_name} {term_name}...", "info")
+                    for i, block_a in enumerate(blocks):
+                        term_a = Term.objects.get(block=block_a, term_name=term_name)
+                        courses_a = list(TermCourses.objects.filter(term=term_a))
+                        for j, block_b in enumerate(blocks):
+                            if block_b == block_a:
+                                continue
+                            term_b = Term.objects.get(block=block_b, term_name=term_name)
+                            courses_b = list(TermCourses.objects.filter(term=term_b))
+                            # Try all swaps
+                            for ca in courses_a:
+                                for cb in courses_b:
+                                    if ca.course_code != cb.course_code:
+                                        codes_a = set(tc.course_code for tc in courses_a)
+                                        codes_b = set(tc.course_code for tc in courses_b)
+                                        if cb.course_code not in codes_a and ca.course_code not in codes_b:
+                                            score_a_before = ranker.score_block(block_a)
+                                            score_b_before = ranker.score_block(block_b)
+                                            # Swap
+                                            TermCourses.objects.filter(term=term_a, course_code=ca.course_code, section=ca.section).delete()
+                                            TermCourses.objects.filter(term=term_b, course_code=cb.course_code, section=cb.section).delete()
+                                            TermCourses.objects.create(term=term_a, course_code=cb.course_code, section=cb.section)
+                                            TermCourses.objects.create(term=term_b, course_code=ca.course_code, section=ca.section)
+                                            score_a_after = ranker.score_block(block_a)
+                                            score_b_after = ranker.score_block(block_b)
+                                            if (score_a_after + score_b_after) > (score_a_before + score_b_before):
+                                                total_actions += 1
+                                                improved = True
+                                                self._emit(f"Swap improved: {block_a.block_name} {score_a_before}->{score_a_after}, {block_b.block_name} {score_b_before}->{score_b_after}", "info")
+                                            else:
+                                                # Revert
+                                                TermCourses.objects.filter(term=term_a, course_code=cb.course_code, section=cb.section).delete()
+                                                TermCourses.objects.filter(term=term_b, course_code=ca.course_code, section=ca.section).delete()
+                                                TermCourses.objects.create(term=term_a, course_code=ca.course_code, section=ca.section)
+                                                TermCourses.objects.create(term=term_b, course_code=cb.course_code, section=cb.section)
+                            # Try all moves from A to B
+                            for ca in courses_a:
+                                codes_b = set(tc.course_code for tc in courses_b)
+                                if ca.course_code not in codes_b:
+                                    score_a_before = ranker.score_block(block_a)
+                                    score_b_before = ranker.score_block(block_b)
+                                    # Move ca from A to B
+                                    TermCourses.objects.filter(term=term_a, course_code=ca.course_code, section=ca.section).delete()
+                                    TermCourses.objects.create(term=term_b, course_code=ca.course_code, section=ca.section)
+                                    score_a_after = ranker.score_block(block_a)
+                                    score_b_after = ranker.score_block(block_b)
+                                    if (score_a_after + score_b_after) > (score_a_before + score_b_before):
+                                        total_actions += 1
+                                        improved = True
+                                        self._emit(f"Move improved: {block_a.block_name} {score_a_before}->{score_a_after}, {block_b.block_name} {score_b_before}->{score_b_after}", "info")
+                                    else:
+                                        # Revert
+                                        TermCourses.objects.filter(term=term_b, course_code=ca.course_code, section=ca.section).delete()
+                                        TermCourses.objects.create(term=term_a, course_code=ca.course_code, section=ca.section)
+                pct_prog = int(100 * (prog_idx + 1) / len(programs))
+                self._emit(f"Aggressive optimization complete for {program.program_name} {term_name} after {iteration} passes.", "info", pct=pct_prog)
+        self._emit(f"Total actions performed: {total_actions}", "info", pct=95)
+        # Re-rank all blocks and generate ranking report after optimization
+        self._emit("Ranking all blocks after optimization...", "info", pct=97)
+        ranker_with_progress = __import__('data_app.services.ranking', fromlist=['ScheduleRanker']).ScheduleRanker(progress_callback=self._progress)
+        ranker_with_progress.rank_all_blocks()
+        ranker_with_progress.export_ranking_report()
         self._emit("Optimization complete!", "success", pct=100)
 
     def __init__(self, config: dict | None = None, progress_callback=None):
