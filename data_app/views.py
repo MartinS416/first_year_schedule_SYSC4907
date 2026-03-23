@@ -16,6 +16,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
 
 from .models import Block, Course, Program, ProgramCourse, Term, TermCourses
+
 from .services.schedule_service import (
     apply_term_schedule,
     get_course_sections,
@@ -25,6 +26,72 @@ from .services.schedule_service import (
     get_term_courses_table,
     ranking_class,
 )
+
+# Import ScheduleBuilder for optimization endpoint
+from .services.schedule_builder import ScheduleBuilder, DEFAULT_CONFIG
+# ============================================================================
+#  API endpoints
+# ============================================================================
+
+from django.views.decorators.csrf import csrf_exempt
+
+# --- Optimization API ---
+@require_POST
+@csrf_exempt
+def api_optimize_schedule(request):
+    """
+    Optimize the generated schedule. Streams progress via SSE.
+    Accepts optional JSON config body.
+    """
+    import json as _json
+    from django.http import StreamingHttpResponse
+
+    try:
+        body = _json.loads(request.body or b"{}")
+        config = {k: body[k] for k in DEFAULT_CONFIG if k in body}
+    except Exception:
+        config = {}
+
+    def event_stream():
+        import json as _j
+        from queue import SimpleQueue
+        import threading
+
+        q = SimpleQueue()
+
+        def callback(kind, msg, pct):
+            q.put((kind, msg, pct))
+
+        def run():
+            overall_success = False
+            try:
+                builder = ScheduleBuilder(config=config, progress_callback=callback)
+                builder.optimize_schedule()
+                callback("success", "=== OPTIMIZATION COMPLETE ===", pct=100)
+                overall_success = True
+            except Exception as exc:
+                callback("error", f"ERROR: {exc}", 100)
+            finally:
+                q.put(("__done__", overall_success))
+
+        t = threading.Thread(target=run, daemon=True)
+        t.start()
+
+        while True:
+            item = q.get()
+            if isinstance(item, tuple) and len(item) == 2 and item[0] == "__done__":
+                success = item[1]
+                payload = _j.dumps({"type": "done", "message": "", "pct": 100, "success": success})
+                yield f"data: {payload}\n\n"
+                break
+            kind, msg, pct = item
+            payload = _j.dumps({"type": kind, "message": msg, "pct": pct})
+            yield f"data: {payload}\n\n"
+
+    response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
+    response["Cache-Control"] = "no-cache"
+    response["X-Accel-Buffering"] = "no"
+    return response
 
 
 # ---------------------------------------------------------------------------

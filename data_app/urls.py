@@ -51,6 +51,11 @@ urlpatterns = [
         views.api_stats,
         name="api_stats",
     ),
+    path(
+        "api/optimize/",
+        views.api_optimize_schedule,
+        name="api_optimize_schedule",
+    ),
 
     # ── Schedule Builder page ──────────────────────────────────────────
     path(

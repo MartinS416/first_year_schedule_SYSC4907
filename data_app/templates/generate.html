@@ -82,7 +82,6 @@
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
                     Run
                 </button>
-                <div class="pipeline-step-badge">Coming Soon</div>
             </div>
 
             <!-- Arrow -->
@@ -655,9 +654,24 @@
         });
     };
 
-    /* ── Optimize (stub) ── */
+    /* ── Optimize ── */
     window.handleOptimize = function () {
-        showToast('Optimize is coming soon!', 'info');
+        if (isRunning) return;
+        isRunning = true;
+        setAllDisabled(true);
+        consoleEl.innerHTML = '';
+        consoleEl.style.display = 'block';
+        progBar.className = 'prog-bar';
+        setProgress(0, 'Starting optimization…', '');
+        appendToConsole('> Starting schedule optimization…', 'console-line-info');
+
+        streamPost('{% url "api_optimize_schedule" %}', readGenSettings())
+        .catch(function (err) {
+            appendToConsole('> NETWORK ERROR: ' + err.message, 'console-line-error');
+            setProgressFinal(false);
+            showToast('Network error: ' + err.message, 'error');
+            onStreamDone(false);
+        });
     };
 
     /* ── Rank (standalone) ── */
