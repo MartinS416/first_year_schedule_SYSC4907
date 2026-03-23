@@ -25,6 +25,7 @@ from .services.schedule_service import (
     get_term_courses_table,
     ranking_class,
 )
+from .services.log_service import log_error, log_info, log_success
 
 
 # ---------------------------------------------------------------------------
@@ -228,78 +229,47 @@ def schedules_page(request):
 @require_POST
 def api_generate_schedule(request):
     """
-    Stream schedule generation + ranking progress via Server-Sent Events.
-
-    Accepts optional JSON body:
-        {
-            "gen":  { block_size, max_retries, max_recursion_depth, enforce_capacity, skip_electives },
-            "rank": { base_score, penalty_per_30min_gap, penalty_per_30min_sleep,
-                      max_gap_allowed_mins, min_overnight_rest_hrs }
-        }
+    Trigger schedule generation via AJAX. Returns JSON with success status and log output.
     """
-    import json as _json
-    from django.http import StreamingHttpResponse
-    from .services.schedule_builder import ScheduleBuilder, DEFAULT_CONFIG
-    from .services.ranking import ScheduleRanker, DEFAULT_RANKING_CONFIG
+    log_info(
+        "Schedule Generation Started", details="User triggered schedule generation."
+    )
 
     try:
-        body = _json.loads(request.body or b"{}")
-        gen_body  = body.get("gen",  body)   # fall back to flat body for backwards compat
-        rank_body = body.get("rank", {})
-        gen_config  = {k: gen_body[k]  for k in DEFAULT_CONFIG         if k in gen_body}
-        rank_config = {k: rank_body[k] for k in DEFAULT_RANKING_CONFIG if k in rank_body}
-    except Exception:
-        gen_config = {}
-        rank_config = {}
+        from .services.schedule_builder import ScheduleBuilder
 
-    def event_stream():
-        import json as _j
-        from queue import SimpleQueue
-        import threading
+        # Capture stdout to return as log
+        log_buffer = io.StringIO()
 
-        q = SimpleQueue()
+        with redirect_stdout(log_buffer):
+            builder = ScheduleBuilder()
+            builder.generate_schedule()
+            builder.export_schedule_to_txt()
+            builder.export_visual_grid()
 
-        def callback(kind, msg, pct):
-            q.put((kind, msg, pct))
+        log_output = log_buffer.getvalue()
 
-        def run():
-            overall_success = False
-            try:
-                builder = ScheduleBuilder(config=gen_config, progress_callback=callback)
-                builder.generate_schedule()
-                builder.export_schedule_to_txt()
-                builder.export_visual_grid()
+        log_success("Schedule Generation Completed", details=log_output)
 
-                callback("info", "\n=== STARTING BLOCK RANKING ===", pct=92)
-                ranker = ScheduleRanker(config=rank_config, progress_callback=callback)
-                ranker.rank_all_blocks()
-                ranker.export_ranking_report()
-                callback("success", "=== RANKING COMPLETE ===", pct=99)
+        return JsonResponse(
+            {
+                "success": True,
+                "log": log_output,
+                "message": "Schedule generated successfully.",
+            }
+        )
 
-                overall_success = True
-            except Exception as exc:
-                callback("error", f"ERROR: {exc}", 100)
-            finally:
-                q.put(("__done__", overall_success))
+    except Exception as e:
+        log_error("Schedule Generation Failed", details=f"Error: {str(e)}")
 
-        t = threading.Thread(target=run, daemon=True)
-        t.start()
-
-        while True:
-            item = q.get()
-            if isinstance(item, tuple) and len(item) == 2 and item[0] == "__done__":
-                success = item[1]
-                payload = _j.dumps({"type": "done", "message": "", "pct": 100, "success": success})
-                yield f"data: {payload}\n\n"
-                break
-            kind, msg, pct = item
-            payload = _j.dumps({"type": kind, "message": msg, "pct": pct})
-            yield f"data: {payload}\n\n"
-
-    response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
-    response["Cache-Control"] = "no-cache"
-    response["X-Accel-Buffering"] = "no"
-    return response
+        return JsonResponse(
+            {
+                "success": False,
+                "error": str(e),
+                "log": f"ERROR: {str(e)}\n",
+            },
+            status=500,
+        )
 
 
 @require_POST
@@ -308,56 +278,40 @@ def api_rank_blocks(request):
     Standalone rank-only endpoint, streaming SSE.
     Accepts optional flat JSON ranking config body.
     """
-    import json as _json
-    from django.http import StreamingHttpResponse
-    from .services.ranking import ScheduleRanker, DEFAULT_RANKING_CONFIG
+    log_info("Block Ranking Started", details="User triggered block ranking.")
 
     try:
-        body        = _json.loads(request.body or b"{}")
-        rank_config = {k: body[k] for k in DEFAULT_RANKING_CONFIG if k in body}
-    except Exception:
-        rank_config = {}
+        from .services.ranking import ScheduleRanker
 
-    def event_stream():
-        import json as _j
-        from queue import SimpleQueue
-        import threading
+        log_buffer = io.StringIO()
 
-        q = SimpleQueue()
+        with redirect_stdout(log_buffer):
+            ranker = ScheduleRanker()
+            ranker.rank_all_blocks()
+            ranker.export_ranking_report()
 
-        def callback(kind, msg, pct):
-            q.put((kind, msg, pct))
+        log_output = log_buffer.getvalue()
 
-        def run():
-            overall_success = False
-            try:
-                ranker = ScheduleRanker(config=rank_config, progress_callback=callback)
-                ranker.rank_all_blocks()
-                ranker.export_ranking_report()
-                overall_success = True
-            except Exception as exc:
-                callback("error", f"ERROR: {exc}", 100)
-            finally:
-                q.put(("__done__", overall_success))
+        log_success("Block Ranking Completed", details=log_output)
 
-        t = threading.Thread(target=run, daemon=True)
-        t.start()
+        return JsonResponse(
+            {
+                "success": True,
+                "log": log_output,
+                "message": "Ranking complete.",
+            }
+        )
 
-        while True:
-            item = q.get()
-            if isinstance(item, tuple) and len(item) == 2 and item[0] == "__done__":
-                success = item[1]
-                payload = _j.dumps({"type": "done", "message": "", "pct": 100, "success": success})
-                yield f"data: {payload}\n\n"
-                break
-            kind, msg, pct = item
-            payload = _j.dumps({"type": kind, "message": msg, "pct": pct})
-            yield f"data: {payload}\n\n"
+    except Exception as e:
+        log_error("Block Ranking Failed", details=f"Error: {str(e)}")
 
-    response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
-    response["Cache-Control"] = "no-cache"
-    response["X-Accel-Buffering"] = "no"
-    return response
+        return JsonResponse(
+            {
+                "success": False,
+                "error": str(e),
+            },
+            status=500,
+        )
 
 
 @require_GET

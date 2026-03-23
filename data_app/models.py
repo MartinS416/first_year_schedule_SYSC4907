@@ -1,13 +1,16 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Program(models.Model):
     program_name = models.CharField(max_length=255)
-    enrolled = models.IntegerField(null=True, blank=True) 
+    enrolled = models.IntegerField(null=True, blank=True)
 
 
 class Block(models.Model):
-    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name="blocks")
+    program = models.ForeignKey(
+        Program, on_delete=models.CASCADE, related_name="blocks"
+    )
     block_name = models.CharField(max_length=255)
     ranking = models.IntegerField()
     timestamp = models.DateTimeField()
@@ -23,13 +26,9 @@ class Course(models.Model):
     course_code = models.CharField(max_length=255)
     section = models.CharField(max_length=50)
     term = models.CharField(max_length=50)
-    instr_type = models.CharField(max_length=50)     # LEC, LAB, TUT, PA
+    instr_type = models.CharField(max_length=50)  # LEC, LAB, TUT, PA
     parent = models.ForeignKey(
-        "self",
-        null=True,
-        blank=True,
-        on_delete=models.CASCADE,
-        related_name="children"
+        "self", null=True, blank=True, on_delete=models.CASCADE, related_name="children"
     )
     days = models.CharField(max_length=50, blank=True, null=True)
     start_time = models.CharField(max_length=50, blank=True, null=True)
@@ -44,7 +43,9 @@ class Course(models.Model):
 
 
 class TermCourses(models.Model):
-    term = models.ForeignKey(Term, on_delete=models.CASCADE, related_name="term_courses")
+    term = models.ForeignKey(
+        Term, on_delete=models.CASCADE, related_name="term_courses"
+    )
     course_code = models.CharField(max_length=255)
     section = models.CharField(max_length=50)
 
@@ -55,31 +56,58 @@ class TermCourses(models.Model):
 
 
 class ProgramCourse(models.Model):
-    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name="program_courses")
+    program = models.ForeignKey(
+        Program, on_delete=models.CASCADE, related_name="program_courses"
+    )
     course_code = models.CharField(max_length=255)
     term = models.CharField(max_length=50)
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["program", "course_code"], name="unique_program_course")
+            models.UniqueConstraint(
+                fields=["program", "course_code"], name="unique_program_course"
+            )
         ]
 
 
 class Student(models.Model):
     student_id = models.IntegerField(unique=True)
-    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name="students")
+    program = models.ForeignKey(
+        Program, on_delete=models.CASCADE, related_name="students"
+    )
     block = models.ForeignKey(Block, on_delete=models.CASCADE, related_name="students")
 
 
 class AdminUser(models.Model):
     email = models.CharField(max_length=255, unique=True)
     password_hash = models.CharField(max_length=255)
-    role = models.CharField(max_length=50)   # admin, superadmin, etc.
+    role = models.CharField(max_length=50)  # admin, superadmin, etc.
     created_at = models.CharField(max_length=255, blank=True, null=True)
 
 
 class LogEntry(models.Model):
-    admin = models.ForeignKey(AdminUser, on_delete=models.CASCADE, related_name="logs")
+    LEVEL_CHOICES = [
+        ("INFO", "Info"),
+        ("SUCCESS", "Success"),
+        ("WARNING", "Warning"),
+        ("ERROR", "Error"),
+    ]
+
+    admin = models.ForeignKey(
+        AdminUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="logs",
+    )
     action = models.CharField(max_length=255)
     details = models.TextField(blank=True, null=True)
-    timestamp = models.CharField(max_length=255)
+    level = models.CharField(max_length=10, choices=LEVEL_CHOICES, default="INFO")
+    timestamp = models.DateTimeField(default=timezone.now, db_index=True)
+
+    class Meta:
+        ordering = ["-timestamp"]
+        verbose_name_plural = "Log entries"
+
+    def __str__(self):
+        return f"[{self.level}] {self.action} ({self.timestamp:%Y-%m-%d %H:%M:%S})"
