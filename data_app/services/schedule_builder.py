@@ -29,20 +29,11 @@ class ScheduleBuilder:
         self._emit("\n=== STARTING SCHEDULE OPTIMIZATION ===", "info", pct=0)
         import time
         from data_app.services.ranking import ScheduleRanker
-        MAX_ITERATIONS = 30  # Allow more iterations for deeper search
-        MIN_IMPROVEMENT = 0  # Accept any improvement, even 0 (i.e., non-worsening)
         EARLY_STOP_LIMIT = 5  # Allow more non-improving rounds before stopping
         total_actions = 0
         programs = Program.objects.all()
         pct_prog = 0
         ranker = ScheduleRanker()
-        # Helper to compute average score for a set of blocks
-        def avg_score(blocks):
-            if not blocks:
-                return 0
-            return sum(ranker.score_block(b) for b in blocks) / len(blocks)
-        # Store summary stats for reporting at the end
-        summary_stats = []
         # GLOBAL OPTIMIZER: optimize across all blocks, all programs, both terms
         import random
         all_blocks = list(Block.objects.all())
@@ -126,7 +117,6 @@ class ScheduleBuilder:
         after_avg = sum(after_scores) / len(after_scores) if after_scores else 0
         after_high = max(after_scores) if after_scores else 0
         after_low = min(after_scores) if after_scores else 0
-        summary_stats = []
         # Per-program summary for compatibility with existing reporting
         for program in programs:
             blocks = list(Block.objects.filter(program=program))

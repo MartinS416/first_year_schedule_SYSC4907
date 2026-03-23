@@ -10,7 +10,6 @@ DEFAULT_RANKING_CONFIG = {
     "min_overnight_rest_hrs":    12,   # minimum overnight rest before sleep penalty
 }
 
-
 class ScheduleRanker:
     """
     Ranks blocks based on schedule quality (0-100).
