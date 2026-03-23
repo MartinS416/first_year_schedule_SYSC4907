@@ -17,6 +17,11 @@ DEFAULT_CONFIG = {
     "max_recursion_depth": 3,     # kick-and-repair recursion limit
     "enforce_capacity":    True,  # reject sections that are over capacity
     "skip_electives":      True,  # exclude courses with "Elective" in the code
+    "optimization_config": {
+        "max_global_iter": 10,      # Number of global optimization passes
+        "max_random_swaps": 30,     # Number of random swaps per pass
+        "early_stop_limit": 5       # Non-improving rounds before stopping
+    }
 }
 
 
@@ -31,7 +36,11 @@ class ScheduleBuilder:
         self._emit("==============================\n", "info", pct=0)
         import time
         from data_app.services.ranking import ScheduleRanker
-        EARLY_STOP_LIMIT = 5  # Allow more non-improving rounds before stopping
+        # Load optimization config (with defaults)
+        opt_cfg = getattr(self, 'OPTIMIZATION_CONFIG', DEFAULT_CONFIG["optimization_config"])
+        MAX_GLOBAL_ITER = opt_cfg.get("max_global_iter", 10)
+        MAX_RANDOM_SWAPS = opt_cfg.get("max_random_swaps", 30)
+        EARLY_STOP_LIMIT = opt_cfg.get("early_stop_limit", 5)
         total_actions = 0
         programs = Program.objects.all()
         pct_prog = 0
@@ -195,6 +204,7 @@ class ScheduleBuilder:
         self.ENFORCE_CAPACITY    = bool(cfg["enforce_capacity"])
         self.SKIP_ELECTIVES      = bool(cfg["skip_electives"])
         self.SHARED_COURSES      = {}
+        self.OPTIMIZATION_CONFIG = cfg.get("optimization_config", DEFAULT_CONFIG["optimization_config"])
         self._progress           = progress_callback or (lambda *a, **kw: None)
 
     # ── progress helpers ─────────────────────────────────────────────────────
