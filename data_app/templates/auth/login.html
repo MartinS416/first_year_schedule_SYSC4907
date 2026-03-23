@@ -6,20 +6,41 @@
 {% block content %}
 <div class="card" style="max-width: 400px; margin: 0 auto;">
     <div class="card-body">
+        
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" style="margin-bottom: 1.5rem; background-color: #fee2e2; color: #991b1b; padding: 0.75rem; border-radius: 0.375rem;">
+                {% for error in form.non_field_errors %}
+                    <p style="margin: 0;">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <form method="post">
             {% csrf_token %}
             
             <div style="margin-bottom: 1rem;">
-                <label>Username</label>
+                <label style="display: block; font-weight: 500; margin-bottom: 0.25rem;">Username</label>
                 {{ form.username }}
+                
+                {% if form.username.errors %}
+                    <div style="color: #dc2626; font-size: 0.875rem; margin-top: 0.25rem;">
+                        {{ form.username.errors }}
+                    </div>
+                {% endif %}
             </div>
 
             <div style="margin-bottom: 1rem;">
-                <label>Password</label>
+                <label style="display: block; font-weight: 500; margin-bottom: 0.25rem;">Password</label>
                 {{ form.password }}
+
+                {% if form.password.errors %}
+                    <div style="color: #dc2626; font-size: 0.875rem; margin-top: 0.25rem;">
+                        {{ form.password.errors }}
+                    </div>
+                {% endif %}
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg">
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
                 Login
             </button>
         </form>

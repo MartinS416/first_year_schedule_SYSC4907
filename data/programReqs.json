@@ -1,0 +1,59 @@
+{
+  "Aerospace": {
+    "fall": ["MATH 1004","ElectiveB","ElectiveC","ECOR 1045","ECOR 1047","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","CHEM 1101","PHYS 1004","ECOR 1041","ECOR 1043","ECOR 1056"]
+  },
+  "Architectural": {
+    "fall": ["MATH 1004","CHEM 1101","ARCH 1000","ECOR 1041","ECOR 1043","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","ElectiveB","PHYS 1004","ECOR 1045","ECOR 1047","ECOR 1056"]
+  },
+  "Bioelectrical": {
+    "fall": ["MATH 1004","CHEM 1001","ElectiveC","ECOR 1041","ECOR 1043","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","CHEM 1002","PHYS 1004","ECOR 1045","ECOR 1047","ECOR 1056"]
+  },
+  "Biomechanical": {
+    "fall": ["MATH 1004","CHEM 1001","ElectiveC","ECOR 1041","ECOR 1043","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","CHEM 1002","PHYS 1004","ECOR 1045","ECOR 1047","ECOR 1056"]
+  },
+  "Civil": {
+    "fall": ["MATH 1004","CHEM 1101","ElectiveC","ECOR 1045","ECOR 1047","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","ERTH 2404","PHYS 1004","ECOR 1041","ECOR 1043","ECOR 1056"]
+  },
+  "Communications": {
+    "fall": ["MATH 1004","CHEM 1101","ElectiveC","ECOR 1041","ECOR 1043","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","ElectiveB","PHYS 1004","ECOR 1045","ECOR 1047","ECOR 1056"]
+  },
+  "Computer Systems": {
+    "fall": ["MATH 1004","CHEM 1101","ElectiveB","ECOR 1041","ECOR 1043","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","PHYS 1004","ElectiveC","ECOR 1045","ECOR 1047","ECOR 1056"]
+  },
+  "Electrical": {
+    "fall": ["MATH 1004","ElectiveB","ElectiveC","ECOR 1045","ECOR 1047","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","CHEM 1101","PHYS 1004","ECOR 1041","ECOR 1043","ECOR 1056"]
+  },
+  "Environmental": {
+    "fall": ["MATH 1004","CHEM 1001","ElectiveC","ECOR 1041","ECOR 1043","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","CHEM 1002","PHYS 1004","ECOR 1045","ECOR 1047","ECOR 1056"],
+    "extra": ["MATH 1005","BIOL 1103","CIVE 2200","MAAE 2400","MAAE 2300"]
+  },
+  "Mechanical": {
+    "fall": ["MATH 1004","ElectiveB","ElectiveC","ECOR 1041","ECOR 1043","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","CHEM 1101","PHYS 1004","ECOR 1045","ECOR 1047","ECOR 1056"]
+  },
+  "Physics": {
+    "fall": ["MATH 1004","PHYS 1001","CHEM 1101","ECOR 1041","ECOR 1043","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","PHYS 1002","ElectiveC","ECOR 1045","ECOR 1047","ECOR 1056"]
+  },
+  "SREE A": {
+    "fall": ["MATH 1004","ElectiveB","ElectiveC","ECOR 1041","ECOR 1043","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","PHYS 1004","CHEM 1101","ECOR 1045","ECOR 1047","ECOR 1056"]
+  },
+  "SREE B": {
+    "fall": ["MATH 1004","ElectiveB","ElectiveC","ECOR 1041","ECOR 1043","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","PHYS 1004","CHEM 1101","ECOR 1045","ECOR 1047","ECOR 1056"]
+  },
+  "Software": {
+    "fall": ["MATH 1004","CHEM 1101","ElectiveB","ECOR 1045","ECOR 1047","ECOR 1055","ECOR 1057"],
+    "winter": ["MATH 1104","PHYS 1004","ElectiveC","ECOR 1041","ECOR 1043","ECOR 1056"]
+  }
+}

@@ -1,0 +1,901 @@
+============================================================
+BLOCK: Block A  |  PROGRAM: Aerospace
+FINAL SCORE: 87 / 100
+============================================================
+  --- FALL TERM (Score: 74) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-20] Wed: Large gap of 6.2 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Aerospace
+FINAL SCORE: 77 / 100
+============================================================
+  --- FALL TERM (Score: 78) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-14] Thu: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-2] Fri: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 76) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-14] Thu: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Aerospace
+FINAL SCORE: 72 / 100
+============================================================
+  --- FALL TERM (Score: 52) ---
+  [-16] Tue: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-16] Wed: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 92) ---
+  [-4] Mon: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-4] Wed: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Aerospace
+FINAL SCORE: 92 / 100
+============================================================
+  --- FALL TERM (Score: 88) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 96) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Aerospace
+FINAL SCORE: 65 / 100
+============================================================
+  --- FALL TERM (Score: 82) ---
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 48) ---
+  [-16] Mon: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-16] Tue: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-16] Wed: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-4] Thu: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block F  |  PROGRAM: Aerospace
+FINAL SCORE: 70 / 100
+============================================================
+  --- FALL TERM (Score: 84) ---
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 56) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-4] Wed: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-14] Thu: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-4] Thu: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block G  |  PROGRAM: Aerospace
+FINAL SCORE: 83 / 100
+============================================================
+  --- FALL TERM (Score: 74) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-14] Fri: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 92) ---
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block H  |  PROGRAM: Aerospace
+FINAL SCORE: 78 / 100
+============================================================
+  --- FALL TERM (Score: 80) ---
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 76) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Architectural
+FINAL SCORE: 77 / 100
+============================================================
+  --- FALL TERM (Score: 88) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Thu: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 66) ---
+  [-14] Mon: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-14] Wed: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-4] Fri: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Architectural
+FINAL SCORE: 50 / 100
+============================================================
+  --- FALL TERM (Score: 70) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-14] Wed: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-4] Thu: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 30) ---
+  [-22] Mon: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-14] Tue: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-22] Wed: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Wed->Thu: Only 10.7 hrs rest (Req: 12.0 hrs)
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Architectural
+FINAL SCORE: 84 / 100
+============================================================
+  --- FALL TERM (Score: 76) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 92) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Bioelectrical
+FINAL SCORE: 72 / 100
+============================================================
+  --- FALL TERM (Score: 64) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-4] Wed: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 80) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Bioelectrical
+FINAL SCORE: 75 / 100
+============================================================
+  --- FALL TERM (Score: 82) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-14] Wed: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 68) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-22] Thu: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Biomechanical
+FINAL SCORE: 68 / 100
+============================================================
+  --- FALL TERM (Score: 68) ---
+  [-10] Mon: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-14] Fri: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 68) ---
+  [-22] Mon: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Biomechanical
+FINAL SCORE: 57 / 100
+============================================================
+  --- FALL TERM (Score: 60) ---
+  [-16] Mon: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 54) ---
+  [-4] Mon: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-22] Wed: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Civil
+FINAL SCORE: 52 / 100
+============================================================
+  --- FALL TERM (Score: 50) ---
+  [-14] Mon: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-14] Wed: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-14] Thu: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-8] Fri: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 54) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-4] Mon: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-28] Wed: Large gap of 8.2 hrs (Allowed: 1.0 hr)
+  [-4] Thu: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Civil
+FINAL SCORE: 65 / 100
+============================================================
+  --- FALL TERM (Score: 56) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-16] Tue: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-10] Wed: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 74) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-14] Wed: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Civil
+FINAL SCORE: 76 / 100
+============================================================
+  --- FALL TERM (Score: 68) ---
+  [-10] Mon: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-14] Thu: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-8] Fri: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 84) ---
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Civil
+FINAL SCORE: 59 / 100
+============================================================
+  --- FALL TERM (Score: 76) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 42) ---
+  [-4] Mon: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-28] Wed: Large gap of 8.2 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-8] Fri: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Civil
+FINAL SCORE: 71 / 100
+============================================================
+  --- FALL TERM (Score: 66) ---
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-20] Thu: Large gap of 6.2 hrs (Allowed: 1.0 hr)
+  [-2] Fri: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 76) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-22] Wed: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block F  |  PROGRAM: Civil
+FINAL SCORE: 78 / 100
+============================================================
+  --- FALL TERM (Score: 84) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 72) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-4] Wed: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Communications
+FINAL SCORE: 88 / 100
+============================================================
+  --- FALL TERM (Score: 92) ---
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-4] Thu: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 84) ---
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-8] Fri: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Computer Systems
+FINAL SCORE: 51 / 100
+============================================================
+  --- FALL TERM (Score: 66) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-10] Wed: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-14] Fri: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 36) ---
+  [-14] Mon: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-16] Tue: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-14] Wed: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Computer Systems
+FINAL SCORE: 84 / 100
+============================================================
+  --- FALL TERM (Score: 72) ---
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 96) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Computer Systems
+FINAL SCORE: 83 / 100
+============================================================
+  --- FALL TERM (Score: 74) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-20] Wed: Large gap of 6.2 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 92) ---
+  [-4] Mon: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Computer Systems
+FINAL SCORE: 76 / 100
+============================================================
+  --- FALL TERM (Score: 76) ---
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-14] Fri: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 76) ---
+  [-14] Mon: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Computer Systems
+FINAL SCORE: 63 / 100
+============================================================
+  --- FALL TERM (Score: 70) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-4] Wed: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 56) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-16] Wed: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-22] Thu: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Electrical
+FINAL SCORE: 79 / 100
+============================================================
+  --- FALL TERM (Score: 96) ---
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 62) ---
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-4] Thu: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-4] Fri: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-10] Thu->Fri: Only 10.7 hrs rest (Req: 12.0 hrs)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Electrical
+FINAL SCORE: 74 / 100
+============================================================
+  --- FALL TERM (Score: 68) ---
+  [-16] Tue: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 80) ---
+  [-16] Tue: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-4] Thu: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Electrical
+FINAL SCORE: 86 / 100
+============================================================
+  --- FALL TERM (Score: 72) ---
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Electrical
+FINAL SCORE: 73 / 100
+============================================================
+  --- FALL TERM (Score: 84) ---
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-14] Fri: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 62) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-22] Thu: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Electrical
+FINAL SCORE: 81 / 100
+============================================================
+  --- FALL TERM (Score: 76) ---
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-20] Thu: Large gap of 6.2 hrs (Allowed: 1.0 hr)
+  [-2] Fri: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 86) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block F  |  PROGRAM: Electrical
+FINAL SCORE: 61 / 100
+============================================================
+  --- FALL TERM (Score: 80) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-14] Fri: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 42) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-22] Tue: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-22] Thu: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu->Fri: Only 10.7 hrs rest (Req: 12.0 hrs)
+  
+
+
+============================================================
+BLOCK: Block G  |  PROGRAM: Electrical
+FINAL SCORE: 63 / 100
+============================================================
+  --- FALL TERM (Score: 92) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Fri: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 34) ---
+  [-16] Tue: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-22] Fri: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu->Fri: Only 10.7 hrs rest (Req: 12.0 hrs)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Environmental
+FINAL SCORE: 62 / 100
+============================================================
+  --- FALL TERM (Score: 56) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-18] Mon: Large gap of 5.7 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-20] Wed: Large gap of 6.2 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 68) ---
+  [-4] Mon: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-4] Thu: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Environmental
+FINAL SCORE: 47 / 100
+============================================================
+  --- FALL TERM (Score: 40) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-22] Tue: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-22] Thu: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 54) ---
+  [-22] Mon: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-2] Fri: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Mechanical
+FINAL SCORE: 53 / 100
+============================================================
+  --- FALL TERM (Score: 92) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 14) ---
+  [-28] Mon: Large gap of 8.2 hrs (Allowed: 1.0 hr)
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-28] Wed: Large gap of 8.2 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-10] Fri: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Mechanical
+FINAL SCORE: 89 / 100
+============================================================
+  --- FALL TERM (Score: 80) ---
+  [-14] Mon: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-4] Wed: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 98) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Mechanical
+FINAL SCORE: 67 / 100
+============================================================
+  --- FALL TERM (Score: 70) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-18] Mon: Large gap of 5.7 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 64) ---
+  [-16] Mon: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-14] Tue: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Fri: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Fri: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Mechanical
+FINAL SCORE: 72 / 100
+============================================================
+  --- FALL TERM (Score: 72) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-22] Thu: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 72) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Mon: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Wed: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Mechanical
+FINAL SCORE: 65 / 100
+============================================================
+  --- FALL TERM (Score: 58) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-18] Mon: Large gap of 5.7 hrs (Allowed: 1.0 hr)
+  [-14] Wed: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 72) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-2] Fri: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Physics
+FINAL SCORE: 56 / 100
+============================================================
+  --- FALL TERM (Score: 52) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu->Fri: Only 10.7 hrs rest (Req: 12.0 hrs)
+  
+  --- WINTER TERM (Score: 60) ---
+  [-16] Tue: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-14] Fri: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu->Fri: Only 10.7 hrs rest (Req: 12.0 hrs)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: SREE A
+FINAL SCORE: 77 / 100
+============================================================
+  --- FALL TERM (Score: 92) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Wed: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 62) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-16] Mon: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-16] Wed: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: SREE B
+FINAL SCORE: 76 / 100
+============================================================
+  --- FALL TERM (Score: 66) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-28] Wed: Large gap of 8.2 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 86) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block A  |  PROGRAM: Software
+FINAL SCORE: 84 / 100
+============================================================
+  --- FALL TERM (Score: 94) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 74) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Fri: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block B  |  PROGRAM: Software
+FINAL SCORE: 48 / 100
+============================================================
+  --- FALL TERM (Score: 78) ---
+  [-4] Mon: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-14] Fri: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 18) ---
+  [-22] Mon: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-16] Tue: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-14] Wed: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-14] Fri: Large gap of 4.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block C  |  PROGRAM: Software
+FINAL SCORE: 64 / 100
+============================================================
+  --- FALL TERM (Score: 56) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Tue: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-20] Wed: Large gap of 6.2 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Thu: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 72) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-16] Tue: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  [-4] Thu: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block D  |  PROGRAM: Software
+FINAL SCORE: 93 / 100
+============================================================
+  --- FALL TERM (Score: 88) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 98) ---
+  [-2] Tue: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block E  |  PROGRAM: Software
+FINAL SCORE: 59 / 100
+============================================================
+  --- FALL TERM (Score: 70) ---
+  [-10] Mon: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-16] Thu: Large gap of 5.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 48) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-4] Mon: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-22] Wed: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-8] Fri: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block F  |  PROGRAM: Software
+FINAL SCORE: 75 / 100
+============================================================
+  --- FALL TERM (Score: 72) ---
+  [-20] Wed: Large gap of 6.2 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 78) ---
+  [-2] Mon: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Tue: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block G  |  PROGRAM: Software
+FINAL SCORE: 77 / 100
+============================================================
+  --- FALL TERM (Score: 78) ---
+  [-2] Wed: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  [-10] Wed: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-2] Thu: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 76) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  
+
+
+============================================================
+BLOCK: Block H  |  PROGRAM: Software
+FINAL SCORE: 55 / 100
+============================================================
+  --- FALL TERM (Score: 86) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-4] Tue: Large gap of 2.2 hrs (Allowed: 1.0 hr)
+  [-2] Fri: Large gap of 1.7 hrs (Allowed: 1.0 hr)
+  
+  --- WINTER TERM (Score: 24) ---
+  [-8] Mon: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-10] Mon: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-22] Tue: Large gap of 6.7 hrs (Allowed: 1.0 hr)
+  [-8] Wed: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-10] Wed: Large gap of 3.7 hrs (Allowed: 1.0 hr)
+  [-8] Thu: Large gap of 3.2 hrs (Allowed: 1.0 hr)
+  [-10] Wed->Thu: Only 10.7 hrs rest (Req: 12.0 hrs)
+  
+
+
