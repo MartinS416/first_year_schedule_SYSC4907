@@ -2,106 +2,178 @@
 {% block title %}Algorithm Comparison{% endblock %}
 {% block page_title %}Greedy vs. Optimized Scheduling{% endblock %}
 {% block content %}
-<div class="container" style="max-width: 900px; margin: 0 auto;">
-    <h2>Program: {{ program.program_name }}</h2>
+<div class="container" style="max-width: 1100px; margin: 0 auto;">
+    <form method="get" class="form-inline" style="margin-bottom: 2rem;">
+        <label for="program_id" style="font-weight: 500; margin-right: 0.5rem;">Select Program:</label>
+        <select name="program_id" id="program_id" class="form-select" onchange="this.form.submit()">
+            {% for p in programs %}
+                <option value="{{ p.id }}" {% if p.id == program.id %}selected{% endif %}>{{ p.program_name }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <h2 style="margin-bottom: 1.5rem;">Algorithm Comparison for <span style="color: var(--primary-700);">{{ program.program_name }}</span></h2>
+
     {% if error %}
         <div class="alert alert-danger">{{ error }}</div>
     {% else %}
-    <div class="row" style="display: flex; gap: 2rem;">
+    <!-- Summary Stats -->
+    <div class="stats-grid" style="margin-bottom: 2rem;">
+        <div class="stat-card">
+            <div class="stat-icon stat-icon-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value">{{ greedy_score|floatformat:2 }}</div>
+                <div class="stat-label">Greedy Avg. Block Score</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon stat-icon-success">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value">{{ optimized_score|floatformat:2 }}</div>
+                <div class="stat-label">Optimized Avg. Block Score</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="display: flex; gap: 2rem; align-items: flex-start;">
         <div class="card" style="flex: 1;">
             <div class="card-header"><h3>Greedy Algorithm</h3></div>
-            <div class="card-body">
-                <p><strong>Average Block Score:</strong> {{ greedy_score|floatformat:2 }}</p>
-                <table class="table">
-                    <thead><tr><th>Block</th><th>Score</th></tr></thead>
-                    <tbody>
-                    {% for item in greedy_result %}
-                        <tr>
-                            <td>{{ item.block.block_name }}</td>
-                            <td>{{ item.score|floatformat:2 }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <strong>Schedule:</strong>
-                                <ul>
+            <div class="card-body blocks-container">
+                {% for item in greedy_result %}
+                <div class="block-card">
+                    <div class="block-card-header">
+                        <div class="block-card-header-left">
+                            <span class="block-label">{{ item.block.block_name }}</span>
+                            <span class="block-size">Block Size: {{ item.block.size }}</span>
+                        </div>
+                        <span class="block-ranking ranking-{% if item.score >= 85 %}excellent{% elif item.score >= 70 %}good{% elif item.score >= 50 %}fair{% else %}poor{% endif %}">Score: {{ item.score|floatformat:2 }}</span>
+                    </div>
+                    <div class="block-card-content open" style="display: flex; flex-wrap: wrap; gap: 2rem; padding-bottom: 1.5rem;">
+                        <div style="flex: 2 1 340px; min-width: 320px;">
+                            <table class="table schedule-table" style="margin-bottom: 0; border-radius: 10px; overflow: hidden;">
+                                <thead>
+                                    <tr style="background: var(--gray-50);">
+                                        <th style="padding: 12px 8px;">Term</th>
+                                        <th style="padding: 12px 8px;">Course</th>
+                                        <th style="padding: 12px 8px;">Section</th>
+                                        <th style="padding: 12px 8px;">Type</th>
+                                        <th style="padding: 12px 8px;">Days</th>
+                                        <th style="padding: 12px 8px;">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                 {% for term in item.terms %}
-                                    <li><u>{{ term.term.term_name|title }}</u>:
-                                        <ul>
-                                        {% for c in term.courses %}
-                                            <li>
-                                                {{ c.course_code }}-{{ c.section }}
-                                                {% if c.course %}
-                                                    ({{ c.course.instr_type }}, {{ c.course.days }} {{ c.course.start_time }}-{{ c.course.end_time }})
-                                                {% endif %}
-                                            </li>
-                                        {% empty %}
-                                            <li><em>No courses scheduled.</em></li>
-                                        {% endfor %}
-                                        </ul>
-                                    </li>
+                                    {% for c in term.courses %}
+                                    <tr style="height: 38px;">
+                                        <td style="padding: 10px 8px;">{{ term.term.term_name|title }}</td>
+                                        <td style="padding: 10px 8px;">{{ c.course_code }}</td>
+                                        <td style="padding: 10px 8px;">{{ c.section }}</td>
+                                        <td style="padding: 10px 8px;">{% if c.course %}{{ c.course.instr_type }}{% endif %}</td>
+                                        <td style="padding: 10px 8px;">{% if c.course %}{{ c.course.days }}{% endif %}</td>
+                                        <td style="padding: 10px 8px;">{% if c.course %}{{ c.course.start_time }}-{{ c.course.end_time }}{% endif %}</td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr><td colspan="6" style="padding: 12px 8px;"><em>No courses scheduled.</em></td></tr>
+                                    {% endfor %}
                                 {% endfor %}
-                                </ul>
-                                <strong>Ranking Explanation:</strong>
-                                <ul>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ranking-explanation" style="flex: 1 1 260px; min-width: 220px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px; padding: 1.2rem 1.2rem 1rem 1.2rem; margin-top: 0.5rem;">
+                            <details open>
+                                <summary style="cursor: pointer; font-weight: 600; color: var(--primary-700); font-size: 1.08em; margin-bottom: 0.7rem;">Ranking Explanation</summary>
+                                <ul style="list-style: none; padding-left: 0; margin-top: 0.5rem;">
                                 {% for line in item.explanation %}
-                                    <li>{{ line }}</li>
+                                    {% if '---' in line %}
+                                        <li style="margin-bottom: 0.7em; margin-top: 0.7em; font-weight: bold; color: var(--primary-700);">{{ line }}</li>
+                                    {% elif line %}
+                                        <li style="display: flex; align-items: flex-start; gap: 0.7em; margin-bottom: 0.4em;">
+                                            <span style="margin-top: 0.18em;">
+                                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" fill="var(--primary-400)"/></svg>
+                                            </span>
+                                            <span style="color: var(--gray-700); font-size: 0.98em;">{{ line }}</span>
+                                        </li>
+                                    {% endif %}
                                 {% empty %}
                                     <li><em>No explanation available.</em></li>
                                 {% endfor %}
-                                </ul>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="card" style="flex: 1;">
             <div class="card-header"><h3>Optimized Algorithm</h3></div>
-            <div class="card-body">
-                <p><strong>Average Block Score:</strong> {{ optimized_score|floatformat:2 }}</p>
-                <table class="table">
-                    <thead><tr><th>Block</th><th>Score</th></tr></thead>
-                    <tbody>
-                    {% for item in optimized_result %}
-                        <tr>
-                            <td>{{ item.block.block_name }}</td>
-                            <td>{{ item.score|floatformat:2 }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <strong>Schedule:</strong>
-                                <ul>
+            <div class="card-body blocks-container">
+                {% for item in optimized_result %}
+                <div class="block-card">
+                    <div class="block-card-header">
+                        <div class="block-card-header-left">
+                            <span class="block-label">{{ item.block.block_name }}</span>
+                            <span class="block-size">Block Size: {{ item.block.size }}</span>
+                        </div>
+                        <span class="block-ranking ranking-{% if item.score >= 85 %}excellent{% elif item.score >= 70 %}good{% elif item.score >= 50 %}fair{% else %}poor{% endif %}">Score: {{ item.score|floatformat:2 }}</span>
+                    </div>
+                    <div class="block-card-content open" style="display: flex; flex-wrap: wrap; gap: 2rem; padding-bottom: 1.5rem;">
+                        <div style="flex: 2 1 340px; min-width: 320px;">
+                            <table class="table schedule-table" style="margin-bottom: 0; border-radius: 10px; overflow: hidden;">
+                                <thead>
+                                    <tr style="background: var(--gray-50);">
+                                        <th style="padding: 12px 8px;">Term</th>
+                                        <th style="padding: 12px 8px;">Course</th>
+                                        <th style="padding: 12px 8px;">Section</th>
+                                        <th style="padding: 12px 8px;">Type</th>
+                                        <th style="padding: 12px 8px;">Days</th>
+                                        <th style="padding: 12px 8px;">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                 {% for term in item.terms %}
-                                    <li><u>{{ term.term.term_name|title }}</u>:
-                                        <ul>
-                                        {% for c in term.courses %}
-                                            <li>
-                                                {{ c.course_code }}-{{ c.section }}
-                                                {% if c.course %}
-                                                    ({{ c.course.instr_type }}, {{ c.course.days }} {{ c.course.start_time }}-{{ c.course.end_time }})
-                                                {% endif %}
-                                            </li>
-                                        {% empty %}
-                                            <li><em>No courses scheduled.</em></li>
-                                        {% endfor %}
-                                        </ul>
-                                    </li>
+                                    {% for c in term.courses %}
+                                    <tr style="height: 38px;">
+                                        <td style="padding: 10px 8px;">{{ term.term.term_name|title }}</td>
+                                        <td style="padding: 10px 8px;">{{ c.course_code }}</td>
+                                        <td style="padding: 10px 8px;">{{ c.section }}</td>
+                                        <td style="padding: 10px 8px;">{% if c.course %}{{ c.course.instr_type }}{% endif %}</td>
+                                        <td style="padding: 10px 8px;">{% if c.course %}{{ c.course.days }}{% endif %}</td>
+                                        <td style="padding: 10px 8px;">{% if c.course %}{{ c.course.start_time }}-{{ c.course.end_time }}{% endif %}</td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr><td colspan="6" style="padding: 12px 8px;"><em>No courses scheduled.</em></td></tr>
+                                    {% endfor %}
                                 {% endfor %}
-                                </ul>
-                                <strong>Ranking Explanation:</strong>
-                                <ul>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ranking-explanation" style="flex: 1 1 260px; min-width: 220px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px; padding: 1.2rem 1.2rem 1rem 1.2rem; margin-top: 0.5rem;">
+                            <details open>
+                                <summary style="cursor: pointer; font-weight: 600; color: var(--primary-700); font-size: 1.08em; margin-bottom: 0.7rem;">Ranking Explanation</summary>
+                                <ul style="list-style: none; padding-left: 0; margin-top: 0.5rem;">
                                 {% for line in item.explanation %}
-                                    <li>{{ line }}</li>
+                                    {% if '---' in line %}
+                                        <li style="margin-bottom: 0.7em; margin-top: 0.7em; font-weight: bold; color: var(--primary-700);">{{ line }}</li>
+                                    {% elif line %}
+                                        <li style="display: flex; align-items: flex-start; gap: 0.7em; margin-bottom: 0.4em;">
+                                            <span style="margin-top: 0.18em;">
+                                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" fill="var(--primary-400)"/></svg>
+                                            </span>
+                                            <span style="color: var(--gray-700); font-size: 0.98em;">{{ line }}</span>
+                                        </li>
+                                    {% endif %}
                                 {% empty %}
                                     <li><em>No explanation available.</em></li>
                                 {% endfor %}
-                                </ul>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
