@@ -26,7 +26,9 @@ class ScheduleBuilder:
         """
         Enhanced optimizer: Lower threshold, more iterations, and detailed progress reporting.
         """
-        self._emit("\n=== STARTING SCHEDULE OPTIMIZATION ===", "info", pct=0)
+        self._emit("\n==============================", "info")
+        self._emit("=== GLOBAL SCHEDULE OPTIMIZATION ===", "info")
+        self._emit("==============================\n", "info", pct=0)
         import time
         from data_app.services.ranking import ScheduleRanker
         EARLY_STOP_LIMIT = 5  # Allow more non-improving rounds before stopping
@@ -69,8 +71,8 @@ class ScheduleBuilder:
             all_terms = list(Term.objects.all())
             all_scores_before = [ranker.score_block(b) for b in all_blocks]
             total_avg_before = sum(all_scores_before) / len(all_scores_before) if all_scores_before else 0
-            self._emit(f"Global optimization pass {iteration}...", "info")
-            # Try random swaps across all terms/blocks
+            self._emit(f"\n--- GLOBAL OPTIMIZATION PASS {iteration} ---", "info")
+            swaps_this_pass = 0
             for _ in range(MAX_RANDOM_SWAPS):
                 term_a, term_b = random.sample(all_terms, 2)
                 if term_a == term_b:
@@ -86,6 +88,7 @@ class ScheduleBuilder:
                 codes_a = set(tc.course_code for tc in courses_a)
                 codes_b = set(tc.course_code for tc in courses_b)
                 if cb.course_code not in codes_a and ca.course_code not in codes_b:
+                    self._emit(f"  Attempting random swap: {ca.course_code} (Term {term_a}) <-> {cb.course_code} (Term {term_b})", "info")
                     # Try swap
                     TermCourses.objects.filter(term=term_a, course_code=ca.course_code, section=ca.section).delete()
                     TermCourses.objects.filter(term=term_b, course_code=cb.course_code, section=cb.section).delete()
@@ -98,14 +101,17 @@ class ScheduleBuilder:
                     if total_avg_after > total_avg_before:
                         total_actions += 1
                         improved = True
+                        swaps_this_pass += 1
                         no_improve_count = 0
-                        self._emit(f"Global swap improved total avg: {total_avg_before:.2f}->{total_avg_after:.2f}", "info")
+                        self._emit(f"    Swap accepted! Total avg improved: {total_avg_before:.2f} → {total_avg_after:.2f}", "success")
                     else:
                         # Revert
                         TermCourses.objects.filter(term=term_a, course_code=cb.course_code, section=cb.section).delete()
                         TermCourses.objects.filter(term=term_b, course_code=ca.course_code, section=ca.section).delete()
                         TermCourses.objects.create(term=term_a, course_code=ca.course_code, section=ca.section)
                         TermCourses.objects.create(term=term_b, course_code=cb.course_code, section=cb.section)
+                        self._emit(f"    Swap reverted (no improvement)", "warning")
+            self._emit(f"--- End of pass {iteration}: {swaps_this_pass} swaps accepted ---", "info")
             if not improved:
                 no_improve_count += 1
             else:
@@ -118,6 +124,7 @@ class ScheduleBuilder:
         after_high = max(after_scores) if after_scores else 0
         after_low = min(after_scores) if after_scores else 0
         # Per-program summary for compatibility with existing reporting
+        summary_stats = []
         for program in programs:
             blocks = list(Block.objects.filter(program=program))
             # Use initial (pre-optimization) stats for before values
@@ -137,9 +144,11 @@ class ScheduleBuilder:
                 'after_high': after_high_prog,
                 'after_low': after_low_prog
             })
-        self._emit(f"Total actions performed: {total_actions}", "info", pct=95)
+        self._emit(f"\n==============================", "info")
+        self._emit(f"Total swaps accepted during optimization: {total_actions}", "info", pct=95)
+        self._emit(f"==============================\n", "info")
         # Re-rank all blocks and generate ranking report after optimization
-        self._emit("Ranking all blocks after optimization...", "info", pct=97)
+        self._emit("\nRanking all blocks after optimization...", "info", pct=97)
         ranker_with_progress = __import__('data_app.services.ranking', fromlist=['ScheduleRanker']).ScheduleRanker(progress_callback=self._progress)
         ranker_with_progress.rank_all_blocks()
         ranker_with_progress.export_ranking_report()
@@ -151,7 +160,9 @@ class ScheduleBuilder:
         total_after_avg = after_avg
         total_after_high = after_high
         total_after_low = after_low
-        self._emit("\n=== SCHEDULE OPTIMIZATION SUMMARY ===", "success")
+        self._emit("\n==============================", "success")
+        self._emit("=== SCHEDULE OPTIMIZATION SUMMARY ===", "success")
+        self._emit("==============================", "success")
         for stat in summary_stats:
             self._emit(
                 f"Program: {stat['program']}\n"
