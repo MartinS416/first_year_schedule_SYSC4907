@@ -22,10 +22,29 @@ DEFAULT_CONFIG = {
 
 class ScheduleBuilder:
 
-    BLOCK_SIZE = 20
-    SHARED_COURSES = {}
-    
-    PRIORITY_COURSES = ["ECOR 1041"]
+    def __init__(self, config: dict | None = None, progress_callback=None):
+        """
+        config            — dict of settings (missing keys fall back to DEFAULT_CONFIG).
+        progress_callback — callable(event_type, message, pct) called throughout
+                            generation so the caller can stream progress to the client.
+                            event_type: 'info' | 'success' | 'warning' | 'error' | 'progress'
+                            pct: 0-100 integer (None if not meaningful)
+        """
+        cfg = {**DEFAULT_CONFIG, **(config or {})}
+        self.BLOCK_SIZE          = int(cfg["block_size"])
+        self.MAX_RETRIES         = int(cfg["max_retries"])
+        self.MAX_RECURSION_DEPTH = int(cfg["max_recursion_depth"])
+        self.ENFORCE_CAPACITY    = bool(cfg["enforce_capacity"])
+        self.SKIP_ELECTIVES      = bool(cfg["skip_electives"])
+        self.SHARED_COURSES      = {}
+        self._progress           = progress_callback or (lambda *a, **kw: None)
+
+    # ── progress helpers ─────────────────────────────────────────────────────
+
+    def _emit(self, msg, kind="info", pct=None):
+        """Print to stdout (captured by redirect_stdout) AND fire the callback."""
+        print(msg)
+        self._progress(kind, msg, pct)
 
     def build_blocks(self):
         """
@@ -72,16 +91,12 @@ class ScheduleBuilder:
     def find_shared_courses(self):
         """
         Prioritizes courses by:
-        0. Manual Priority Bias (Forces problem courses to the front)
         1. Program Frequency (Constraints)
         2. Flexibility (Fewest sections first)
         3. Random weight (To vary results on retries)
         """
-        course_stats = (
-            ProgramCourse.objects
-            .exclude(course_code__icontains="Elective")
-            .values('course_code')
-            .annotate(program_count=models.Count('program', distinct=True))
+        qs = ProgramCourse.objects.values('course_code').annotate(
+            program_count=models.Count('program', distinct=True)
         )
         if self.SKIP_ELECTIVES:
             qs = qs.exclude(course_code__icontains="Elective")
@@ -89,32 +104,16 @@ class ScheduleBuilder:
         enriched_stats = []
         for entry in qs:
             code = entry['course_code']
-            
-            # Get total number of distinct sections (bundles)
             num_bundles = len(self.get_course_bundles(code))
-
-            # --- ADD THIS: Assign a score of 1 if it's in the priority list, else 0 ---
-            priority_score = 1 if code in self.PRIORITY_COURSES else 0
-
             enriched_stats.append({
                 'course_code':   code,
                 'program_count': entry['program_count'],
-                'flexibility': num_bundles, 
-                'random_weight': random.random(),
-                'priority_score': priority_score   # <--- Add to dictionary
+                'flexibility':   num_bundles,
+                'random_weight': random.random()
             })
         
-        # Sort Logic:
-        # 0. Manual Priority (1 goes before 0)
-        # 1. Most Programs (Constraints)
-        # 2. FEWEST bundles (Flexibility - Low is hard) -> Use negative or reverse sort
         enriched_stats.sort(
-            key=lambda x: (
-                x['priority_score'],    # <--- Put priority score FIRST in the tuple
-                x['program_count'], 
-                -x['flexibility'], 
-                x['random_weight']
-            ),
+            key=lambda x: (x['program_count'], -x['flexibility'], x['random_weight']),
             reverse=True
         )
         return enriched_stats
@@ -392,11 +391,8 @@ class ScheduleBuilder:
 
     def _attempt_force_schedule(self, term, new_course_code, new_bundles, depth):
         existing_groups = self._get_existing_course_objects_for_term(term)
-        
-        # FIX: Get the block size once at the beginning (default to 0 if None)
-        block_size = term.block.size or 0
-        
-        # Sort victims by "Ease of Rescheduling" (Flexibility)
+        block_size = term.block.size
+
         victim_scores = []
         for group in existing_groups:
             c_code = group[0].course_code
@@ -407,11 +403,11 @@ class ScheduleBuilder:
         random.shuffle(new_bundles)
 
         for new_bundle in new_bundles:
-            # FIX: Ensure the new bundle actually has enough capacity before proceeding!
+            # Gate on capacity with fresh DB values before attempting any kick.
+            # This avoids kicking a victim only to find the replacement is full too.
             if not self._has_capacity(new_bundle, block_size):
                 continue
-            
-            # Iterate through our SORTED list of victims
+
             for item in victim_scores:
                 existing_group = item['group']
                 victim_code    = item['code']
@@ -422,11 +418,11 @@ class ScheduleBuilder:
                 temp_schedule = [g['group'] for g in victim_scores if g['code'] != victim_code]
                 
                 if can_add_group_to_term(new_bundle, temp_schedule):
-                    
-                    # 1. Delete Victim and decrement enrollment for SPECIFIC sections
-                    print(f"      [!] Kicking out {victim_code} to make room for {new_course_code}...")
-                    
-                    # Decrement enrollment for each specific course in the victim bundle
+                    self._emit(
+                        f"      [!] Kicking out {victim_code} to make room for {new_course_code}...",
+                        "warning"
+                    )
+
                     for course_part in existing_group:
                         Course.objects.filter(pk=course_part.pk).update(
                             enrolled=models.F('enrolled') - block_size
@@ -537,19 +533,20 @@ class ScheduleBuilder:
 
                         for term in Term.objects.filter(block=block):
                             f.write(f"    TERM: {term.term_name}\n")
-                            
+                            term_links = TermCourses.objects.filter(term=term)
                             row_format = "{:<12} {:<8} {:<6} {:<10} {:<15} {:<15}"
                             header = row_format.format("Code", "Sec", "Type", "Days", "Time", "Enrl/Cap")
                             f.write("      " + header + "\n")
                             
                             scheduled_codes = set()
-                            # FIXED: Use the helper to properly load courses without MultipleObjectsReturned exceptions
-                            existing_groups = self._get_existing_course_objects_for_term(term)
-                            
-                            if existing_groups:
-                                for group in existing_groups:
-                                    for course in group:
-                                        scheduled_codes.add(course.course_code)
+                            if term_links.exists():
+                                for link in term_links:
+                                    scheduled_codes.add(link.course_code)
+                                    try:
+                                        course = Course.objects.get(
+                                            course_code=link.course_code,
+                                            section=link.section
+                                        )
                                         s_time = self._format_time(course.start_time)
                                         e_time = self._format_time(course.end_time)
                                         time_str = f"{s_time}-{e_time}"
@@ -560,14 +557,15 @@ class ScheduleBuilder:
                                             course.instr_type, course.days or "N/A",
                                             time_str, ratio_str
                                         ) + "\n")
+                                    except:
+                                        f.write(f"      ERR: {link.course_code}\n")
                             else:
                                 f.write("      (No courses assigned)\n")
 
                             elective_filter = {"course_code__icontains": "Elective"} if self.SKIP_ELECTIVES else {}
                             required_courses = ProgramCourse.objects.filter(
-                                program=program, 
-                                term=term.term_name
-                            ).exclude(course_code__icontains="Elective").values_list('course_code', flat=True)
+                                program=program, term=term.term_name
+                            ).exclude(**elective_filter).values_list('course_code', flat=True)
                             
                             missing_set = set(required_courses) - scheduled_codes
                             if missing_set:
@@ -580,6 +578,13 @@ class ScheduleBuilder:
         except IOError as e:
             self._emit(f"Error writing to file: {e}", "error")
 
+    def _format_time(self, time_str):
+        if not time_str or len(str(time_str)) < 3:
+            return ""
+        t = str(time_str)
+        if len(t) == 3: t = "0" + t
+        return f"{t[:2]}:{t[2:]}"
+    
     def export_visual_grid(self, filename="visual_schedule.txt"):
         self._emit(f"Generating box-style schedule to {filename}...")
         START_HOUR, END_HOUR, SLOT_MINS, COL_WIDTH = 8, 22, 30, 14
@@ -593,24 +598,20 @@ class ScheduleBuilder:
                     for block in Block.objects.filter(program=program).order_by('block_name'):
                         for term in Term.objects.filter(block=block):
                             grid = [[None for _ in range(5)] for _ in range(total_slots)]
-                            
-                            # FIXED: Call the same existing objects helper to retrieve components
-                            existing_groups = self._get_existing_course_objects_for_term(term)
-                            
-                            for group in existing_groups:
-                                for course in group:
+                            for link in TermCourses.objects.filter(term=term):
+                                try:
+                                    course = Course.objects.get(course_code=link.course_code, section=link.section)
                                     if not course.days or not course.start_time: continue
                                     s_min = self.parse_time(course.start_time)
                                     e_min = self.parse_time(course.end_time)
                                     start_slot = (s_min - (START_HOUR * 60)) // SLOT_MINS
-                                    end_slot = (e_min - (START_HOUR * 60)) // SLOT_MINS
-                                    days = parse_days(course.days)
-                                    
-                                    for d in days:
+                                    end_slot   = (e_min - (START_HOUR * 60)) // SLOT_MINS
+                                    for d in parse_days(course.days):
                                         if d in days_map:
                                             for r in range(start_slot, end_slot):
                                                 if 0 <= r < total_slots:
-                                                    grid[r][d_idx] = course
+                                                    grid[r][days_map[d]] = course
+                                except: continue
 
                             title = f"{program.program_name} - {block.block_name} ({term.term_name})"
                             f.write("\n" + "="*85 + "\n")
@@ -656,14 +657,7 @@ class ScheduleBuilder:
                             f.write("\n")
             self._emit("Visual box export complete.", "success")
         except IOError as e:
-            print(f"Error: {e}")
-
-    def _format_time(self, time_str):
-        if not time_str or len(str(time_str)) < 3:
-            return ""
-        t = str(time_str)
-        if len(t) == 3: t = "0" + t
-        return f"{t[:2]}:{t[2:]}"
+            self._emit(f"Error: {e}", "error")
             
     def parse_time(self, t):
         try:

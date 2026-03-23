@@ -120,18 +120,19 @@
     --course-11: #38bdf8; /* sky */
     --course-12: #4ade80; /* green */
 
-    --course-bg-1:  #eef2ff;
-    --course-bg-2:  #ecfdf5;
-    --course-bg-3:  #fdf2f8;
-    --course-bg-4:  #fffbeb;
-    --course-bg-5:  #eff6ff;
-    --course-bg-6:  #f5f3ff;
-    --course-bg-7:  #fef2f2;
-    --course-bg-8:  #f0fdfa;
-    --course-bg-9:  #fff7ed;
-    --course-bg-10: #faf5ff;
-    --course-bg-11: #f0f9ff;
-    --course-bg-12: #f0fdf4;
+    --course-bg-1:  #c7d2fe; /* indigo-300 */
+    --course-bg-2:  #bbf7d0; /* green-300 */
+    --course-bg-3:  #fbcfe8; /* pink-300 */
+    --course-bg-4:  #fde68a; /* amber-300 */
+    --course-bg-5:  #bfdbfe; /* blue-300 */
+    --course-bg-6:  #ddd6fe; /* violet-300 */
+    --course-bg-7:  #fecaca; /* red-300 */
+    --course-bg-8:  #99f6e4; /* teal-300 */
+    --course-bg-9:  #fed7aa; /* orange-300 */
+    --course-bg-10: #e9d5ff; /* purple-300 */
+    --course-bg-11: #bae6fd; /* sky-300 */
+    --course-bg-12: #bbf7d0; /* emerald-300 */
+
 }
 
 
