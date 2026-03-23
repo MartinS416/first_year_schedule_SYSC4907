@@ -1,0 +1,1548 @@
+=====================================================================================
+PROGRAM: Aerospace (Enrolled: 150)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    A        LEC    TR         14:35-15:55     200/285        
+      ECOR 1045    A2       LAB    F          14:35-17:25     60/79          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A5A      LAB    F          11:35-14:25     60/86          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    C        LEC    MW         08:35-09:55     180/236        
+      MATH 1004    C2       TUT    M          11:35-12:25     20/48          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    L4       LAB    F          13:35-16:25     60/72          
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D5       LAB    T          18:05-20:55     40/80          
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D4       LAB    R          18:05-20:55     60/65          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    C        LEC    TR         14:35-15:55     80/236         
+      MATH 1104    C1       TUT    R          13:35-14:25     20/48          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L4A      LAB    M          08:35-11:25     40/70          
+
+
+  [ BLOCK: Block B ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    B        LEC    WF         14:35-15:55     140/393        
+      ECOR 1045    B3       LAB    F          08:35-11:25     80/98          
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B4B      LAB    R          14:35-17:25     20/86          
+      ECOR 1055    G        LEC    R          08:35-09:55     160/285        
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    C        LEC    MW         08:35-09:55     180/236        
+      MATH 1004    C4       TUT    M          11:35-12:25     60/66          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    C        LEC    MW         08:35-09:55     170/386        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D5       LAB    T          18:05-20:55     40/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C4       LAB    R          08:35-11:25     50/65          
+      ECOR 1056    D        LEC    N/A        -               190/9000       
+      MATH 1104    E        LEC    WF         11:35-12:55     100/386        
+      MATH 1104    ET       TUT    F          13:35-14:25     20/?           
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L3A      LAB    F          08:35-11:25     60/70          
+
+
+  [ BLOCK: Block C ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C2       LAB    M          11:35-14:25     100/236        
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B5B      LAB    W          18:05-20:55     40/86          
+      ECOR 1055    C        LEC    M          14:35-15:55     100/204        
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    F1       TUT    R          21:05-21:55     60/66          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D4       LAB    F          14:35-17:25     20/80          
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D4       LAB    R          18:05-20:55     60/65          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    G5       TUT    M          19:35-20:25     60/66          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L4A      LAB    M          08:35-11:25     40/70          
+
+
+  [ BLOCK: Block D ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C2       LAB    M          11:35-14:25     100/236        
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B6B      LAB    W          08:35-11:25     40/86          
+      ECOR 1055    C        LEC    M          14:35-15:55     100/204        
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    D        LEC    TR         10:05-11:25     180/236        
+      MATH 1004    D5       TUT    R          17:35-18:25     40/52          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    L2       LAB    R          13:35-16:25     40/72          
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C2       LAB    T          14:35-17:25     60/80          
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D1       LAB    M          08:35-11:25     40/65          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    J        LEC    TR         10:05-11:25     140/236        
+      MATH 1104    J3       TUT    T          08:35-09:25     40/52          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L3B      LAB    F          08:35-11:25     80/98          
+
+
+  [ BLOCK: Block E ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    A        LEC    TR         14:35-15:55     200/285        
+      ECOR 1045    A1       LAB    M          08:35-11:25     20/79          
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B6B      LAB    W          08:35-11:25     40/86          
+      ECOR 1055    I        LEC    M          11:35-12:55     60/154         
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    D        LEC    TR         10:05-11:25     180/236        
+      MATH 1004    DT       TUT    R          17:35-18:25     40/?           
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    L3       LAB    F          08:35-11:25     60/72          
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C5       LAB    F          11:35-14:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C6       LAB    T          08:35-11:25     50/65          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    G1       TUT    M          19:35-20:25     20/48          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L5B      LAB    R          13:05-15:55     80/98          
+
+
+  [ BLOCK: Block F ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    A        LEC    TR         14:35-15:55     200/285        
+      ECOR 1045    A4       LAB    T          11:35-14:25     60/115         
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B2A      LAB    R          08:35-11:25     20/86          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    A        LEC    TR         16:35-17:55     140/236        
+      MATH 1004    A4       TUT    T          18:05-18:55     40/52          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    C        LEC    MW         08:35-09:55     170/386        
+      CHEM 1101    L1       LAB    R          08:35-11:25     40/72          
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D3       LAB    T          08:35-11:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C2       LAB    W          18:05-20:55     60/65          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    H        LEC    TR         19:35-20:55     200/236        
+      MATH 1104    H1       TUT    R          21:05-21:55     40/48          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L8A      LAB    T          13:05-15:55     60/70          
+
+
+  [ BLOCK: Block G ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    A        LEC    TR         14:35-15:55     200/285        
+      ECOR 1045    A3       LAB    M          18:05-20:55     60/78          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A1A      LAB    M          14:35-17:25     40/86          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    B        LEC    WF         11:35-12:55     160/236        
+      MATH 1004    B2       TUT    F          17:35-18:25     40/48          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    C        LEC    MW         08:35-09:55     170/386        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C4       LAB    R          08:35-11:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C6       LAB    T          08:35-11:25     50/65          
+      ECOR 1056    D        LEC    N/A        -               190/9000       
+      MATH 1104    E        LEC    WF         11:35-12:55     100/386        
+      MATH 1104    E5       TUT    F          13:35-14:25     20/58          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L5A      LAB    R          13:05-15:55     60/70          
+
+
+  [ BLOCK: Block H ]  (Students in Block: 10)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    B        LEC    WF         14:35-15:55     140/393        
+      ECOR 1045    B2       LAB    F          08:35-11:25     30/79          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A5B      LAB    F          11:35-14:25     30/86          
+      ECOR 1055    J        LEC    R          10:05-11:25     90/96          
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    A        LEC    TR         16:35-17:55     140/236        
+      MATH 1004    A3       TUT    T          18:05-18:55     30/48          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    C        LEC    MW         08:35-09:55     170/386        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D1       LAB    R          14:35-17:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C6       LAB    T          08:35-11:25     50/65          
+      ECOR 1056    D        LEC    N/A        -               190/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    G3       TUT    M          19:35-20:25     50/52          
+      PHYS 1004    C        LEC    MW         16:05-17:25     130/386        
+      PHYS 1004    L1C      LAB    R          08:35-11:25     70/70          
+
+
+
+=====================================================================================
+PROGRAM: Architectural (Enrolled: 50)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ARCH 1000    A        LEC    F          08:35-11:25     50/9000        
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B1       LAB    M          14:35-17:25     40/80          
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B1       LAB    R          18:05-20:55     60/65          
+      ECOR 1055    A        LEC    W          08:35-09:55     60/204         
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    A        LEC    TR         16:35-17:55     140/236        
+      MATH 1004    A4       TUT    T          18:05-18:55     40/52          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    F        LEC    TR         13:05-14:25     180/236        
+      ECOR 1045    F1       LAB    T          08:35-11:25     40/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D3A      LAB    F          18:05-20:55     20/58          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    G3       TUT    M          19:35-20:25     50/52          
+      PHYS 1004    C        LEC    MW         16:05-17:25     130/386        
+      PHYS 1004    L2C      LAB    F          13:05-15:55     60/70          
+
+
+  [ BLOCK: Block B ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ARCH 1000    A        LEC    F          08:35-11:25     50/9000        
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B1       LAB    M          14:35-17:25     40/80          
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B1       LAB    R          18:05-20:55     60/65          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    A        LEC    N/A        -               190/9000       
+      MATH 1004    A        LEC    TR         16:35-17:55     140/236        
+      MATH 1004    A3       TUT    T          18:05-18:55     30/48          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    D        LEC    MW         11:35-12:55     110/236        
+      ECOR 1045    D3       LAB    R          08:35-11:25     20/69          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D6B      LAB    T          08:35-11:25     40/58          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    I        LEC    MW         19:35-20:55     90/204         
+      MATH 1104    I4       TUT    W          21:05-21:55     40/52          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L5A      LAB    R          13:05-15:55     60/70          
+
+
+  [ BLOCK: Block C ]  (Students in Block: 10)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ARCH 1000    A        LEC    F          08:35-11:25     50/9000        
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1041    A        LEC    TR         11:35-12:55     150/348        
+      ECOR 1041    A1       LAB    T          08:35-11:25     30/80          
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B2       LAB    M          14:35-17:25     50/65          
+      ECOR 1055    D        LEC    W          08:35-09:55     90/98          
+      ECOR 1057    A        LEC    N/A        -               190/9000       
+      MATH 1004    A        LEC    TR         16:35-17:55     140/236        
+      MATH 1004    A1       TUT    T          18:05-18:55     10/48          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    D        LEC    MW         11:35-12:55     110/236        
+      ECOR 1045    D4       LAB    W          14:35-17:25     10/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D5B      LAB    R          14:35-17:25     10/58          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    F        LEC    MW         08:35-09:55     70/236         
+      MATH 1104    F1       TUT    M          14:35-15:25     10/98          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L8B      LAB    T          13:05-15:55     90/98          
+
+
+
+=====================================================================================
+PROGRAM: Bioelectrical (Enrolled: 40)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1001    E        LEC    MW         18:05-19:25     100/148        
+      CHEM 1001    G1       LAB    N/A        -               60/?           
+      CHEM 1001    T7       TUT    W          13:35-16:25     20/56          
+      ECOR 1041    F        LEC    TR         11:35-12:55     40/285         
+      ECOR 1041    F1       LAB    N/A        -               40/?           
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B2       LAB    M          14:35-17:25     50/65          
+      ECOR 1055    G        LEC    R          08:35-09:55     160/285        
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    A        LEC    TR         16:35-17:55     140/236        
+      MATH 1004    A2       TUT    T          18:05-18:55     40/52          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1002    A        LEC    TR         11:35-12:55     80/393         
+      CHEM 1002    A1       LAB    M          18:05-20:55     40/72          
+      CHEM 1002    T4       TUT    T          08:35-11:25     20/48          
+      ECOR 1045    F        LEC    TR         13:05-14:25     180/236        
+      ECOR 1045    F3       LAB    M          14:35-17:25     40/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D5A      LAB    R          14:35-17:25     20/58          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    H        LEC    TR         19:35-20:55     200/236        
+      MATH 1104    H1       TUT    R          21:05-21:55     40/48          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L1B      LAB    W          13:05-15:55     40/98          
+
+
+  [ BLOCK: Block B ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1001    E        LEC    MW         18:05-19:25     100/148        
+      CHEM 1001    E3       LAB    M          13:35-16:25     20/72          
+      CHEM 1001    ETU      TUT    W          19:35-20:25     40/151         
+      ECOR 1041    A        LEC    TR         11:35-12:55     150/348        
+      ECOR 1041    A6       LAB    R          14:35-17:25     20/80          
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B4       LAB    F          11:35-14:25     40/65          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    C        LEC    MW         08:35-09:55     180/236        
+      MATH 1004    C1       TUT    M          11:35-12:25     40/56          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1002    E        LEC    TR         19:35-20:55     40/148         
+      CHEM 1002    ETU      TUT    R          21:05-21:55     20/115         
+      CHEM 1002    G1       LAB    N/A        -               60/?           
+      ECOR 1045    E        LEC    WF         13:05-14:25     160/285        
+      ECOR 1045    E3       LAB    T          14:35-17:25     60/78          
+      ECOR 1047    C        LEC    TR         11:35-12:55     200/348        
+      ECOR 1047    C2A      LAB    W          08:35-11:25     20/58          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    G5       TUT    M          19:35-20:25     60/66          
+      PHYS 1004    C        LEC    MW         16:05-17:25     130/386        
+      PHYS 1004    L1C      LAB    R          08:35-11:25     70/70          
+
+
+
+=====================================================================================
+PROGRAM: Biomechanical (Enrolled: 40)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1001    A        LEC    TR         11:35-12:55     20/393         
+      CHEM 1001    A4       LAB    T          08:35-11:25     20/72          
+      CHEM 1001    T1       TUT    M          18:05-20:55     40/55          
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B4       LAB    W          18:05-20:55     80/80          
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B6       LAB    M          11:35-14:25     40/65          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    B        LEC    WF         11:35-12:55     160/236        
+      MATH 1004    B4       TUT    F          17:35-18:25     40/56          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1002    A        LEC    TR         11:35-12:55     80/393         
+      CHEM 1002    G1       LAB    N/A        -               60/?           
+      CHEM 1002    T2       TUT    T          18:05-20:55     20/55          
+      ECOR 1045    E        LEC    WF         13:05-14:25     160/285        
+      ECOR 1045    E2       LAB    F          14:35-17:25     40/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D4A      LAB    M          18:05-20:55     40/58          
+      ECOR 1056    D        LEC    N/A        -               190/9000       
+      MATH 1104    J        LEC    TR         10:05-11:25     140/236        
+      MATH 1104    J1       TUT    T          08:35-09:25     40/48          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L5A      LAB    R          13:05-15:55     60/70          
+
+
+  [ BLOCK: Block B ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1001    E        LEC    MW         18:05-19:25     100/148        
+      CHEM 1001    G1       LAB    N/A        -               60/?           
+      CHEM 1001    T4       TUT    T          08:35-11:25     20/56          
+      ECOR 1041    A        LEC    TR         11:35-12:55     150/348        
+      ECOR 1041    A3       LAB    R          08:35-11:25     40/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A2       LAB    W          14:35-17:25     60/65          
+      ECOR 1055    I        LEC    M          11:35-12:55     60/154         
+      ECOR 1057    A        LEC    N/A        -               190/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    F1       TUT    R          21:05-21:55     60/66          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1002    E        LEC    TR         19:35-20:55     40/148         
+      CHEM 1002    G2       LAB    N/A        -               20/?           
+      CHEM 1002    T6       TUT    W          08:35-11:25     20/55          
+      ECOR 1045    F        LEC    TR         13:05-14:25     180/236        
+      ECOR 1045    F2       LAB    F          11:35-14:25     60/78          
+      ECOR 1047    C        LEC    TR         11:35-12:55     200/348        
+      ECOR 1047    C3A      LAB    F          14:35-17:25     20/58          
+      ECOR 1056    D        LEC    N/A        -               190/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    G4       TUT    M          19:35-20:25     40/58          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L2B      LAB    M          13:05-15:55     40/98          
+
+
+
+=====================================================================================
+PROGRAM: Civil (Enrolled: 120)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1045    B        LEC    WF         14:35-15:55     140/393        
+      ECOR 1045    B2       LAB    F          08:35-11:25     30/79          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A1B      LAB    M          14:35-17:25     20/86          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    D        LEC    TR         10:05-11:25     180/236        
+      MATH 1004    D4       TUT    R          17:35-18:25     60/66          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C2       LAB    T          14:35-17:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C1       LAB    F          14:35-17:25     60/65          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      ERTH 2404    A        LEC    M          14:35-17:25     120/331        
+      ERTH 2404    L4       LAB    F          11:35-14:25     20/24          
+      MATH 1104    I        LEC    MW         19:35-20:55     90/204         
+      MATH 1104    I4       TUT    W          21:05-21:55     40/52          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L5B      LAB    R          13:05-15:55     80/98          
+
+
+  [ BLOCK: Block B ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C4       LAB    W          18:05-20:55     20/79          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A1A      LAB    M          14:35-17:25     40/86          
+      ECOR 1055    H        LEC    M          10:05-11:25     40/154         
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    F3       TUT    R          21:05-21:55     40/56          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C2       LAB    T          14:35-17:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C3       LAB    M          18:05-20:55     60/65          
+      ECOR 1056    D        LEC    N/A        -               190/9000       
+      ERTH 2404    A        LEC    M          14:35-17:25     120/331        
+      ERTH 2404    L7       LAB    R          14:35-17:25     20/24          
+      MATH 1104    D        LEC    WF         16:05-17:25     120/236        
+      MATH 1104    DT       TUT    W          17:35-18:25     20/?           
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L6B      LAB    T          08:35-11:25     50/98          
+
+
+  [ BLOCK: Block C ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1045    B        LEC    WF         14:35-15:55     140/393        
+      ECOR 1045    B3       LAB    F          08:35-11:25     80/98          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A3B      LAB    M          18:05-20:55     40/86          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    D        LEC    TR         10:05-11:25     180/236        
+      MATH 1004    D4       TUT    R          17:35-18:25     60/66          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C1       LAB    M          11:35-14:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C5       LAB    F          18:05-20:55     60/65          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      ERTH 2404    A        LEC    M          14:35-17:25     120/331        
+      ERTH 2404    L5       LAB    R          18:05-20:55     20/24          
+      MATH 1104    J        LEC    TR         10:05-11:25     140/236        
+      MATH 1104    J2       TUT    T          08:35-09:25     40/52          
+      -----------------------------------------------------------------
+      !! MISSING / UNSCHEDULED: PHYS 1004
+      -----------------------------------------------------------------
+
+
+  [ BLOCK: Block D ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1045    A        LEC    TR         14:35-15:55     200/285        
+      ECOR 1045    A4       LAB    T          11:35-14:25     60/115         
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B3A      LAB    T          08:35-11:25     20/86          
+      ECOR 1055    L        LEC    M          11:35-12:55     40/57          
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    F5       TUT    R          21:05-21:55     30/42          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C1       LAB    M          11:35-14:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C1       LAB    F          14:35-17:25     60/65          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      ERTH 2404    A        LEC    M          14:35-17:25     120/331        
+      ERTH 2404    L2       LAB    T          14:35-17:25     20/24          
+      MATH 1104    I        LEC    MW         19:35-20:55     90/204         
+      MATH 1104    IT       TUT    W          21:05-21:55     40/?           
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L3B      LAB    F          08:35-11:25     80/98          
+
+
+  [ BLOCK: Block E ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1045    B        LEC    WF         14:35-15:55     140/393        
+      ECOR 1045    B3       LAB    F          08:35-11:25     80/98          
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B1A      LAB    T          14:35-17:25     30/86          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    A        LEC    N/A        -               190/9000       
+      MATH 1004    D        LEC    TR         10:05-11:25     180/236        
+      MATH 1004    D4       TUT    R          17:35-18:25     60/66          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C1       LAB    M          11:35-14:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C3       LAB    M          18:05-20:55     60/65          
+      ECOR 1056    D        LEC    N/A        -               190/9000       
+      ERTH 2404    A        LEC    M          14:35-17:25     120/331        
+      ERTH 2404    L8       LAB    W          18:05-20:55     20/24          
+      MATH 1104    C        LEC    TR         14:35-15:55     80/236         
+      MATH 1104    CT       TUT    R          13:35-14:25     20/?           
+      -----------------------------------------------------------------
+      !! MISSING / UNSCHEDULED: PHYS 1004
+      -----------------------------------------------------------------
+
+
+  [ BLOCK: Block F ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C2       LAB    M          11:35-14:25     100/236        
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B5B      LAB    W          18:05-20:55     40/86          
+      ECOR 1055    G        LEC    R          08:35-09:55     160/285        
+      ECOR 1057    A        LEC    N/A        -               190/9000       
+      MATH 1004    E        LEC    MW         16:05-17:25     120/236        
+      MATH 1004    ET       TUT    W          13:35-14:25     20/?           
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C4       LAB    R          08:35-11:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C2       LAB    W          18:05-20:55     60/65          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      ERTH 2404    A        LEC    M          14:35-17:25     120/331        
+      ERTH 2404    L6       LAB    T          18:05-20:55     20/24          
+      MATH 1104    E        LEC    WF         11:35-12:55     100/386        
+      MATH 1104    E2       TUT    F          13:35-14:25     20/52          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L1A      LAB    W          13:05-15:55     20/70          
+
+
+
+=====================================================================================
+PROGRAM: Communications (Enrolled: 20)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B3       LAB    W          11:35-14:25     20/80          
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B4       LAB    F          11:35-14:25     40/65          
+      ECOR 1055    I        LEC    M          11:35-12:55     60/154         
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    A        LEC    TR         16:35-17:55     140/236        
+      MATH 1004    A2       TUT    T          18:05-18:55     40/52          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    D        LEC    MW         11:35-12:55     110/236        
+      ECOR 1045    D2       LAB    F          14:35-17:25     60/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D6A      LAB    T          08:35-11:25     20/58          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    C        LEC    TR         14:35-15:55     80/236         
+      MATH 1104    C5       TUT    R          13:35-14:25     40/84          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L3A      LAB    F          08:35-11:25     60/70          
+
+
+
+=====================================================================================
+PROGRAM: Computer Systems (Enrolled: 100)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B4       LAB    W          18:05-20:55     80/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A1       LAB    R          08:35-11:25     20/65          
+      ECOR 1055    K        LEC    M          08:35-09:55     50/51          
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    B        LEC    WF         11:35-12:55     160/236        
+      MATH 1004    BT       TUT    F          17:35-18:25     20/?           
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    F        LEC    TR         13:05-14:25     180/236        
+      ECOR 1045    F1       LAB    T          08:35-11:25     40/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D4B      LAB    M          18:05-20:55     40/58          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    H        LEC    TR         19:35-20:55     200/236        
+      MATH 1104    HT       TUT    R          21:05-21:55     100/?          
+      PHYS 1004    C        LEC    MW         16:05-17:25     130/386        
+      PHYS 1004    L1C      LAB    R          08:35-11:25     70/70          
+
+
+  [ BLOCK: Block B ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B2       LAB    F          11:35-14:25     60/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A2       LAB    W          14:35-17:25     60/65          
+      ECOR 1055    A        LEC    W          08:35-09:55     60/204         
+      ECOR 1057    A        LEC    N/A        -               190/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    FT       TUT    R          21:05-21:55     100/?          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    F        LEC    TR         13:05-14:25     180/236        
+      ECOR 1045    F4       LAB    M          08:35-11:25     40/78          
+      ECOR 1047    C        LEC    TR         11:35-12:55     200/348        
+      ECOR 1047    C5B      LAB    F          11:35-14:25     20/58          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    J        LEC    TR         10:05-11:25     140/236        
+      MATH 1104    J5       TUT    T          08:35-09:25     20/67          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L7A      LAB    W          08:35-11:25     40/70          
+
+
+  [ BLOCK: Block C ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B2       LAB    F          11:35-14:25     60/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A5       LAB    F          08:35-11:25     60/65          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    A        LEC    N/A        -               190/9000       
+      MATH 1004    D        LEC    TR         10:05-11:25     180/236        
+      MATH 1004    DT       TUT    R          17:35-18:25     40/?           
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    F        LEC    TR         13:05-14:25     180/236        
+      ECOR 1045    F2       LAB    F          11:35-14:25     60/78          
+      ECOR 1047    C        LEC    TR         11:35-12:55     200/348        
+      ECOR 1047    C1A      LAB    T          18:05-20:55     40/58          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    G4       TUT    M          19:35-20:25     40/58          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L2A      LAB    M          13:05-15:55     40/70          
+
+
+  [ BLOCK: Block D ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B4       LAB    W          18:05-20:55     80/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A5       LAB    F          08:35-11:25     60/65          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    B        LEC    WF         11:35-12:55     160/236        
+      MATH 1004    B5       TUT    F          17:35-18:25     20/66          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    F        LEC    TR         13:05-14:25     180/236        
+      ECOR 1045    F4       LAB    M          08:35-11:25     40/78          
+      ECOR 1047    C        LEC    TR         11:35-12:55     200/348        
+      ECOR 1047    C1A      LAB    T          18:05-20:55     40/58          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    G3       TUT    M          19:35-20:25     50/52          
+      PHYS 1004    C        LEC    MW         16:05-17:25     130/386        
+      PHYS 1004    L2C      LAB    F          13:05-15:55     60/70          
+
+
+  [ BLOCK: Block E ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1041    A        LEC    TR         11:35-12:55     150/348        
+      ECOR 1041    A4       LAB    F          08:35-11:25     40/80          
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B1       LAB    R          18:05-20:55     60/65          
+      ECOR 1055    L        LEC    M          11:35-12:55     40/57          
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    E        LEC    MW         16:05-17:25     120/236        
+      MATH 1004    E5       TUT    W          13:35-14:25     20/57          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    D        LEC    MW         11:35-12:55     110/236        
+      ECOR 1045    D1       LAB    W          18:05-20:55     20/78          
+      ECOR 1047    C        LEC    TR         11:35-12:55     200/348        
+      ECOR 1047    C4A      LAB    T          14:35-17:25     20/58          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    H        LEC    TR         19:35-20:55     200/236        
+      MATH 1104    HT       TUT    R          21:05-21:55     100/?          
+      -----------------------------------------------------------------
+      !! MISSING / UNSCHEDULED: PHYS 1004
+      -----------------------------------------------------------------
+
+
+
+=====================================================================================
+PROGRAM: Electrical (Enrolled: 140)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C3       LAB    T          14:35-17:25     80/84          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A6A      LAB    F          08:35-11:25     80/86          
+      ECOR 1055    G        LEC    R          08:35-09:55     160/285        
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    E        LEC    MW         16:05-17:25     120/236        
+      MATH 1004    E2       TUT    W          13:35-14:25     20/51          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    L4       LAB    F          13:35-16:25     60/72          
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C6       LAB    M          08:35-11:25     40/80          
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D2       LAB    W          08:35-11:25     60/65          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    H        LEC    TR         19:35-20:55     200/236        
+      MATH 1104    HT       TUT    R          21:05-21:55     100/?          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L3A      LAB    F          08:35-11:25     60/70          
+
+
+  [ BLOCK: Block B ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C2       LAB    M          11:35-14:25     100/236        
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A5A      LAB    F          11:35-14:25     60/86          
+      ECOR 1055    D        LEC    W          08:35-09:55     90/98          
+      ECOR 1057    A        LEC    N/A        -               190/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    FT       TUT    R          21:05-21:55     100/?          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1041    H        LEC    TR         11:35-12:55     60/331         
+      ECOR 1041    H1       LAB    N/A        -               60/?           
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D2       LAB    W          08:35-11:25     60/65          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    H        LEC    TR         19:35-20:55     200/236        
+      MATH 1104    H4       TUT    R          21:05-21:55     40/58          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L5B      LAB    R          13:05-15:55     80/98          
+
+
+  [ BLOCK: Block C ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    B        LEC    WF         14:35-15:55     140/393        
+      ECOR 1045    B4       LAB    W          08:35-11:25     20/78          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A2B      LAB    M          08:35-11:25     40/86          
+      ECOR 1055    J        LEC    R          10:05-11:25     90/96          
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    A        LEC    TR         16:35-17:55     140/236        
+      MATH 1004    A5       TUT    T          18:05-18:55     20/52          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D6       LAB    W          08:35-11:25     20/80          
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D1       LAB    M          08:35-11:25     40/65          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    D        LEC    WF         16:05-17:25     120/236        
+      MATH 1104    D4       TUT    W          17:35-18:25     20/56          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L8A      LAB    T          13:05-15:55     60/70          
+
+
+  [ BLOCK: Block D ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C1       LAB    T          08:35-11:25     20/78          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A6A      LAB    F          08:35-11:25     80/86          
+      ECOR 1055    D        LEC    W          08:35-09:55     90/98          
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    B        LEC    WF         11:35-12:55     160/236        
+      MATH 1004    B2       TUT    F          17:35-18:25     40/48          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    C        LEC    MW         08:35-09:55     170/386        
+      CHEM 1101    L1       LAB    R          08:35-11:25     40/72          
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D3       LAB    T          08:35-11:25     60/80          
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D6       LAB    F          08:35-11:25     60/65          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    E        LEC    WF         11:35-12:55     100/386        
+      MATH 1104    E1       TUT    F          13:35-14:25     40/48          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L8B      LAB    T          13:05-15:55     90/98          
+
+
+  [ BLOCK: Block E ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    B        LEC    WF         14:35-15:55     140/393        
+      ECOR 1045    B3       LAB    F          08:35-11:25     80/98          
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B6A      LAB    W          08:35-11:25     20/86          
+      ECOR 1055    C        LEC    M          14:35-15:55     100/204        
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    D        LEC    TR         10:05-11:25     180/236        
+      MATH 1004    D2       TUT    R          17:35-18:25     40/48          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    L3       LAB    F          08:35-11:25     60/72          
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D1       LAB    R          14:35-17:25     60/80          
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D2       LAB    W          08:35-11:25     60/65          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    J        LEC    TR         10:05-11:25     140/236        
+      MATH 1104    J3       TUT    T          08:35-09:25     40/52          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L8B      LAB    T          13:05-15:55     90/98          
+
+
+  [ BLOCK: Block F ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    A        LEC    TR         14:35-15:55     200/285        
+      ECOR 1045    A3       LAB    M          18:05-20:55     60/78          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A6A      LAB    F          08:35-11:25     80/86          
+      ECOR 1055    E        LEC    W          08:35-09:55     40/66          
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    B        LEC    WF         11:35-12:55     160/236        
+      MATH 1004    B3       TUT    F          17:35-18:25     40/52          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C5       LAB    F          11:35-14:25     60/80          
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D6       LAB    F          08:35-11:25     60/65          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    H        LEC    TR         19:35-20:55     200/236        
+      MATH 1104    H2       TUT    R          21:05-21:55     20/48          
+      PHYS 1004    C        LEC    MW         16:05-17:25     130/386        
+      PHYS 1004    L1C      LAB    R          08:35-11:25     70/70          
+
+
+  [ BLOCK: Block G ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    A        LEC    TR         14:35-15:55     200/285        
+      ECOR 1045    A2       LAB    F          14:35-17:25     60/79          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A2B      LAB    M          08:35-11:25     40/86          
+      ECOR 1055    D        LEC    W          08:35-09:55     90/98          
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    B        LEC    WF         11:35-12:55     160/236        
+      MATH 1004    B3       TUT    F          17:35-18:25     40/52          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    C        LEC    MW         08:35-09:55     170/386        
+      CHEM 1101    L3       LAB    F          08:35-11:25     60/72          
+      ECOR 1041    H        LEC    TR         11:35-12:55     60/331         
+      ECOR 1041    H1       LAB    N/A        -               60/?           
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C5       LAB    F          18:05-20:55     60/65          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    H        LEC    TR         19:35-20:55     200/236        
+      MATH 1104    H4       TUT    R          21:05-21:55     40/58          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L1B      LAB    W          13:05-15:55     40/98          
+
+
+
+=====================================================================================
+PROGRAM: Environmental (Enrolled: 40)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1001    E        LEC    MW         18:05-19:25     100/148        
+      CHEM 1001    E4       LAB    T          08:35-11:25     20/72          
+      CHEM 1001    T1       TUT    M          18:05-20:55     40/55          
+      ECOR 1041    A        LEC    TR         11:35-12:55     150/348        
+      ECOR 1041    A3       LAB    R          08:35-11:25     40/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A6       LAB    N/A        -               20/?           
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    C        LEC    MW         08:35-09:55     180/236        
+      MATH 1004    C4       TUT    M          11:35-12:25     60/66          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1002    A        LEC    TR         11:35-12:55     80/393         
+      CHEM 1002    G1       LAB    N/A        -               60/?           
+      CHEM 1002    T3       TUT    M          13:35-16:25     20/48          
+      ECOR 1045    E        LEC    WF         13:05-14:25     160/285        
+      ECOR 1045    E2       LAB    F          14:35-17:25     40/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D4A      LAB    M          18:05-20:55     40/58          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    H        LEC    TR         19:35-20:55     200/236        
+      MATH 1104    HT       TUT    R          21:05-21:55     100/?          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L6A      LAB    T          08:35-11:25     60/70          
+
+
+  [ BLOCK: Block B ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1001    E        LEC    MW         18:05-19:25     100/148        
+      CHEM 1001    ETU      TUT    W          19:35-20:25     40/151         
+      CHEM 1001    G1       LAB    N/A        -               60/?           
+      ECOR 1041    A        LEC    TR         11:35-12:55     150/348        
+      ECOR 1041    A2       LAB    W          14:35-17:25     20/80          
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B2       LAB    M          14:35-17:25     50/65          
+      ECOR 1055    J        LEC    R          10:05-11:25     90/96          
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    FT       TUT    R          21:05-21:55     100/?          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1002    A        LEC    TR         11:35-12:55     80/393         
+      CHEM 1002    A1       LAB    M          18:05-20:55     40/72          
+      CHEM 1002    T1       TUT    M          18:05-20:55     20/55          
+      ECOR 1045    E        LEC    WF         13:05-14:25     160/285        
+      ECOR 1045    E3       LAB    T          14:35-17:25     60/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D3B      LAB    F          18:05-20:55     40/58          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    D        LEC    WF         16:05-17:25     120/236        
+      MATH 1104    D1       TUT    W          17:35-18:25     40/58          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L6B      LAB    T          08:35-11:25     50/98          
+
+
+
+=====================================================================================
+PROGRAM: Mechanical (Enrolled: 100)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    A        LEC    TR         11:35-12:55     150/348        
+      ECOR 1041    A4       LAB    F          08:35-11:25     40/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A4       LAB    T          08:35-11:25     60/65          
+      ECOR 1055    G        LEC    R          08:35-09:55     160/285        
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    C        LEC    MW         08:35-09:55     180/236        
+      MATH 1004    C3       TUT    M          11:35-12:25     20/66          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    C        LEC    MW         08:35-09:55     170/386        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1045    F        LEC    TR         13:05-14:25     180/236        
+      ECOR 1045    F2       LAB    F          11:35-14:25     60/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D3B      LAB    F          18:05-20:55     40/58          
+      ECOR 1056    D        LEC    N/A        -               190/9000       
+      MATH 1104    I        LEC    MW         19:35-20:55     90/204         
+      MATH 1104    IT       TUT    W          21:05-21:55     40/?           
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L3B      LAB    F          08:35-11:25     80/98          
+
+
+  [ BLOCK: Block B ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B5       LAB    M          18:05-20:55     60/80          
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B5       LAB    T          14:35-17:25     40/65          
+      ECOR 1055    K        LEC    M          08:35-09:55     50/51          
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    E        LEC    MW         16:05-17:25     120/236        
+      MATH 1004    E4       TUT    W          13:35-14:25     20/79          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    L4       LAB    F          13:35-16:25     60/72          
+      ECOR 1045    F        LEC    TR         13:05-14:25     180/236        
+      ECOR 1045    F3       LAB    M          14:35-17:25     40/78          
+      ECOR 1047    C        LEC    TR         11:35-12:55     200/348        
+      ECOR 1047    C6A      LAB    M          08:35-11:25     20/58          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    J        LEC    TR         10:05-11:25     140/236        
+      MATH 1104    J2       TUT    T          08:35-09:25     40/52          
+      -----------------------------------------------------------------
+      !! MISSING / UNSCHEDULED: PHYS 1004
+      -----------------------------------------------------------------
+
+
+  [ BLOCK: Block C ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B5       LAB    M          18:05-20:55     60/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A4       LAB    T          08:35-11:25     60/65          
+      ECOR 1055    G        LEC    R          08:35-09:55     160/285        
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    C        LEC    MW         08:35-09:55     180/236        
+      MATH 1004    CT       TUT    M          11:35-12:25     40/?           
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1045    E        LEC    WF         13:05-14:25     160/285        
+      ECOR 1045    E1       LAB    F          08:35-11:25     40/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D4B      LAB    M          18:05-20:55     40/58          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    D        LEC    WF         16:05-17:25     120/236        
+      MATH 1104    D3       TUT    W          17:35-18:25     20/52          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L6A      LAB    T          08:35-11:25     60/70          
+
+
+  [ BLOCK: Block D ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    A        LEC    TR         11:35-12:55     150/348        
+      ECOR 1041    A1       LAB    T          08:35-11:25     30/80          
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B5       LAB    T          14:35-17:25     40/65          
+      ECOR 1055    A        LEC    W          08:35-09:55     60/204         
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    F3       TUT    R          21:05-21:55     40/56          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    C        LEC    MW         08:35-09:55     170/386        
+      CHEM 1101    L2       LAB    R          13:35-16:25     40/72          
+      ECOR 1045    E        LEC    WF         13:05-14:25     160/285        
+      ECOR 1045    E3       LAB    T          14:35-17:25     60/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D6B      LAB    T          08:35-11:25     40/58          
+      ECOR 1056    D        LEC    N/A        -               190/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    GT       TUT    M          19:35-20:25     20/?           
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L2B      LAB    M          13:05-15:55     40/98          
+
+
+  [ BLOCK: Block E ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B5       LAB    M          18:05-20:55     60/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A2       LAB    W          14:35-17:25     60/65          
+      ECOR 1055    G        LEC    R          08:35-09:55     160/285        
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    C        LEC    MW         08:35-09:55     180/236        
+      MATH 1004    C1       TUT    M          11:35-12:25     40/56          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1045    E        LEC    WF         13:05-14:25     160/285        
+      ECOR 1045    E1       LAB    F          08:35-11:25     40/78          
+      ECOR 1047    C        LEC    TR         11:35-12:55     200/348        
+      ECOR 1047    C3B      LAB    F          14:35-17:25     20/58          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    F        LEC    MW         08:35-09:55     70/236         
+      MATH 1104    F3       TUT    M          14:35-15:25     40/57          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L8B      LAB    T          13:05-15:55     90/98          
+
+
+
+=====================================================================================
+PROGRAM: Physics (Enrolled: 20)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B2       LAB    F          11:35-14:25     60/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A5       LAB    F          08:35-11:25     60/65          
+      ECOR 1055    H        LEC    M          10:05-11:25     40/154         
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    F1       TUT    R          21:05-21:55     60/66          
+      PHYS 1001    A        LEC    TR         08:35-09:55     20/96          
+      PHYS 1001    A2       LAB    M          13:05-15:55     20/30          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1045    D        LEC    MW         11:35-12:55     110/236        
+      ECOR 1045    D2       LAB    F          14:35-17:25     60/78          
+      ECOR 1047    D        LEC    MW         10:05-11:25     250/331        
+      ECOR 1047    D1A      LAB    T          11:35-14:25     20/58          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    H        LEC    TR         19:35-20:55     200/236        
+      MATH 1104    HT       TUT    R          21:05-21:55     100/?          
+      PHYS 1002    A        LEC    WF         08:35-09:55     20/115         
+      PHYS 1002    A3       LAB    W          13:05-15:55     20/30          
+
+
+
+=====================================================================================
+PROGRAM: SREE A (Enrolled: 20)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    F        LEC    TR         11:35-12:55     40/285         
+      ECOR 1041    F1       LAB    N/A        -               40/?           
+      ECOR 1043    B        LEC    MW         10:05-11:25     230/393        
+      ECOR 1043    B6       LAB    M          11:35-14:25     40/65          
+      ECOR 1055    E        LEC    W          08:35-09:55     40/66          
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    E        LEC    MW         16:05-17:25     120/236        
+      MATH 1004    E1       TUT    W          13:35-14:25     20/97          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    C        LEC    MW         08:35-09:55     170/386        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1045    D        LEC    MW         11:35-12:55     110/236        
+      ECOR 1045    D2       LAB    F          14:35-17:25     60/78          
+      ECOR 1047    C        LEC    TR         11:35-12:55     200/348        
+      ECOR 1047    C4B      LAB    T          14:35-17:25     20/58          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    G2       TUT    M          19:35-20:25     20/48          
+      -----------------------------------------------------------------
+      !! MISSING / UNSCHEDULED: PHYS 1004
+      -----------------------------------------------------------------
+
+
+
+=====================================================================================
+PROGRAM: SREE B (Enrolled: 20)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    B        LEC    TR         13:05-14:25     260/348        
+      ECOR 1041    B4       LAB    W          18:05-20:55     80/80          
+      ECOR 1043    A        LEC    TR         14:35-15:55     220/348        
+      ECOR 1043    A4       LAB    T          08:35-11:25     60/65          
+      ECOR 1055    J        LEC    R          10:05-11:25     90/96          
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    C        LEC    MW         08:35-09:55     180/236        
+      MATH 1004    C4       TUT    M          11:35-12:25     60/66          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    D        LEC    MW         11:35-12:55     260/348        
+      CHEM 1101    G1       LAB    N/A        -               230/?          
+      ECOR 1045    E        LEC    WF         13:05-14:25     160/285        
+      ECOR 1045    E4       LAB    R          08:35-11:25     20/78          
+      ECOR 1047    C        LEC    TR         11:35-12:55     200/348        
+      ECOR 1047    C1B      LAB    T          18:05-20:55     20/58          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    F        LEC    MW         08:35-09:55     70/236         
+      MATH 1104    F3       TUT    M          14:35-15:25     40/57          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L8A      LAB    T          13:05-15:55     60/70          
+
+
+
+=====================================================================================
+PROGRAM: Software (Enrolled: 150)
+=====================================================================================
+
+  [ BLOCK: Block A ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C2       LAB    M          11:35-14:25     100/236        
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B1B      LAB    T          14:35-17:25     20/86          
+      ECOR 1055    C        LEC    M          14:35-15:55     100/204        
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    E        LEC    MW         16:05-17:25     120/236        
+      MATH 1004    E3       TUT    W          13:35-14:25     20/78          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D3       LAB    T          08:35-11:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C5       LAB    F          18:05-20:55     60/65          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    E        LEC    WF         11:35-12:55     100/386        
+      MATH 1104    E1       TUT    F          13:35-14:25     40/48          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L8B      LAB    T          13:05-15:55     90/98          
+
+
+  [ BLOCK: Block B ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1045    A        LEC    TR         14:35-15:55     200/285        
+      ECOR 1045    A3       LAB    M          18:05-20:55     60/78          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A6B      LAB    F          08:35-11:25     20/86          
+      ECOR 1055    C        LEC    M          14:35-15:55     100/204        
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    B        LEC    WF         11:35-12:55     160/236        
+      MATH 1004    B4       TUT    F          17:35-18:25     40/56          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C4       LAB    R          08:35-11:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C3       LAB    M          18:05-20:55     60/65          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    D        LEC    WF         16:05-17:25     120/236        
+      MATH 1104    D1       TUT    W          17:35-18:25     40/58          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L3B      LAB    F          08:35-11:25     80/98          
+
+
+  [ BLOCK: Block C ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1045    A        LEC    TR         14:35-15:55     200/285        
+      ECOR 1045    A2       LAB    F          14:35-17:25     60/79          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A5B      LAB    F          11:35-14:25     30/86          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    FT       TUT    R          21:05-21:55     100/?          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C5       LAB    F          11:35-14:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C4       LAB    R          08:35-11:25     50/65          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    F        LEC    MW         08:35-09:55     70/236         
+      MATH 1104    F4       TUT    M          14:35-15:25     20/67          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L5B      LAB    R          13:05-15:55     80/98          
+
+
+  [ BLOCK: Block D ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C3       LAB    T          14:35-17:25     80/84          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A6A      LAB    F          08:35-11:25     80/86          
+      ECOR 1055    G        LEC    R          08:35-09:55     160/285        
+      ECOR 1057    A        LEC    N/A        -               190/9000       
+      MATH 1004    C        LEC    MW         08:35-09:55     180/236        
+      MATH 1004    CT       TUT    M          11:35-12:25     40/?           
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    H        LEC    TR         11:35-12:55     60/331         
+      ECOR 1041    H1       LAB    N/A        -               60/?           
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D6       LAB    F          08:35-11:25     60/65          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    C        LEC    TR         14:35-15:55     80/236         
+      MATH 1104    C5       TUT    R          13:35-14:25     40/84          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L6A      LAB    T          08:35-11:25     60/70          
+
+
+  [ BLOCK: Block E ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C3       LAB    T          14:35-17:25     80/84          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A3B      LAB    M          18:05-20:55     40/86          
+      ECOR 1055    J        LEC    R          10:05-11:25     90/96          
+      ECOR 1057    C        LEC    N/A        -               280/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    FT       TUT    R          21:05-21:55     100/?          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C3       LAB    F          08:35-11:25     20/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C1       LAB    F          14:35-17:25     60/65          
+      ECOR 1056    D        LEC    N/A        -               190/9000       
+      MATH 1104    G        LEC    MW         18:05-19:25     210/236        
+      MATH 1104    G5       TUT    M          19:35-20:25     60/66          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L2A      LAB    M          13:05-15:55     40/70          
+
+
+  [ BLOCK: Block F ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    B        LEC    MW         08:35-09:55     260/348        
+      ECOR 1045    C        LEC    TR         13:05-14:25     220/393        
+      ECOR 1045    C3       LAB    T          14:35-17:25     80/84          
+      ECOR 1047    A        LEC    TR         11:35-12:55     330/444        
+      ECOR 1047    A5A      LAB    F          11:35-14:25     60/86          
+      ECOR 1055    B        LEC    W          16:05-17:25     280/285        
+      ECOR 1057    A        LEC    N/A        -               190/9000       
+      MATH 1004    D        LEC    TR         10:05-11:25     180/236        
+      MATH 1004    D2       TUT    R          17:35-18:25     40/48          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    C        LEC    TR         11:35-12:55     300/386        
+      ECOR 1041    C6       LAB    M          08:35-11:25     40/80          
+      ECOR 1043    D        LEC    MW         13:05-14:25     220/393        
+      ECOR 1043    D4       LAB    R          18:05-20:55     60/65          
+      ECOR 1056    B        LEC    N/A        -               300/9000       
+      MATH 1104    D        LEC    WF         16:05-17:25     120/236        
+      MATH 1104    D5       TUT    W          17:35-18:25     20/55          
+      PHYS 1004    A        LEC    TR         16:05-17:25     380/393        
+      PHYS 1004    L7A      LAB    W          08:35-11:25     40/70          
+
+
+  [ BLOCK: Block G ]  (Students in Block: 20)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1045    A        LEC    TR         14:35-15:55     200/285        
+      ECOR 1045    A4       LAB    T          11:35-14:25     60/115         
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B5A      LAB    W          18:05-20:55     20/86          
+      ECOR 1055    D        LEC    W          08:35-09:55     90/98          
+      ECOR 1057    D        LEC    N/A        -               280/9000       
+      MATH 1004    D        LEC    TR         10:05-11:25     180/236        
+      MATH 1004    D5       TUT    R          17:35-18:25     40/52          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D1       LAB    R          14:35-17:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C2       LAB    W          18:05-20:55     60/65          
+      ECOR 1056    A        LEC    N/A        -               240/9000       
+      MATH 1104    J        LEC    TR         10:05-11:25     140/236        
+      MATH 1104    J1       TUT    T          08:35-09:25     40/48          
+      PHYS 1004    C        LEC    MW         16:05-17:25     130/386        
+      PHYS 1004    L2C      LAB    F          13:05-15:55     60/70          
+
+
+  [ BLOCK: Block H ]  (Students in Block: 10)
+  ---------------------------------------------------------------------------
+    TERM: fall
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      CHEM 1101    A        LEC    MW         13:05-14:25     200/444        
+      ECOR 1045    B        LEC    WF         14:35-15:55     140/393        
+      ECOR 1045    B1       LAB    M          14:35-17:25     10/78          
+      ECOR 1047    B        LEC    WF         11:35-12:55     230/386        
+      ECOR 1047    B1A      LAB    T          14:35-17:25     30/86          
+      ECOR 1055    K        LEC    M          08:35-09:55     50/51          
+      ECOR 1057    B        LEC    N/A        -               260/9000       
+      MATH 1004    F        LEC    TR         19:35-20:55     230/236        
+      MATH 1004    F5       TUT    R          21:05-21:55     30/42          
+
+    TERM: winter
+      Code         Sec      Type   Days       Time            Enrl/Cap       
+      ECOR 1041    D        LEC    MW         14:35-15:55     200/386        
+      ECOR 1041    D1       LAB    R          14:35-17:25     60/80          
+      ECOR 1043    C        LEC    MW         10:05-11:25     340/393        
+      ECOR 1043    C4       LAB    R          08:35-11:25     50/65          
+      ECOR 1056    C        LEC    N/A        -               280/9000       
+      MATH 1104    I        LEC    MW         19:35-20:55     90/204         
+      MATH 1104    I2       TUT    W          21:05-21:55     10/48          
+      PHYS 1004    B        LEC    TR         18:05-19:25     380/386        
+      PHYS 1004    L6B      LAB    T          08:35-11:25     50/98          
+
+
+

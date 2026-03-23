@@ -200,6 +200,7 @@ def rankings(request):
 
 
 @ensure_csrf_cookie
+@login_required
 def generate_page(request):
     ctx = _base_context(active_page="generate")
     total_scheduled = TermCourses.objects.count()
@@ -215,6 +216,7 @@ def generate_page(request):
 
 
 @ensure_csrf_cookie
+@login_required
 def schedules_page(request):
     """Schedule builder page shell — all data loaded via AJAX."""
     ctx = _base_context(active_page="schedules")
