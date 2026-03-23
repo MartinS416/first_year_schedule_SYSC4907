@@ -1,12 +1,8 @@
 from django.urls import path
-from django.contrib.auth.views import LoginView, LogoutView
-from django.urls import path
+
 from . import views
 
 urlpatterns = [
-    path("login/", LoginView.as_view(template_name="auth/login.html"), name="login"),
-    path("logout/", LogoutView.as_view(next_page="/login/"), name="logout"),
-    path("dashboard/home/", views.admin_home, name="admin_home"),
     # ---------------------------------------------------------------
     #  Page Views
     # ---------------------------------------------------------------
@@ -50,29 +46,5 @@ urlpatterns = [
         "api/stats/",
         views.api_stats,
         name="api_stats",
-    ),
-
-    # ── Schedule Builder page ──────────────────────────────────────────
-    path(
-        "schedules/",
-        views.schedules_page,
-        name="schedules",
-    ),
-
-    # ── Schedule Builder API ───────────────────────────────────────────
-    path(
-        "api/schedule/requirements/<int:program_id>/",
-        views.api_schedule_requirements,
-        name="api_schedule_requirements",
-    ),
-    path(
-        "api/schedule/course-sections/",
-        views.api_course_sections,
-        name="api_course_sections",
-    ),
-    path(
-        "api/schedule/update-term/",
-        views.api_update_term,
-        name="api_update_term",
     ),
 ]

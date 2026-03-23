@@ -1,17 +1,10 @@
 from django.db import models
 from data_app.models import Block, Term, TermCourses, Course, ProgramCourse, Program
 
-DEFAULT_RANKING_CONFIG = {
-    "base_score":                100,
-    "penalty_per_30min_gap":     2,    # points deducted per 30 min of gap beyond 1 hr
-    "penalty_per_30min_sleep":   5,    # points deducted per 30 min of lost overnight rest
-    "max_gap_allowed_mins":      60,   # free gap window before penalties start
-    "min_overnight_rest_hrs":    12,   # minimum overnight rest before sleep penalty
-}
-
 class ScheduleRanker:
     """
     Ranks blocks based on schedule quality (0-100).
+    Now includes detailed reporting capabilities.
     """
 
     # --- CONFIGURATION WEIGHTS ---
@@ -34,26 +27,24 @@ class ScheduleRanker:
     def rank_all_blocks(self):
         """
         Calculates scores and saves them to the database.
+        Prints a summary to the console.
         """
         blocks = Block.objects.all()
-        total  = blocks.count()
-        self._emit(f"Ranking {total} blocks...", "info", pct=92)
+        print(f"Ranking {blocks.count()} blocks...")
 
-        for i, block in enumerate(blocks):
+        for block in blocks:
+            # We only care about the integer score for the DB
             final_score, _ = self._calculate_block_score_and_report(block)
+            
             block.ranking = final_score
             block.save()
-            pct = int(92 + (i + 1) / total * 6) if total else 98
-            self._emit(
-                f"  > Updated {block.block_name} ({block.program.program_name}): {final_score}/100",
-                "info", pct=pct
-            )
+            print(f"  > Updated {block.block_name} ({block.program.program_name}): {final_score}/100")
 
     def export_ranking_report(self, filename="ranking_report.txt"):
         """
         Generates a detailed text file explaining exactly why blocks got their scores.
         """
-        self._emit(f"Generating detailed report to {filename}...", "info", pct=98)
+        print(f"Generating detailed report to {filename}...")
         blocks = Block.objects.all().order_by('program__program_name', 'block_name')
 
         try:
@@ -74,10 +65,9 @@ class ScheduleRanker:
                     
                     f.write("\n\n")
             print("Report generation complete.")
-            self._emit("Ranking report written.", "success", pct=99)
             
         except IOError as e:
-            self._emit(f"Error writing file: {e}", "error")
+            print(f"Error writing file: {e}")
 
     def _calculate_block_score_and_report(self, block):
         """
