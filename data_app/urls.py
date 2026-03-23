@@ -51,4 +51,5 @@ urlpatterns = [
     #  Ranking Config
     # ---------------------------------------------------------------
     path("", include("data_app.urls_ranking_config")),
+    path("", include("data_app.urls_algo_comparison")),
 ]
