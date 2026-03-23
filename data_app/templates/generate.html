@@ -1,704 +1,689 @@
-{% extends "base.html" %} {% load static %} {% block title %}Generate Schedule{%
-endblock %} {% block page_title %}Generate Schedule{% endblock %} {% block
-topbar_actions %}
+{% extends "base.html" %} {% load static %}
+{% block title %}Generate Schedule{% endblock %}
+{% block page_title %}Generate Schedule{% endblock %}
+
+{% block topbar_actions %}
 <a href="{% url 'dashboard' %}" class="btn btn-ghost btn-sm">
-    <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-    >
-        <polyline points="15 18 9 12 15 6"></polyline>
-    </svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
     Back to Dashboard
 </a>
-{% endblock %} {% block content %}
+{% endblock %}
 
-<!-- Current Status -->
+{% block content %}
+
 {% if has_schedule %}
 <div class="alert alert-info mb-6">
     <span>
-        <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            style="
-                display: inline-block;
-                vertical-align: middle;
-                margin-right: 6px;
-            "
-        >
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-        A schedule already exists with
-        <strong>{{ total_scheduled }}</strong> course assignments across
-        <strong>{{ total_blocks }}</strong> blocks. Generating a new schedule
-        will replace the current one.
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        A schedule already exists with <strong>{{ total_scheduled }}</strong> course assignments across <strong>{{ total_blocks }}</strong> blocks. Generating a new schedule will replace the current one.
     </span>
-    <button class="alert-close" onclick="this.parentElement.remove()">
-        &times;
-    </button>
+    <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
 </div>
 {% endif %}
 
-<!-- Stats Summary -->
-<div class="stats-grid mb-8">
+<!-- Stats -->
+<div class="stats-grid mb-6">
     <div class="stat-card">
         <div class="stat-icon stat-icon-primary">
-            <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            >
-                <path
-                    d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
-                ></path>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
         </div>
-        <div class="stat-content">
-            <div class="stat-value">{{ total_programs }}</div>
-            <div class="stat-label">Programs Loaded</div>
-        </div>
+        <div class="stat-content"><div class="stat-value">{{ total_programs }}</div><div class="stat-label">Programs</div></div>
     </div>
-
     <div class="stat-card">
         <div class="stat-icon stat-icon-warning">
-            <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            >
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
         </div>
-        <div class="stat-content">
-            <div class="stat-value">{{ total_blocks }}</div>
-            <div class="stat-label">Existing Blocks</div>
-        </div>
+        <div class="stat-content"><div class="stat-value">{{ total_blocks }}</div><div class="stat-label">Blocks</div></div>
     </div>
-
     <div class="stat-card">
         <div class="stat-icon stat-icon-success">
-            <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            >
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
         </div>
-        <div class="stat-content">
-            <div class="stat-value">{{ total_scheduled }}</div>
-            <div class="stat-label">Course Assignments</div>
-        </div>
+        <div class="stat-content"><div class="stat-value">{{ total_scheduled }}</div><div class="stat-label">Course Assignments</div></div>
     </div>
 </div>
 
-<!-- Generate Card -->
-<div class="generate-container">
-    <div class="card generate-card">
-        <div class="card-body">
-            <div class="generate-icon">
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <rect
-                        x="3"
-                        y="4"
-                        width="18"
-                        height="18"
-                        rx="2"
-                        ry="2"
-                    ></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                    <line x1="10" y1="14" x2="14" y2="14"></line>
-                    <line x1="12" y1="12" x2="12" y2="16"></line>
-                </svg>
-            </div>
+<!-- ══ PIPELINE ═══════════════════════════════════════════════════════════════ -->
+<div class="card mb-6">
+    <div class="card-body" style="padding:var(--space-6);">
 
-            <h2 class="generate-title">Schedule Generator</h2>
-            <p class="generate-description">
-                Build optimized first-year engineering schedules across all
-                programs. The generator assigns course sections to blocks while
-                avoiding time conflicts and respecting enrollment capacities.
-            </p>
+        <div class="pipeline">
 
-            <div class="generate-actions">
-                <!-- Generate Button -->
-                <button
-                    class="btn btn-primary btn-lg"
-                    id="btn-generate"
-                    onclick="handleGenerate()"
-                    {% if total_programs == 0 %}disabled{% endif %}
-                >
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                    Generate New Schedule
+            <!-- Step 1: Generate -->
+            <div class="pipeline-step" id="pstep-generate">
+                <div class="pipeline-step-icon psi-primary">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+                <div class="pipeline-step-label">Generate</div>
+                <div class="pipeline-step-sub">Build blocks &amp; assign sections</div>
+                <button class="btn btn-primary btn-sm pipeline-btn" id="btn-generate"
+                        onclick="handleGenerate()" {% if total_programs == 0 %}disabled{% endif %}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    Run
                 </button>
-
-                <!-- Rank Button -->
-                <button
-                    class="btn btn-success btn-lg"
-                    id="btn-rank"
-                    onclick="handleRank()"
-                    {% if not has_schedule %}disabled{% endif %}
-                >
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <line x1="18" y1="20" x2="18" y2="10"></line>
-                        <line x1="12" y1="20" x2="12" y2="4"></line>
-                        <line x1="6" y1="20" x2="6" y2="14"></line>
-                    </svg>
-                    Rank All Blocks
-                </button>
-
                 {% if total_programs == 0 %}
-                <p class="text-sm text-muted mt-2">
-                    <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        style="
-                            display: inline-block;
-                            vertical-align: middle;
-                            margin-right: 4px;
-                            color: var(--warning-500);
-                        "
-                    >
-                        <path
-                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
-                        ></path>
-                        <line x1="12" y1="9" x2="12" y2="13"></line>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                    </svg>
-                    No programs loaded. Please load data first using the
-                    management commands described in the README.
-                </p>
+                <div class="pipeline-step-warn">No programs loaded</div>
                 {% endif %}
             </div>
 
-            <!-- Console Output Area -->
-            <div
-                class="console-output"
-                id="console-output"
-                style="display: none"
-            ></div>
-        </div>
-    </div>
-
-    <!-- How It Works -->
-    <div class="card mt-6">
-        <div class="card-header">
-            <div>
-                <h3 class="card-header-title">
-                    <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        style="
-                            display: inline-block;
-                            vertical-align: middle;
-                            margin-right: 6px;
-                            color: var(--primary-500);
-                        "
-                    >
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    </svg>
-                    How It Works
-                </h3>
+            <!-- Arrow -->
+            <div class="pipeline-arrow">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </div>
-        </div>
-        <div class="card-body">
-            <div
-                style="
-                    display: flex;
-                    flex-direction: column;
-                    gap: var(--space-5);
-                "
-            >
-                <div
-                    style="
-                        display: flex;
-                        align-items: flex-start;
-                        gap: var(--space-4);
-                    "
-                >
-                    <div
-                        style="
-                            flex-shrink: 0;
-                            width: 32px;
-                            height: 32px;
-                            border-radius: 50%;
-                            background: var(--primary-100);
-                            color: var(--primary-700);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-weight: 700;
-                            font-size: var(--text-sm);
-                        "
-                    >
-                        1
-                    </div>
-                    <div>
-                        <h4
-                            style="
-                                font-weight: 600;
-                                color: var(--gray-900);
-                                font-size: var(--text-sm);
-                                margin-bottom: 2px;
-                            "
-                        >
-                            Build Blocks
-                        </h4>
-                        <p class="text-sm text-muted">
-                            Creates blocks of ~20 students for each program
-                            based on enrollment numbers. Each block gets a fall
-                            and winter term.
-                        </p>
-                    </div>
-                </div>
 
-                <div
-                    style="
-                        display: flex;
-                        align-items: flex-start;
-                        gap: var(--space-4);
-                    "
-                >
-                    <div
-                        style="
-                            flex-shrink: 0;
-                            width: 32px;
-                            height: 32px;
-                            border-radius: 50%;
-                            background: var(--primary-100);
-                            color: var(--primary-700);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-weight: 700;
-                            font-size: var(--text-sm);
-                        "
-                    >
-                        2
-                    </div>
-                    <div>
-                        <h4
-                            style="
-                                font-weight: 600;
-                                color: var(--gray-900);
-                                font-size: var(--text-sm);
-                                margin-bottom: 2px;
-                            "
-                        >
-                            Prioritize Courses
-                        </h4>
-                        <p class="text-sm text-muted">
-                            Shared courses (required by many programs) are
-                            scheduled first. Courses with fewer available
-                            sections are given higher priority to ensure
-                            feasibility.
-                        </p>
-                    </div>
+            <!-- Step 2: Optimize -->
+            <div class="pipeline-step" id="pstep-optimize">
+                <div class="pipeline-step-icon psi-purple">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                 </div>
-
-                <div
-                    style="
-                        display: flex;
-                        align-items: flex-start;
-                        gap: var(--space-4);
-                    "
-                >
-                    <div
-                        style="
-                            flex-shrink: 0;
-                            width: 32px;
-                            height: 32px;
-                            border-radius: 50%;
-                            background: var(--primary-100);
-                            color: var(--primary-700);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-weight: 700;
-                            font-size: var(--text-sm);
-                        "
-                    >
-                        3
-                    </div>
-                    <div>
-                        <h4
-                            style="
-                                font-weight: 600;
-                                color: var(--gray-900);
-                                font-size: var(--text-sm);
-                                margin-bottom: 2px;
-                            "
-                        >
-                            Assign Sections
-                        </h4>
-                        <p class="text-sm text-muted">
-                            For each course, the algorithm tries to assign a
-                            non-conflicting section (lecture + lab/tutorial) to
-                            every block that needs it, respecting room
-                            capacities.
-                        </p>
-                    </div>
-                </div>
-
-                <div
-                    style="
-                        display: flex;
-                        align-items: flex-start;
-                        gap: var(--space-4);
-                    "
-                >
-                    <div
-                        style="
-                            flex-shrink: 0;
-                            width: 32px;
-                            height: 32px;
-                            border-radius: 50%;
-                            background: var(--primary-100);
-                            color: var(--primary-700);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-weight: 700;
-                            font-size: var(--text-sm);
-                        "
-                    >
-                        4
-                    </div>
-                    <div>
-                        <h4
-                            style="
-                                font-weight: 600;
-                                color: var(--gray-900);
-                                font-size: var(--text-sm);
-                                margin-bottom: 2px;
-                            "
-                        >
-                            Kick &amp; Repair
-                        </h4>
-                        <p class="text-sm text-muted">
-                            When conflicts arise, the system can displace
-                            easier-to-reschedule courses and attempt to re-place
-                            them elsewhere — a "kick and repair" strategy.
-                        </p>
-                    </div>
-                </div>
-
-                <div
-                    style="
-                        display: flex;
-                        align-items: flex-start;
-                        gap: var(--space-4);
-                    "
-                >
-                    <div
-                        style="
-                            flex-shrink: 0;
-                            width: 32px;
-                            height: 32px;
-                            border-radius: 50%;
-                            background: var(--success-100);
-                            color: var(--success-700);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-weight: 700;
-                            font-size: var(--text-sm);
-                        "
-                    >
-                        5
-                    </div>
-                    <div>
-                        <h4
-                            style="
-                                font-weight: 600;
-                                color: var(--gray-900);
-                                font-size: var(--text-sm);
-                                margin-bottom: 2px;
-                            "
-                        >
-                            Rank &amp; Report
-                        </h4>
-                        <p class="text-sm text-muted">
-                            After generation, each block is scored 0–100 based
-                            on schedule quality: penalizing large gaps between
-                            classes and insufficient overnight rest between
-                            consecutive days.
-                        </p>
-                    </div>
-                </div>
+                <div class="pipeline-step-label">Optimize</div>
+                <div class="pipeline-step-sub">Fine-tune schedule quality</div>
+                <button class="btn btn-ghost btn-sm pipeline-btn" id="btn-optimize" onclick="handleOptimize()">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                    Run
+                </button>
+                <div class="pipeline-step-badge">Coming Soon</div>
             </div>
+
+            <!-- Arrow -->
+            <div class="pipeline-arrow">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </div>
+
+            <!-- Step 3: Rank -->
+            <div class="pipeline-step" id="pstep-rank">
+                <div class="pipeline-step-icon psi-success">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                </div>
+                <div class="pipeline-step-label">Rank</div>
+                <div class="pipeline-step-sub">Score each block 0–100</div>
+                <button class="btn btn-success btn-sm pipeline-btn" id="btn-rank"
+                        onclick="handleRank()" {% if not has_schedule %}disabled{% endif %}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    Run
+                </button>
+            </div>
+
         </div>
+
+        <!-- Progress Area -->
+        <div id="progress-area" style="display:none;margin-top:var(--space-6);border-top:1px solid var(--gray-100);padding-top:var(--space-5);">
+            <div class="prog-header">
+                <span id="prog-label" class="prog-label">Initialising…</span>
+                <span id="prog-pct" class="prog-pct">0%</span>
+            </div>
+            <div class="prog-track">
+                <div class="prog-bar" id="prog-bar" style="width:0%"></div>
+            </div>
+            <div id="prog-step" class="prog-step"></div>
+        </div>
+
+        <!-- Console -->
+        <div class="console-output" id="console-output" style="display:none;margin-top:var(--space-4);"></div>
     </div>
 </div>
 
-{% endblock %} {% block extra_scripts %}
+<!-- ══ SETTINGS ROW ═══════════════════════════════════════════════════════════ -->
+<div class="settings-row">
+
+    <!-- Generator Settings -->
+    <div class="card settings-panel">
+        <div class="card-header settings-panel-header" onclick="togglePanel('gen')">
+            <div style="display:flex;align-items:center;gap:var(--space-2);flex:1;">
+                <div class="settings-panel-icon" style="background:var(--primary-100);color:var(--primary-600);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+                <span class="settings-panel-title">Generator Settings</span>
+                <span id="gen-modified-badge" class="pill pill-warning" style="display:none;font-size:10px;">Modified</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:var(--space-2);">
+                <button class="btn btn-ghost btn-sm" id="btn-reset-gen" onclick="event.stopPropagation();resetGenSettings()" style="display:none;font-size:11px;">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 .49-3.31"></path></svg>
+                    Reset
+                </button>
+                <svg id="gen-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;color:var(--gray-400);"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+        </div>
+        <div id="gen-settings-body" class="card-body settings-panel-body">
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="cfg-block-size">Block Size</label>
+                    <span class="setting-default">Default: 20</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="cfg-block-size" class="setting-range" min="5" max="50" step="1" value="20" oninput="onGenChange()">
+                    <span class="setting-value-badge" id="cfg-block-size-val">20 students</span>
+                </div>
+                <p class="setting-desc">Students per block. Smaller blocks create more blocks per program.</p>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="cfg-max-retries">Generation Attempts</label>
+                    <span class="setting-default">Default: 1</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="cfg-max-retries" class="setting-range" min="1" max="10" step="1" value="1" oninput="onGenChange()">
+                    <span class="setting-value-badge" id="cfg-max-retries-val">1 attempt</span>
+                </div>
+                <p class="setting-desc">More attempts improve completeness at the cost of time.</p>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="cfg-recursion-depth">Kick &amp; Repair Depth</label>
+                    <span class="setting-default">Default: 3</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="cfg-recursion-depth" class="setting-range" min="0" max="8" step="1" value="3" oninput="onGenChange()">
+                    <span class="setting-value-badge" id="cfg-recursion-depth-val">3 levels</span>
+                </div>
+                <p class="setting-desc">Recursion depth for conflict resolution. Higher = more thorough, slower.</p>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label">Enforce Capacity</label>
+                    <span class="setting-default">Default: On</span>
+                </div>
+                <div class="setting-control-row" style="gap:var(--space-3);">
+                    <label class="setting-toggle">
+                        <input type="checkbox" id="cfg-enforce-capacity" checked onchange="onGenChange()">
+                        <span class="setting-toggle-track"><span class="setting-toggle-thumb"></span></span>
+                    </label>
+                    <span id="cfg-enforce-capacity-val" class="setting-value-badge" style="background:var(--success-100);color:var(--success-700);">Enabled</span>
+                </div>
+                <p class="setting-desc">Skip sections that would exceed room capacity.</p>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label">Skip Electives</label>
+                    <span class="setting-default">Default: On</span>
+                </div>
+                <div class="setting-control-row" style="gap:var(--space-3);">
+                    <label class="setting-toggle">
+                        <input type="checkbox" id="cfg-skip-electives" checked onchange="onGenChange()">
+                        <span class="setting-toggle-track"><span class="setting-toggle-thumb"></span></span>
+                    </label>
+                    <span id="cfg-skip-electives-val" class="setting-value-badge" style="background:var(--success-100);color:var(--success-700);">Enabled</span>
+                </div>
+                <p class="setting-desc">Exclude courses with "Elective" in their code.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Ranking Settings -->
+    <div class="card settings-panel">
+        <div class="card-header settings-panel-header" onclick="togglePanel('rank')">
+            <div style="display:flex;align-items:center;gap:var(--space-2);flex:1;">
+                <div class="settings-panel-icon" style="background:var(--success-100);color:var(--success-600);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                </div>
+                <span class="settings-panel-title">Ranking Settings</span>
+                <span id="rank-modified-badge" class="pill pill-warning" style="display:none;font-size:10px;">Modified</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:var(--space-2);">
+                <button class="btn btn-ghost btn-sm" id="btn-reset-rank" onclick="event.stopPropagation();resetRankSettings()" style="display:none;font-size:11px;">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 .49-3.31"></path></svg>
+                    Reset
+                </button>
+                <svg id="rank-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;color:var(--gray-400);"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+        </div>
+        <div id="rank-settings-body" class="card-body settings-panel-body">
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="rnk-gap-penalty">Gap Penalty (per 30 min)</label>
+                    <span class="setting-default">Default: 2 pts</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="rnk-gap-penalty" class="setting-range" min="0" max="10" step="1" value="2" oninput="onRankChange()">
+                    <span class="setting-value-badge" id="rnk-gap-penalty-val">2 pts</span>
+                </div>
+                <p class="setting-desc">Points deducted per 30 min of gap time beyond the free window.</p>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="rnk-sleep-penalty">Sleep Penalty (per 30 min)</label>
+                    <span class="setting-default">Default: 5 pts</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="rnk-sleep-penalty" class="setting-range" min="0" max="15" step="1" value="5" oninput="onRankChange()">
+                    <span class="setting-value-badge" id="rnk-sleep-penalty-val">5 pts</span>
+                </div>
+                <p class="setting-desc">Points deducted per 30 min of lost overnight rest below the minimum.</p>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="rnk-max-gap">Free Gap Window</label>
+                    <span class="setting-default">Default: 60 min</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="rnk-max-gap" class="setting-range" min="0" max="180" step="15" value="60" oninput="onRankChange()">
+                    <span class="setting-value-badge" id="rnk-max-gap-val">60 min</span>
+                </div>
+                <p class="setting-desc">Gaps up to this length are not penalized.</p>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="rnk-min-sleep">Min Overnight Rest</label>
+                    <span class="setting-default">Default: 12 hrs</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="rnk-min-sleep" class="setting-range" min="6" max="16" step="1" value="12" oninput="onRankChange()">
+                    <span class="setting-value-badge" id="rnk-min-sleep-val">12 hrs</span>
+                </div>
+                <p class="setting-desc">Minimum overnight rest required before the sleep penalty applies.</p>
+            </div>
+
+        </div>
+    </div>
+
+</div><!-- /.settings-row -->
+
+<!-- ══ STYLES ════════════════════════════════════════════════════════════════ -->
+<style>
+
+/* ── Pipeline ── */
+.pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    row-gap: var(--space-5);
+}
+
+.pipeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-2);
+    min-width: 150px;
+    flex: 1;
+    max-width: 220px;
+    position: relative;
+}
+
+.pipeline-step-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 2px;
+}
+.psi-primary { background: var(--primary-100); color: var(--primary-600); }
+.psi-purple  { background: #ede9fe; color: #7c3aed; }
+.psi-success { background: var(--success-100); color: var(--success-600); }
+
+.pipeline-step-label {
+    font-size: var(--text-sm); font-weight: 700; color: var(--gray-900);
+    letter-spacing: -0.01em;
+}
+.pipeline-step-sub {
+    font-size: var(--text-xs); color: var(--gray-500); line-height: 1.4;
+    min-height: 32px;
+}
+.pipeline-btn { min-width: 90px; }
+.pipeline-step-warn {
+    font-size: 10px; color: var(--warning-600); margin-top: 2px;
+}
+.pipeline-step-badge {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+    color: #7c3aed; background: #ede9fe;
+    padding: 2px 8px; border-radius: 8px; margin-top: 2px;
+}
+
+.pipeline-arrow {
+    color: var(--gray-300);
+    flex-shrink: 0;
+    padding: 0 var(--space-2);
+    padding-bottom: 48px; /* align with icon vertically */
+}
+
+/* ── Progress ── */
+.prog-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+.prog-label  { font-size:var(--text-sm); font-weight:600; color:var(--gray-700); }
+.prog-pct    { font-size:var(--text-xs); font-weight:700; color:var(--primary-600); font-family:var(--font-mono); }
+.prog-track  { height:8px; background:var(--gray-200); border-radius:9999px; overflow:hidden; }
+.prog-bar    { height:100%; border-radius:9999px; background:linear-gradient(90deg,var(--primary-500),var(--primary-400)); transition:width 0.35s ease; }
+.prog-bar.success { background: var(--success-500); }
+.prog-bar.error   { background: var(--danger-500);  }
+.prog-step   { font-size:var(--text-xs); color:var(--gray-400); margin-top:5px; font-family:var(--font-mono); min-height:18px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* ── Settings row ── */
+.settings-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+}
+@media (max-width: 860px) {
+    .settings-row { grid-template-columns: 1fr; }
+}
+
+.settings-panel {}
+.settings-panel-header {
+    cursor: pointer;
+    user-select: none;
+}
+.settings-panel-header:hover { background: var(--gray-50); }
+.settings-panel-icon {
+    width: 26px; height: 26px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.settings-panel-title {
+    font-size: var(--text-sm); font-weight: 700; color: var(--gray-900);
+}
+.settings-panel-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding-top: var(--space-4);
+}
+
+/* ── Individual setting items ── */
+.setting-item  { background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--border-radius); padding:var(--space-3) var(--space-4); }
+.setting-label-row   { display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-2); }
+.setting-label       { font-size:var(--text-xs); font-weight:600; color:var(--gray-800); }
+.setting-default     { font-size:10px; color:var(--gray-400); font-family:var(--font-mono); }
+.setting-control-row { display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-2); }
+.setting-range       { flex:1; accent-color:var(--primary-500); height:4px; cursor:pointer; }
+.setting-value-badge { font-size:11px; font-weight:700; white-space:nowrap; padding:2px 8px; border-radius:8px; background:var(--primary-100); color:var(--primary-700); font-family:var(--font-mono); min-width:72px; text-align:center; }
+.setting-desc        { font-size:var(--text-xs); color:var(--gray-500); line-height:1.5; margin:0; }
+.setting-toggle      { display:inline-flex; align-items:center; cursor:pointer; }
+.setting-toggle input { display:none; }
+.setting-toggle-track { width:36px; height:20px; border-radius:10px; background:var(--gray-300); position:relative; transition:background 0.2s; }
+.setting-toggle input:checked + .setting-toggle-track { background:var(--primary-500); }
+.setting-toggle-thumb { position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:white; transition:left 0.2s; box-shadow:0 1px 3px rgba(0,0,0,0.2); }
+.setting-toggle input:checked + .setting-toggle-track .setting-toggle-thumb { left:18px; }
+</style>
+
+{% endblock %}
+
+{% block extra_scripts %}
 <script>
-    (function () {
-        var consoleEl = document.getElementById("console-output");
-        var btnGenerate = document.getElementById("btn-generate");
-        var btnRank = document.getElementById("btn-rank");
-        var isRunning = false;
+(function () {
 
-        function appendToConsole(text, className) {
-            if (!consoleEl) return;
-            consoleEl.style.display = "block";
+    /* ── Generator defaults ── */
+    var GEN_DEFAULTS = {
+        block_size: 20, max_retries: 1, max_recursion_depth: 3,
+        enforce_capacity: true, skip_electives: true,
+    };
 
-            if (className) {
-                var span = document.createElement("span");
-                span.className = className;
-                span.textContent = text + "\n";
-                consoleEl.appendChild(span);
-            } else {
-                consoleEl.textContent += text + "\n";
-            }
+    /* ── Ranking defaults (must match DEFAULT_RANKING_CONFIG in ranking.py) ── */
+    var RANK_DEFAULTS = {
+        penalty_per_30min_gap:   2,
+        penalty_per_30min_sleep: 5,
+        max_gap_allowed_mins:    60,
+        min_overnight_rest_hrs:  12,
+    };
 
-            consoleEl.scrollTop = consoleEl.scrollHeight;
+    /* ── Panel open/close state ── */
+    var panelOpen = { gen: true, rank: true };
+
+    window.togglePanel = function (key) {
+        panelOpen[key] = !panelOpen[key];
+        document.getElementById(key + '-settings-body').style.display = panelOpen[key] ? '' : 'none';
+        document.getElementById(key + '-chevron').style.transform = panelOpen[key] ? '' : 'rotate(-90deg)';
+    };
+
+    /* ── Read settings ── */
+    function readGenSettings() {
+        return {
+            block_size:          parseInt(document.getElementById('cfg-block-size').value),
+            max_retries:         parseInt(document.getElementById('cfg-max-retries').value),
+            max_recursion_depth: parseInt(document.getElementById('cfg-recursion-depth').value),
+            enforce_capacity:    document.getElementById('cfg-enforce-capacity').checked,
+            skip_electives:      document.getElementById('cfg-skip-electives').checked,
+        };
+    }
+
+    function readRankSettings() {
+        return {
+            penalty_per_30min_gap:   parseInt(document.getElementById('rnk-gap-penalty').value),
+            penalty_per_30min_sleep: parseInt(document.getElementById('rnk-sleep-penalty').value),
+            max_gap_allowed_mins:    parseInt(document.getElementById('rnk-max-gap').value),
+            min_overnight_rest_hrs:  parseInt(document.getElementById('rnk-min-sleep').value),
+        };
+    }
+
+    /* ── Sync labels ── */
+    function syncGenLabels() {
+        var s = readGenSettings();
+        document.getElementById('cfg-block-size-val').textContent      = s.block_size + ' students';
+        document.getElementById('cfg-max-retries-val').textContent     = s.max_retries + ' attempt' + (s.max_retries !== 1 ? 's' : '');
+        document.getElementById('cfg-recursion-depth-val').textContent = s.max_recursion_depth + ' level' + (s.max_recursion_depth !== 1 ? 's' : '');
+
+        var capEl = document.getElementById('cfg-enforce-capacity-val');
+        capEl.textContent = s.enforce_capacity ? 'Enabled' : 'Disabled';
+        capEl.style.background = s.enforce_capacity ? 'var(--success-100)' : 'var(--gray-100)';
+        capEl.style.color      = s.enforce_capacity ? 'var(--success-700)' : 'var(--gray-500)';
+
+        var elecEl = document.getElementById('cfg-skip-electives-val');
+        elecEl.textContent = s.skip_electives ? 'Enabled' : 'Disabled';
+        elecEl.style.background = s.skip_electives ? 'var(--success-100)' : 'var(--gray-100)';
+        elecEl.style.color      = s.skip_electives ? 'var(--success-700)' : 'var(--gray-500)';
+
+        var mod = Object.keys(GEN_DEFAULTS).some(function (k) { return s[k] !== GEN_DEFAULTS[k]; });
+        document.getElementById('gen-modified-badge').style.display = mod ? '' : 'none';
+        document.getElementById('btn-reset-gen').style.display      = mod ? '' : 'none';
+    }
+
+    function syncRankLabels() {
+        var s = readRankSettings();
+        document.getElementById('rnk-gap-penalty-val').textContent  = s.penalty_per_30min_gap + ' pts';
+        document.getElementById('rnk-sleep-penalty-val').textContent = s.penalty_per_30min_sleep + ' pts';
+        document.getElementById('rnk-max-gap-val').textContent      = s.max_gap_allowed_mins + ' min';
+        document.getElementById('rnk-min-sleep-val').textContent    = s.min_overnight_rest_hrs + ' hrs';
+
+        var mod = Object.keys(RANK_DEFAULTS).some(function (k) { return s[k] !== RANK_DEFAULTS[k]; });
+        document.getElementById('rank-modified-badge').style.display = mod ? '' : 'none';
+        document.getElementById('btn-reset-rank').style.display      = mod ? '' : 'none';
+    }
+
+    window.onGenChange  = syncGenLabels;
+    window.onRankChange = syncRankLabels;
+
+    window.resetGenSettings = function () {
+        document.getElementById('cfg-block-size').value         = GEN_DEFAULTS.block_size;
+        document.getElementById('cfg-max-retries').value        = GEN_DEFAULTS.max_retries;
+        document.getElementById('cfg-recursion-depth').value    = GEN_DEFAULTS.max_recursion_depth;
+        document.getElementById('cfg-enforce-capacity').checked = GEN_DEFAULTS.enforce_capacity;
+        document.getElementById('cfg-skip-electives').checked   = GEN_DEFAULTS.skip_electives;
+        syncGenLabels();
+    };
+
+    window.resetRankSettings = function () {
+        document.getElementById('rnk-gap-penalty').value  = RANK_DEFAULTS.penalty_per_30min_gap;
+        document.getElementById('rnk-sleep-penalty').value = RANK_DEFAULTS.penalty_per_30min_sleep;
+        document.getElementById('rnk-max-gap').value      = RANK_DEFAULTS.max_gap_allowed_mins;
+        document.getElementById('rnk-min-sleep').value    = RANK_DEFAULTS.min_overnight_rest_hrs;
+        syncRankLabels();
+    };
+
+    /* ── DOM refs ── */
+    var consoleEl    = document.getElementById('console-output');
+    var progressArea = document.getElementById('progress-area');
+    var progBar      = document.getElementById('prog-bar');
+    var progLabel    = document.getElementById('prog-label');
+    var progPct      = document.getElementById('prog-pct');
+    var progStep     = document.getElementById('prog-step');
+    var btnGenerate  = document.getElementById('btn-generate');
+    var btnOptimize  = document.getElementById('btn-optimize');
+    var btnRank      = document.getElementById('btn-rank');
+    var isRunning    = false;
+
+    /* ── Progress helpers ── */
+    function setProgress(pct, label, step) {
+        progressArea.style.display = '';
+        if (pct !== null && pct !== undefined)   { progBar.style.width = pct + '%'; progPct.textContent = pct + '%'; }
+        if (label !== null && label !== undefined) progLabel.textContent = label;
+        if (step  !== null && step  !== undefined) progStep.textContent  = step;
+    }
+
+    function setProgressFinal(success) {
+        progBar.className = 'prog-bar ' + (success ? 'success' : 'error');
+        progBar.style.width = '100%';
+        progPct.textContent = '100%';
+    }
+
+    function appendToConsole(text, cls) {
+        if (!consoleEl || !text.trim()) return;
+        consoleEl.style.display = 'block';
+        if (cls) {
+            var sp = document.createElement('span');
+            sp.className = cls; sp.textContent = text + '\n';
+            consoleEl.appendChild(sp);
+        } else {
+            consoleEl.textContent += text + '\n';
+        }
+        consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+
+    function setAllDisabled(d) {
+        if (btnGenerate) btnGenerate.disabled = d;
+        if (btnOptimize) btnOptimize.disabled = d;
+        if (btnRank)     btnRank.disabled     = d;
+    }
+
+    function getCsrf() {
+        var c = document.cookie.split('; ').find(function (r) { return r.startsWith('csrftoken='); });
+        return c ? c.split('=')[1] : '';
+    }
+
+    /* ── SSE stream handler (shared by generate & rank) ── */
+    function handleSseEvent(evt) {
+        var type = evt.type || 'info';
+        var msg  = (evt.message || '').trim();
+        var pct  = (evt.pct !== undefined && evt.pct !== null) ? evt.pct : null;
+
+        if (type === 'done') {
+            var ok = evt.success === true;
+            setProgress(100, ok ? 'Complete!' : 'Finished with errors', '');
+            setProgressFinal(ok);
+            onStreamDone(ok);
+            return;
         }
 
-        function setButtonsDisabled(disabled) {
-            if (btnGenerate) btnGenerate.disabled = disabled;
-            if (btnRank) btnRank.disabled = disabled;
+        if (pct !== null) setProgress(pct, null, null);
+        if (type === 'progress') { setProgress(null, null, msg); return; }
+        if (type === 'info' || type === 'success') {
+            if (msg.indexOf('Step') !== -1 || msg.indexOf('ATTEMPT') !== -1 ||
+                msg.indexOf('RANKING') !== -1 || msg.indexOf('Ranking') !== -1 ||
+                msg.indexOf('GENERATION') !== -1) {
+                setProgress(null, msg.replace(/={3,}/g, '').replace(/\n/g, ' ').trim(), null);
+            }
         }
+        if (type === 'error') setProgressFinal(false);
 
-        window.handleGenerate = function () {
-            if (isRunning) return;
-            isRunning = true;
+        var cls = { success: 'console-line-success', warning: 'console-line-warning',
+                    error: 'console-line-error', info: 'console-line-info' }[type] || '';
+        if (msg) appendToConsole(msg, cls);
+    }
 
-            setButtonsDisabled(true);
+    function streamPost(url, body) {
+        return fetch(url, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCsrf() },
+            body:    JSON.stringify(body),
+        }).then(function (response) {
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            var reader  = response.body.getReader();
+            var decoder = new TextDecoder();
+            var buffer  = '';
 
-            if (consoleEl) {
-                consoleEl.style.display = "block";
-                consoleEl.innerHTML = "";
-            }
-
-            appendToConsole(
-                "> Starting schedule generation...",
-                "console-line-info",
-            );
-            appendToConsole(
-                "> This may take a moment — building blocks and assigning course sections.\n",
-                "console-line-info",
-            );
-
-            showLoading("Generating schedule... This may take a moment.");
-
-            ajaxPost('{% url "api_generate_schedule" %}')
-                .then(function (data) {
-                    hideLoading();
-                    isRunning = false;
-
-                    if (data.success) {
-                        if (data.log) {
-                            var lines = data.log.split("\n");
-                            lines.forEach(function (line) {
-                                if (!line.trim()) return;
-                                if (
-                                    line.indexOf("SUCCESS") !== -1 ||
-                                    line.indexOf("complete") !== -1
-                                ) {
-                                    appendToConsole(
-                                        line,
-                                        "console-line-success",
-                                    );
-                                } else if (
-                                    line.indexOf("WARNING") !== -1 ||
-                                    line.indexOf("[!]") !== -1
-                                ) {
-                                    appendToConsole(
-                                        line,
-                                        "console-line-warning",
-                                    );
-                                } else if (
-                                    line.indexOf("ERROR") !== -1 ||
-                                    line.indexOf("[x]") !== -1
-                                ) {
-                                    appendToConsole(line, "console-line-error");
-                                } else {
-                                    appendToConsole(line, "");
-                                }
-                            });
-                        }
-
-                        appendToConsole(
-                            "\n> Schedule generation complete!",
-                            "console-line-success",
-                        );
-                        showToast(
-                            "Schedule generated successfully!",
-                            "success",
-                        );
-
-                        // Enable rank button
-                        if (btnRank) btnRank.disabled = false;
-
-                        setTimeout(function () {
-                            setButtonsDisabled(false);
-                        }, 1000);
-                    } else {
-                        appendToConsole(
-                            "\n> ERROR: " +
-                                (data.error || "Generation failed."),
-                            "console-line-error",
-                        );
-                        showToast(
-                            data.error || "Schedule generation failed.",
-                            "error",
-                        );
-                        setButtonsDisabled(false);
+            function pump() {
+                return reader.read().then(function (chunk) {
+                    if (chunk.done) {
+                        if (isRunning) onStreamDone(false);
+                        return;
                     }
-                })
-                .catch(function (err) {
-                    hideLoading();
-                    isRunning = false;
-                    appendToConsole(
-                        "\n> NETWORK ERROR: " + err.message,
-                        "console-line-error",
-                    );
-                    showToast("An error occurred: " + err.message, "error");
-                    setButtonsDisabled(false);
+                    buffer += decoder.decode(chunk.value, { stream: true });
+                    var parts = buffer.split('\n\n');
+                    buffer = parts.pop();
+                    parts.forEach(function (part) {
+                        var line = part.trim();
+                        if (!line.startsWith('data:')) return;
+                        try { handleSseEvent(JSON.parse(line.slice(5).trim())); } catch (e) {}
+                    });
+                    return pump();
                 });
-        };
-
-        window.handleRank = function () {
-            if (isRunning) return;
-            isRunning = true;
-
-            setButtonsDisabled(true);
-
-            if (consoleEl) {
-                consoleEl.style.display = "block";
             }
+            return pump();
+        });
+    }
 
-            appendToConsole(
-                "\n> Starting block ranking process...",
-                "console-line-info",
-            );
+    function onStreamDone(success) {
+        isRunning = false;
+        if (success) {
+            appendToConsole('> Done!', 'console-line-success');
+            showToast('Complete!', 'success');
+            if (btnRank) btnRank.disabled = false;
+        } else {
+            showToast('Encountered errors — check the console.', 'error');
+        }
+        setTimeout(function () { setAllDisabled(false); }, 800);
+    }
 
-            showLoading("Ranking blocks...");
+    /* ── Generate ── */
+    window.handleGenerate = function () {
+        if (isRunning) return;
+        isRunning = true;
+        setAllDisabled(true);
+        consoleEl.innerHTML = '';
+        consoleEl.style.display = 'block';
+        progBar.className = 'prog-bar';
+        setProgress(0, 'Starting generation…', '');
+        appendToConsole('> Starting schedule generation…', 'console-line-info');
 
-            ajaxPost('{% url "api_rank_blocks" %}')
-                .then(function (data) {
-                    hideLoading();
-                    isRunning = false;
+        streamPost('{% url "api_generate_schedule" %}', {
+            gen:  readGenSettings(),
+            rank: readRankSettings(),
+        }).catch(function (err) {
+            appendToConsole('> NETWORK ERROR: ' + err.message, 'console-line-error');
+            setProgressFinal(false);
+            showToast('Network error: ' + err.message, 'error');
+            onStreamDone(false);
+        });
+    };
 
-                    if (data.success) {
-                        if (data.log) {
-                            var lines = data.log.split("\n");
-                            lines.forEach(function (line) {
-                                if (!line.trim()) return;
-                                if (
-                                    line.indexOf("Updated") !== -1 ||
-                                    line.indexOf("complete") !== -1
-                                ) {
-                                    appendToConsole(
-                                        line,
-                                        "console-line-success",
-                                    );
-                                } else {
-                                    appendToConsole(line, "");
-                                }
-                            });
-                        }
+    /* ── Optimize (stub) ── */
+    window.handleOptimize = function () {
+        showToast('Optimize is coming soon!', 'info');
+    };
 
-                        appendToConsole(
-                            "\n> Ranking complete! Scores saved to database.",
-                            "console-line-success",
-                        );
-                        showToast("Block ranking complete!", "success");
+    /* ── Rank (standalone) ── */
+    window.handleRank = function () {
+        if (isRunning) return;
+        isRunning = true;
+        setAllDisabled(true);
+        consoleEl.innerHTML = '';
+        consoleEl.style.display = 'block';
+        progBar.className = 'prog-bar';
+        setProgress(0, 'Starting ranking…', '');
+        appendToConsole('> Starting block ranking…', 'console-line-info');
 
-                        setTimeout(function () {
-                            setButtonsDisabled(false);
-                        }, 1000);
-                    } else {
-                        appendToConsole(
-                            "\n> ERROR: " + (data.error || "Ranking failed."),
-                            "console-line-error",
-                        );
-                        showToast(data.error || "Ranking failed.", "error");
-                        setButtonsDisabled(false);
-                    }
-                })
-                .catch(function (err) {
-                    hideLoading();
-                    isRunning = false;
-                    appendToConsole(
-                        "\n> NETWORK ERROR: " + err.message,
-                        "console-line-error",
-                    );
-                    showToast("An error occurred: " + err.message, "error");
-                    setButtonsDisabled(false);
-                });
-        };
-    })();
+        streamPost('{% url "api_rank_blocks" %}', readRankSettings())
+        .catch(function (err) {
+            appendToConsole('> NETWORK ERROR: ' + err.message, 'console-line-error');
+            setProgressFinal(false);
+            showToast('Network error: ' + err.message, 'error');
+            onStreamDone(false);
+        });
+    };
+
+    /* Init */
+    syncGenLabels();
+    syncRankLabels();
+
+})();
 </script>
 {% endblock %}

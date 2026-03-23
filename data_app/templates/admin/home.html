@@ -1,0 +1,65 @@
+@ -0,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block topbar_actions %}
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+{% endblock %}
+
+{% block content %}
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon stat-icon-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ total_programs }}</div>
+            <div class="stat-label">Programs</div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon stat-icon-success">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ total_enrolled }}</div>
+            <div class="stat-label">Students</div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon stat-icon-warning">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ total_blocks }}</div>
+            <div class="stat-label">Blocks</div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h2>Welcome, {{ request.user.username }}</h2>
+        <p>This page is protected by Django session authentication.</p>
+    </div>
+</div>
+
+{% endblock %}

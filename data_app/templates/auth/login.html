@@ -1,0 +1,28 @@
+@ -0,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block page_title %}Login{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 0 auto;">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            
+            <div style="margin-bottom: 1rem;">
+                <label>Username</label>
+                {{ form.username }}
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <label>Password</label>
+                {{ form.password }}
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">
+                Login
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
