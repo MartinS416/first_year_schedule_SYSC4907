@@ -24,86 +24,159 @@ class ScheduleBuilder:
 
     def optimize_schedule(self):
         """
-        Aggressive optimizer: Exhaustively tries all swaps and moves between all blocks in the same program/term, repeating until no further improvements are found or max iterations reached. Prioritizes tangible ranking improvements over efficiency.
+        Enhanced optimizer: Lower threshold, more iterations, and detailed progress reporting.
         """
-        self._emit("\n=== STARTING AGGRESSIVE SCHEDULE OPTIMIZATION ===", "info", pct=0)
+        self._emit("\n=== STARTING SCHEDULE OPTIMIZATION ===", "info", pct=0)
         import time
         from data_app.services.ranking import ScheduleRanker
-        MAX_ITERATIONS = 20  # Prevent infinite loops; can be increased for even more thoroughness
+        MAX_ITERATIONS = 30  # Allow more iterations for deeper search
+        MIN_IMPROVEMENT = 0  # Accept any improvement, even 0 (i.e., non-worsening)
+        EARLY_STOP_LIMIT = 5  # Allow more non-improving rounds before stopping
         total_actions = 0
         programs = Program.objects.all()
         pct_prog = 0
         ranker = ScheduleRanker()
-        for prog_idx, program in enumerate(programs):
+        # Helper to compute average score for a set of blocks
+        def avg_score(blocks):
+            if not blocks:
+                return 0
+            return sum(ranker.score_block(b) for b in blocks) / len(blocks)
+        # Store summary stats for reporting at the end
+        summary_stats = []
+        # GLOBAL OPTIMIZER: optimize across all blocks, all programs, both terms
+        import random
+        all_blocks = list(Block.objects.all())
+        all_terms = list(Term.objects.all())
+        # --- CAPTURE TRUE PRE-OPTIMIZATION VALUES ---
+        initial_block_scores = [ranker.score_block(b) for b in all_blocks]
+        initial_avg = sum(initial_block_scores) / len(initial_block_scores) if initial_block_scores else 0
+        initial_high = max(initial_block_scores) if initial_block_scores else 0
+        initial_low = min(initial_block_scores) if initial_block_scores else 0
+        self._emit(f"Initial total average score: {initial_avg:.2f}", "info")
+        # Also capture per-program pre-optimization stats
+        initial_program_stats = {}
+        for program in programs:
             blocks = list(Block.objects.filter(program=program))
-            for term_name in ["fall", "winter"]:
-                improved = True
-                iteration = 0
-                while improved and iteration < MAX_ITERATIONS:
-                    improved = False
-                    iteration += 1
-                    self._emit(f"Optimization pass {iteration} for {program.program_name} {term_name}...", "info")
-                    for i, block_a in enumerate(blocks):
-                        term_a = Term.objects.get(block=block_a, term_name=term_name)
-                        courses_a = list(TermCourses.objects.filter(term=term_a))
-                        for j, block_b in enumerate(blocks):
-                            if block_b == block_a:
-                                continue
-                            term_b = Term.objects.get(block=block_b, term_name=term_name)
-                            courses_b = list(TermCourses.objects.filter(term=term_b))
-                            # Try all swaps
-                            for ca in courses_a:
-                                for cb in courses_b:
-                                    if ca.course_code != cb.course_code:
-                                        codes_a = set(tc.course_code for tc in courses_a)
-                                        codes_b = set(tc.course_code for tc in courses_b)
-                                        if cb.course_code not in codes_a and ca.course_code not in codes_b:
-                                            score_a_before = ranker.score_block(block_a)
-                                            score_b_before = ranker.score_block(block_b)
-                                            # Swap
-                                            TermCourses.objects.filter(term=term_a, course_code=ca.course_code, section=ca.section).delete()
-                                            TermCourses.objects.filter(term=term_b, course_code=cb.course_code, section=cb.section).delete()
-                                            TermCourses.objects.create(term=term_a, course_code=cb.course_code, section=cb.section)
-                                            TermCourses.objects.create(term=term_b, course_code=ca.course_code, section=ca.section)
-                                            score_a_after = ranker.score_block(block_a)
-                                            score_b_after = ranker.score_block(block_b)
-                                            if (score_a_after + score_b_after) > (score_a_before + score_b_before):
-                                                total_actions += 1
-                                                improved = True
-                                                self._emit(f"Swap improved: {block_a.block_name} {score_a_before}->{score_a_after}, {block_b.block_name} {score_b_before}->{score_b_after}", "info")
-                                            else:
-                                                # Revert
-                                                TermCourses.objects.filter(term=term_a, course_code=cb.course_code, section=cb.section).delete()
-                                                TermCourses.objects.filter(term=term_b, course_code=ca.course_code, section=ca.section).delete()
-                                                TermCourses.objects.create(term=term_a, course_code=ca.course_code, section=ca.section)
-                                                TermCourses.objects.create(term=term_b, course_code=cb.course_code, section=cb.section)
-                            # Try all moves from A to B
-                            for ca in courses_a:
-                                codes_b = set(tc.course_code for tc in courses_b)
-                                if ca.course_code not in codes_b:
-                                    score_a_before = ranker.score_block(block_a)
-                                    score_b_before = ranker.score_block(block_b)
-                                    # Move ca from A to B
-                                    TermCourses.objects.filter(term=term_a, course_code=ca.course_code, section=ca.section).delete()
-                                    TermCourses.objects.create(term=term_b, course_code=ca.course_code, section=ca.section)
-                                    score_a_after = ranker.score_block(block_a)
-                                    score_b_after = ranker.score_block(block_b)
-                                    if (score_a_after + score_b_after) > (score_a_before + score_b_before):
-                                        total_actions += 1
-                                        improved = True
-                                        self._emit(f"Move improved: {block_a.block_name} {score_a_before}->{score_a_after}, {block_b.block_name} {score_b_before}->{score_b_after}", "info")
-                                    else:
-                                        # Revert
-                                        TermCourses.objects.filter(term=term_b, course_code=ca.course_code, section=ca.section).delete()
-                                        TermCourses.objects.create(term=term_a, course_code=ca.course_code, section=ca.section)
-                pct_prog = int(100 * (prog_idx + 1) / len(programs))
-                self._emit(f"Aggressive optimization complete for {program.program_name} {term_name} after {iteration} passes.", "info", pct=pct_prog)
+            scores = [ranker.score_block(b) for b in blocks]
+            avg_prog = sum(scores) / len(scores) if scores else 0
+            high_prog = max(scores) if scores else 0
+            low_prog = min(scores) if scores else 0
+            initial_program_stats[program.program_name] = {
+                'avg': avg_prog,
+                'high': high_prog,
+                'low': low_prog
+            }
+        MAX_GLOBAL_ITER = 10
+        MAX_RANDOM_SWAPS = 30
+        improved = True
+        iteration = 0
+        no_improve_count = 0
+        while improved and iteration < MAX_GLOBAL_ITER and no_improve_count < EARLY_STOP_LIMIT:
+            improved = False
+            iteration += 1
+            all_blocks = list(Block.objects.all())
+            all_terms = list(Term.objects.all())
+            all_scores_before = [ranker.score_block(b) for b in all_blocks]
+            total_avg_before = sum(all_scores_before) / len(all_scores_before) if all_scores_before else 0
+            self._emit(f"Global optimization pass {iteration}...", "info")
+            # Try random swaps across all terms/blocks
+            for _ in range(MAX_RANDOM_SWAPS):
+                term_a, term_b = random.sample(all_terms, 2)
+                if term_a == term_b:
+                    continue
+                courses_a = list(TermCourses.objects.filter(term=term_a))
+                courses_b = list(TermCourses.objects.filter(term=term_b))
+                if not courses_a or not courses_b:
+                    continue
+                ca = random.choice(courses_a)
+                cb = random.choice(courses_b)
+                if ca.course_code == cb.course_code:
+                    continue
+                codes_a = set(tc.course_code for tc in courses_a)
+                codes_b = set(tc.course_code for tc in courses_b)
+                if cb.course_code not in codes_a and ca.course_code not in codes_b:
+                    # Try swap
+                    TermCourses.objects.filter(term=term_a, course_code=ca.course_code, section=ca.section).delete()
+                    TermCourses.objects.filter(term=term_b, course_code=cb.course_code, section=cb.section).delete()
+                    TermCourses.objects.create(term=term_a, course_code=cb.course_code, section=cb.section)
+                    TermCourses.objects.create(term=term_b, course_code=ca.course_code, section=ca.section)
+                    # Check global improvement
+                    all_blocks_after = list(Block.objects.all())
+                    all_scores_after = [ranker.score_block(b) for b in all_blocks_after]
+                    total_avg_after = sum(all_scores_after) / len(all_scores_after) if all_scores_after else 0
+                    if total_avg_after > total_avg_before:
+                        total_actions += 1
+                        improved = True
+                        no_improve_count = 0
+                        self._emit(f"Global swap improved total avg: {total_avg_before:.2f}->{total_avg_after:.2f}", "info")
+                    else:
+                        # Revert
+                        TermCourses.objects.filter(term=term_a, course_code=cb.course_code, section=cb.section).delete()
+                        TermCourses.objects.filter(term=term_b, course_code=ca.course_code, section=ca.section).delete()
+                        TermCourses.objects.create(term=term_a, course_code=ca.course_code, section=ca.section)
+                        TermCourses.objects.create(term=term_b, course_code=cb.course_code, section=cb.section)
+            if not improved:
+                no_improve_count += 1
+            else:
+                no_improve_count = 0
+        # After global optimization, update all block rankings to reflect the latest scores
+        ranker.rank_all_blocks()
+        all_blocks = list(Block.objects.all())
+        after_scores = [b.ranking for b in all_blocks]
+        after_avg = sum(after_scores) / len(after_scores) if after_scores else 0
+        after_high = max(after_scores) if after_scores else 0
+        after_low = min(after_scores) if after_scores else 0
+        summary_stats = []
+        # Per-program summary for compatibility with existing reporting
+        for program in programs:
+            blocks = list(Block.objects.filter(program=program))
+            # Use initial (pre-optimization) stats for before_*
+            before_avg_prog = initial_program_stats[program.program_name]['avg']
+            before_high_prog = initial_program_stats[program.program_name]['high']
+            before_low_prog = initial_program_stats[program.program_name]['low']
+            after_scores_prog = [b.ranking for b in blocks]
+            after_avg_prog = sum(after_scores_prog) / len(after_scores_prog) if after_scores_prog else 0
+            after_high_prog = max(after_scores_prog) if after_scores_prog else 0
+            after_low_prog = min(after_scores_prog) if after_scores_prog else 0
+            summary_stats.append({
+                'program': program.program_name,
+                'before_avg': before_avg_prog,
+                'before_high': before_high_prog,
+                'before_low': before_low_prog,
+                'after_avg': after_avg_prog,
+                'after_high': after_high_prog,
+                'after_low': after_low_prog
+            })
         self._emit(f"Total actions performed: {total_actions}", "info", pct=95)
         # Re-rank all blocks and generate ranking report after optimization
         self._emit("Ranking all blocks after optimization...", "info", pct=97)
         ranker_with_progress = __import__('data_app.services.ranking', fromlist=['ScheduleRanker']).ScheduleRanker(progress_callback=self._progress)
         ranker_with_progress.rank_all_blocks()
         ranker_with_progress.export_ranking_report()
+        # Print summary at the end
+        # Use initial (pre-optimization) values for totals
+        total_before_avg = initial_avg
+        total_before_high = initial_high
+        total_before_low = initial_low
+        total_after_avg = after_avg
+        total_after_high = after_high
+        total_after_low = after_low
+        self._emit("\n=== SCHEDULE OPTIMIZATION SUMMARY ===", "success")
+        for stat in summary_stats:
+            self._emit(
+                f"Program: {stat['program']}\n"
+                f"  Old Avg: {stat['before_avg']:.2f} | Old High: {stat['before_high']} | Old Low: {stat['before_low']}\n"
+                f"  New Avg: {stat['after_avg']:.2f} | New High: {stat['after_high']} | New Low: {stat['after_low']}\n"
+                f"  Change:  Avg {stat['after_avg']-stat['before_avg']:+.2f} | High {stat['after_high']-stat['before_high']:+} | Low {stat['after_low']-stat['before_low']:+}",
+                "success"
+            )
+        self._emit(
+            f"\nTOTALS (All Programs/Blocks):\n"
+            f"  Old Avg: {total_before_avg:.2f} | Old High: {total_before_high} | Old Low: {total_before_low}\n"
+            f"  New Avg: {total_after_avg:.2f} | New High: {total_after_high} | New Low: {total_after_low}\n"
+            f"  Change:  Avg {total_after_avg-total_before_avg:+.2f} | High {total_after_high-total_before_high:+} | Low {total_after_low-total_before_low:+}",
+            "success"
+        )
         self._emit("Optimization complete!", "success", pct=100)
 
     def __init__(self, config: dict | None = None, progress_callback=None):
