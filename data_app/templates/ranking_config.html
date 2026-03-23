@@ -1,22 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ranking Configuration</title>
-</head>
-<body>
-    <h1>Ranking Weights Configuration</h1>
-    <form method="post">
-        {% csrf_token %}
-        <table>
-            <tr><td>Compactness:</td><td><input type="number" name="compactness" value="{{ config.compactness }}" /></td></tr>
-            <tr><td>Day Balance:</td><td><input type="number" name="day_balance" value="{{ config.day_balance }}" /></td></tr>
-            <tr><td>End Time Preference:</td><td><input type="number" name="end_time_preference" value="{{ config.end_time_preference }}" /></td></tr>
-            <tr><td>Start Time Preference:</td><td><input type="number" name="start_time_preference" value="{{ config.start_time_preference }}" /></td></tr>
-            <tr><td>Late to Early:</td><td><input type="number" name="late_to_early" value="{{ config.late_to_early }}" /></td></tr>
-            <tr><td>Lab Spread:</td><td><input type="number" name="lab_spread" value="{{ config.lab_spread }}" /></td></tr>
-            <tr><td>Days Used:</td><td><input type="number" name="days_used" value="{{ config.days_used }}" /></td></tr>
-        </table>
-        <button type="submit">Save</button>
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Ranking Config{% endblock %}
+{% block page_title %}Ranking Weights Configuration{% endblock %}
+{% block content %}
+<div class="row" style="max-width: 600px; margin: 0 auto;">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title" style="font-size: 1.5rem; font-weight: 600;">Ranking Weights Configuration</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" style="margin-top: 1rem;">
+                {% csrf_token %}
+                <div class="form-grid">
+                    <div class="form-group"><label for="compactness">Compactness</label><input type="number" name="compactness" id="compactness" value="{{ config.compactness }}" class="form-control" /></div>
+                    <div class="form-group"><label for="day_balance">Day Balance</label><input type="number" name="day_balance" id="day_balance" value="{{ config.day_balance }}" class="form-control" /></div>
+                    <div class="form-group"><label for="end_time_preference">End Time Preference</label><input type="number" name="end_time_preference" id="end_time_preference" value="{{ config.end_time_preference }}" class="form-control" /></div>
+                    <div class="form-group"><label for="start_time_preference">Start Time Preference</label><input type="number" name="start_time_preference" id="start_time_preference" value="{{ config.start_time_preference }}" class="form-control" /></div>
+                    <div class="form-group"><label for="late_to_early">Late to Early</label><input type="number" name="late_to_early" id="late_to_early" value="{{ config.late_to_early }}" class="form-control" /></div>
+                    <div class="form-group"><label for="lab_spread">Lab Spread</label><input type="number" name="lab_spread" id="lab_spread" value="{{ config.lab_spread }}" class="form-control" /></div>
+                    <div class="form-group"><label for="days_used">Days Used</label><input type="number" name="days_used" id="days_used" value="{{ config.days_used }}" class="form-control" /></div>
+                </div>
+                <div style="margin-top: 1.5rem; text-align: right;">
+                    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                    <button type="submit" name="reset_defaults" value="1" class="btn btn-secondary btn-sm" style="margin-left: 0.5rem;">Reset to Default</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem 2rem;
+    }
+    .form-group label {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+    .form-group input {
+        width: 100%;
+        padding: 0.4rem 0.6rem;
+        font-size: 1rem;
+        border-radius: 4px;
+        border: 1px solid #d1d5db;
+    }
+</style>
+{% endblock %}

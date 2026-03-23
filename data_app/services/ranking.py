@@ -1,6 +1,5 @@
 from django.db import models
-from data_app.models import Block, Term, TermCourses, Course, ProgramCourse, Program
-from data_app.models.ranking_config import RankingConfig
+from data_app.models import Block, Term, TermCourses, Course, ProgramCourse, Program, RankingConfig
 
 class ScheduleRanker:
     """
