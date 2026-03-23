@@ -2,39 +2,60 @@ from django.db import models
 from data_app.models import Block, Term, TermCourses, Course, ProgramCourse, Program
 import math
 
+DEFAULT_RANKING_CONFIG = {
+    "base_score":                100,
+    "penalty_per_30min_gap":     2,    # points deducted per 30 min of gap beyond 1 hr
+    "penalty_per_30min_sleep":   5,    # points deducted per 30 min of lost overnight rest
+    "max_gap_allowed_mins":      60,   # free gap window before penalties start
+    "min_overnight_rest_hrs":    12,   # minimum overnight rest before sleep penalty
+}
+
 class ScheduleRanker:
     """
     Ranks blocks based on schedule quality (0-100).
-    Now includes detailed reporting capabilities.
     """
 
-    # --- CONFIGURATION WEIGHTS ---
-    BASE_SCORE = 100
-    PENALTY_MISSING_COURSE = 0 
-    PENALTY_PER_30MIN_GAP = 2  
-    PENALTY_PER_30MIN_SLEEP_LOSS = 5 
+    def __init__(self, config=None, progress_callback=None):
+        """
+        config            — dict of penalty weights (missing keys fall back to DEFAULT_RANKING_CONFIG).
+        progress_callback — optional callable(event_type, message, pct).
+        """
+        cfg = {**DEFAULT_RANKING_CONFIG, **(config or {})}
+        self.BASE_SCORE               = int(cfg["base_score"])
+        self.PENALTY_PER_30MIN_GAP    = int(cfg["penalty_per_30min_gap"])
+        self.PENALTY_PER_30MIN_SLEEP  = int(cfg["penalty_per_30min_sleep"])
+        self.MAX_GAP_ALLOWED_MINS     = int(cfg["max_gap_allowed_mins"])
+        self.MIN_OVERNIGHT_REST_MINS  = int(cfg["min_overnight_rest_hrs"]) * 60
+        self.PENALTY_MISSING_COURSE   = 0   # kept for compatibility, currently unused
+        self._progress = progress_callback or (lambda *a, **kw: None)
+
+    def _emit(self, msg, kind="info", pct=None):
+        print(msg)
+        self._progress(kind, msg, pct)
 
     def rank_all_blocks(self):
         """
         Calculates scores and saves them to the database.
-        Prints a summary to the console.
         """
         blocks = Block.objects.all()
-        print(f"Ranking {blocks.count()} blocks...")
+        total  = blocks.count()
+        self._emit(f"Ranking {total} blocks...", "info", pct=92)
 
-        for block in blocks:
-            # We only care about the integer score for the DB
+        for i, block in enumerate(blocks):
             final_score, _ = self._calculate_block_score_and_report(block)
-            
             block.ranking = final_score
             block.save()
-            print(f"  > Updated {block.block_name} ({block.program.program_name}): {final_score}/100")
+            pct = int(92 + (i + 1) / total * 6) if total else 98
+            self._emit(
+                f"  > Updated {block.block_name} ({block.program.program_name}): {final_score}/100",
+                "info", pct=pct
+            )
 
     def export_ranking_report(self, filename="ranking_report.txt"):
         """
         Generates a detailed text file explaining exactly why blocks got their scores.
         """
-        print(f"Generating detailed report to {filename}...")
+        self._emit(f"Generating detailed report to {filename}...", "info", pct=98)
         blocks = Block.objects.all().order_by('program__program_name', 'block_name')
 
         try:
@@ -55,9 +76,10 @@ class ScheduleRanker:
                     
                     f.write("\n\n")
             print("Report generation complete.")
+            self._emit("Ranking report written.", "success", pct=99)
             
         except IOError as e:
-            print(f"Error writing file: {e}")
+            self._emit(f"Error writing file: {e}", "error")
 
     def _calculate_block_score_and_report(self, block):
         """
@@ -156,28 +178,27 @@ class ScheduleRanker:
             for i in range(len(classes) - 1):
                 gap_mins = classes[i+1][0] - classes[i][1]
                 
-                # Allow 60 mins
-                if gap_mins > 60:
-                    excess = gap_mins - 60
+                if gap_mins > self.MAX_GAP_ALLOWED_MINS:
+                    excess = gap_mins - self.MAX_GAP_ALLOWED_MINS
                     pts = (excess // 30) * self.PENALTY_PER_30MIN_GAP
                     if pts > 0:
                         penalty += pts
-                        # Convert minutes to hours for readable report
                         gap_hrs = round(gap_mins / 60, 1)
-                        notes.append(f"[-{pts}] {day_names[d]}: Large gap of {gap_hrs} hrs (Allowed: 1 hr)")
+                        allowed_hrs = round(self.MAX_GAP_ALLOWED_MINS / 60, 1)
+                        notes.append(f"[-{pts}] {day_names[d]}: Large gap of {gap_hrs} hrs (Allowed: {allowed_hrs} hr)")
 
         return penalty, notes
 
     def _calc_sleep_penalty(self, daily_grid, day_names):
         penalty = 0
         notes = []
-        MIN_REST = 12 * 60 # 720 mins
+        MIN_REST = self.MIN_OVERNIGHT_REST_MINS
         
-        for d in range(4): # Mon(0) -> Thu(3)
+        for d in range(4):
             if not daily_grid[d] or not daily_grid[d+1]:
                 continue
 
-            last_end = daily_grid[d][-1][1]
+            last_end    = daily_grid[d][-1][1]
             first_start = daily_grid[d+1][0][0]
 
             mins_until_midnight = 1440 - last_end
@@ -185,11 +206,12 @@ class ScheduleRanker:
 
             if total_rest < MIN_REST:
                 lost = MIN_REST - total_rest
-                pts = (lost // 30) * self.PENALTY_PER_30MIN_SLEEP_LOSS
+                pts = (lost // 30) * self.PENALTY_PER_30MIN_SLEEP
                 if pts > 0:
                     penalty += pts
-                    rest_hrs = round(total_rest / 60, 1)
-                    notes.append(f"[-{pts}] {day_names[d]}->{day_names[d+1]}: Only {rest_hrs} hrs rest (Req: 12 hrs)")
+                    rest_hrs     = round(total_rest / 60, 1)
+                    req_hrs      = round(MIN_REST / 60, 1)
+                    notes.append(f"[-{pts}] {day_names[d]}->{day_names[d+1]}: Only {rest_hrs} hrs rest (Req: {req_hrs} hrs)")
         
         return penalty, notes
 

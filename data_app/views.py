@@ -1,202 +1,80 @@
+"""
+views.py
+--------
+Thin controller layer.  All schedule business logic lives in schedule_service.py.
+"""
+
 import io
 import json
 from contextlib import redirect_stdout
 
+from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Max, Min, Sum
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
 
-from .models import (
-    Block,
-    Course,
-    Program,
-    ProgramCourse,
-    Term,
-    TermCourses,
+from .models import Block, Course, Program, ProgramCourse, Term, TermCourses
+from .services.schedule_service import (
+    apply_term_schedule,
+    get_course_sections,
+    get_program_data_json,
+    get_program_requirements,
+    get_term_courses_json,
+    get_term_courses_table,
+    ranking_class,
 )
 
+
 # ---------------------------------------------------------------------------
-#  Context Processor Helper — sidebar programs available on every page
+#  Shared helpers
 # ---------------------------------------------------------------------------
 
-
-def _base_context(active_page="", active_program_id=None):
-    """Return context dict with sidebar programs and active page marker."""
-    programs = Program.objects.all().order_by("program_name")
+def _base_context(active_page: str = "", active_program_id=None) -> dict:
+    """Return context dict with sidebar programs and active-page marker."""
     return {
-        "sidebar_programs": programs,
+        "sidebar_programs": Program.objects.all().order_by("program_name"),
         "active_page": active_page,
         "active_program_id": active_program_id,
     }
 
 
-def _format_time(time_str):
-    """Format a time string like '0835' into '08:35'."""
-    if not time_str or len(str(time_str)) < 3:
-        return ""
-    t = str(time_str)
-    if len(t) == 3:
-        t = "0" + t
-    return f"{t[:2]}:{t[2:]}"
-
-
-def _ranking_class(score):
-    """Return a CSS class string based on the ranking score."""
-    if score >= 85:
-        return "excellent"
-    elif score >= 70:
-        return "good"
-    elif score >= 50:
-        return "fair"
-    else:
-        return "poor"
-
-
-def _get_block_courses_json(term):
-    """
-    Build a list of course dicts for timetable rendering from a Term object.
-    Returns a JSON-serializable list.
-    """
-    entries = TermCourses.objects.filter(term=term)
-    courses_data = []
-    seen = set()
-
-    for entry in entries:
-        key = (entry.course_code, entry.section)
-        if key in seen:
-            continue
-        seen.add(key)
-
-        try:
-            course = Course.objects.get(
-                course_code=entry.course_code, section=entry.section
-            )
-            courses_data.append(
-                {
-                    "code": course.course_code,
-                    "section": course.section,
-                    "type": course.instr_type or "",
-                    "days": course.days or "",
-                    "start_time": str(course.start_time) if course.start_time else "",
-                    "end_time": str(course.end_time) if course.end_time else "",
-                    "enrolled": course.enrolled,
-                    "capacity": course.capacity,
-                }
-            )
-        except Course.DoesNotExist:
-            continue
-
-    return courses_data
-
-
-def _get_block_courses_table(term, program):
-    """
-    Build data for the course list table within a block, including missing course detection.
-    """
-    entries = TermCourses.objects.filter(term=term)
-    courses = []
-    scheduled_codes = set()
-
-    for entry in entries:
-        scheduled_codes.add(entry.course_code)
-        try:
-            course = Course.objects.get(
-                course_code=entry.course_code, section=entry.section
-            )
-            pct = 0
-            if course.capacity and course.capacity > 0:
-                pct = round((course.enrolled / course.capacity) * 100)
-
-            if pct >= 95:
-                enrollment_status = "full"
-            elif pct >= 75:
-                enrollment_status = "warn"
-            else:
-                enrollment_status = "ok"
-
-            courses.append(
-                {
-                    "code": course.course_code,
-                    "section": course.section,
-                    "type": course.instr_type or "N/A",
-                    "days": course.days or "N/A",
-                    "start_time": _format_time(course.start_time),
-                    "end_time": _format_time(course.end_time),
-                    "enrolled": course.enrolled,
-                    "capacity": course.capacity or "?",
-                    "enrollment_pct": min(pct, 100),
-                    "enrollment_status": enrollment_status,
-                }
-            )
-        except Course.DoesNotExist:
-            courses.append(
-                {
-                    "code": entry.course_code,
-                    "section": entry.section,
-                    "type": "?",
-                    "days": "?",
-                    "start_time": "",
-                    "end_time": "",
-                    "enrolled": 0,
-                    "capacity": "?",
-                    "enrollment_pct": 0,
-                    "enrollment_status": "ok",
-                }
-            )
-
-    # Detect missing courses
-    required_codes = set(
-        ProgramCourse.objects.filter(program=program, term=term.term_name)
-        .exclude(course_code__icontains="Elective")
-        .values_list("course_code", flat=True)
-    )
-    missing = sorted(required_codes - scheduled_codes)
-
-    return courses, missing
+def _json_404(model, **kwargs):
+    """get_object_or_404 equivalent that returns a JsonResponse on miss."""
+    try:
+        return model.objects.get(**kwargs)
+    except model.DoesNotExist:
+        return JsonResponse({"error": f"{model.__name__} not found."}, status=404)
 
 
 # ============================================================================
-#  PAGE VIEWS
+#  Page views
 # ============================================================================
+
+@login_required
+def admin_home(request):
+    return render(request, "admin/home.html")
 
 
 @ensure_csrf_cookie
 def dashboard(request):
-    """Main dashboard — overview of all programs with summary stats."""
     ctx = _base_context(active_page="dashboard")
 
     programs = Program.objects.all().order_by("program_name")
+    color_palette = [
+        "#818cf8", "#34d399", "#f472b6", "#fbbf24", "#60a5fa",
+        "#a78bfa", "#f87171", "#2dd4bf", "#fb923c", "#c084fc",
+        "#38bdf8", "#4ade80", "#e879f9", "#facc15",
+    ]
 
     program_data = []
-    total_enrolled = 0
-    total_blocks = 0
-    total_courses_scheduled = 0
-
-    color_palette = [
-        "#818cf8",
-        "#34d399",
-        "#f472b6",
-        "#fbbf24",
-        "#60a5fa",
-        "#a78bfa",
-        "#f87171",
-        "#2dd4bf",
-        "#fb923c",
-        "#c084fc",
-        "#38bdf8",
-        "#4ade80",
-        "#e879f9",
-        "#facc15",
-    ]
+    total_enrolled = total_blocks = total_courses_scheduled = 0
 
     for i, program in enumerate(programs):
         blocks = Block.objects.filter(program=program)
         block_count = blocks.count()
         avg_ranking = blocks.aggregate(avg=Avg("ranking"))["avg"] or 0
-
-        # Count total scheduled course entries across all blocks/terms
         term_ids = Term.objects.filter(block__in=blocks).values_list("id", flat=True)
         scheduled_count = TermCourses.objects.filter(term_id__in=term_ids).count()
 
@@ -209,123 +87,98 @@ def dashboard(request):
                 "program": program,
                 "block_count": block_count,
                 "avg_ranking": round(avg_ranking),
-                "ranking_class": _ranking_class(round(avg_ranking)),
+                "ranking_class": ranking_class(round(avg_ranking)),
                 "scheduled_count": scheduled_count,
                 "color": color_palette[i % len(color_palette)],
             }
         )
 
-    total_programs = programs.count()
-    unique_courses = Course.objects.values("course_code").distinct().count()
-
     ctx.update(
         {
             "program_data": program_data,
-            "total_programs": total_programs,
+            "total_programs": programs.count(),
             "total_enrolled": total_enrolled,
             "total_blocks": total_blocks,
             "total_courses_scheduled": total_courses_scheduled,
-            "unique_courses": unique_courses,
+            "unique_courses": Course.objects.values("course_code").distinct().count(),
         }
     )
-
     return render(request, "dashboard.html", ctx)
 
 
 @ensure_csrf_cookie
 def program_detail(request, program_id):
-    """Detail view for a single program showing all blocks and their schedules."""
     program = get_object_or_404(Program, pk=program_id)
     ctx = _base_context(active_page="program", active_program_id=program.id)
 
     blocks = Block.objects.filter(program=program).order_by("block_name")
-
     blocks_data = []
-    terms_available = set()
+    terms_available: set[str] = set()
 
     for block in blocks:
-        terms = Term.objects.filter(block=block).order_by("term_name")
-
         block_terms = []
-        for term in terms:
+        for term in Term.objects.filter(block=block).order_by("term_name"):
             terms_available.add(term.term_name)
-
-            courses_table, missing = _get_block_courses_table(term, program)
-            courses_json = _get_block_courses_json(term)
-
+            courses_table, missing = get_term_courses_table(term, program)
             block_terms.append(
                 {
                     "term": term,
                     "courses_table": courses_table,
-                    "courses_json": json.dumps(courses_json),
+                    "courses_json": json.dumps(get_term_courses_json(term)),
                     "missing": missing,
                 }
             )
-
         blocks_data.append(
             {
                 "block": block,
-                "ranking_class": _ranking_class(block.ranking or 0),
+                "ranking_class": ranking_class(block.ranking or 0),
                 "terms": block_terms,
             }
         )
 
-    # Required courses for this program
-    fall_reqs = list(
-        ProgramCourse.objects.filter(program=program, term="fall").values_list(
-            "course_code", flat=True
-        )
-    )
-    winter_reqs = list(
-        ProgramCourse.objects.filter(program=program, term="winter").values_list(
-            "course_code", flat=True
-        )
-    )
-
+    reqs = get_program_requirements(program)
     ctx.update(
         {
             "program": program,
             "blocks_data": blocks_data,
             "terms_available": sorted(terms_available),
-            "fall_reqs": fall_reqs,
-            "winter_reqs": winter_reqs,
+            "fall_reqs": reqs["fall"],
+            "winter_reqs": reqs["winter"],
         }
     )
-
     return render(request, "program_detail.html", ctx)
 
 
 @ensure_csrf_cookie
 def rankings(request):
-    """Rankings page — show all blocks sorted by ranking score."""
     ctx = _base_context(active_page="rankings")
-
     blocks = (
         Block.objects.select_related("program")
         .all()
         .order_by("-ranking", "program__program_name", "block_name")
     )
 
-    blocks_data = []
-    for block in blocks:
-        blocks_data.append(
-            {
-                "block": block,
-                "program_name": block.program.program_name,
-                "ranking_class": _ranking_class(block.ranking or 0),
-            }
-        )
+    blocks_data = [
+        {
+            "block": b,
+            "program_name": b.program.program_name,
+            "ranking_class": ranking_class(b.ranking or 0),
+        }
+        for b in blocks
+    ]
 
-    # Summary statistics
     total_blocks = blocks.count()
     if total_blocks > 0:
-        avg_score = blocks.aggregate(avg=Avg("ranking"))["avg"] or 0
-        min_score = blocks.aggregate(m=Min("ranking"))["m"] or 0
-        max_score = blocks.aggregate(m=Max("ranking"))["m"] or 0
+        agg = blocks.aggregate(
+            avg=Avg("ranking"), mn=Min("ranking"), mx=Max("ranking")
+        )
+        avg_score = agg["avg"] or 0
+        min_score = agg["mn"] or 0
+        max_score = agg["mx"] or 0
         excellent_count = blocks.filter(ranking__gte=85).count()
-        good_count = blocks.filter(ranking__gte=70, ranking__lt=85).count()
-        fair_count = blocks.filter(ranking__gte=50, ranking__lt=70).count()
-        poor_count = blocks.filter(ranking__lt=50).count()
+        good_count      = blocks.filter(ranking__gte=70, ranking__lt=85).count()
+        fair_count      = blocks.filter(ranking__gte=50, ranking__lt=70).count()
+        poor_count      = blocks.filter(ranking__lt=50).count()
     else:
         avg_score = min_score = max_score = 0
         excellent_count = good_count = fair_count = poor_count = 0
@@ -343,225 +196,295 @@ def rankings(request):
             "poor_count": poor_count,
         }
     )
-
     return render(request, "rankings.html", ctx)
 
 
 @ensure_csrf_cookie
 def generate_page(request):
-    """Generate & Rank page — UI for triggering schedule generation and ranking."""
     ctx = _base_context(active_page="generate")
-
-    total_programs = Program.objects.count()
-    total_blocks = Block.objects.count()
     total_scheduled = TermCourses.objects.count()
-    has_schedule = total_scheduled > 0
-
     ctx.update(
         {
-            "total_programs": total_programs,
-            "total_blocks": total_blocks,
+            "total_programs": Program.objects.count(),
+            "total_blocks": Block.objects.count(),
             "total_scheduled": total_scheduled,
-            "has_schedule": has_schedule,
+            "has_schedule": total_scheduled > 0,
         }
     )
-
     return render(request, "generate.html", ctx)
 
 
-# ============================================================================
-#  API ENDPOINTS (AJAX)
-# ============================================================================
+@ensure_csrf_cookie
+def schedules_page(request):
+    """Schedule builder page shell — all data loaded via AJAX."""
+    ctx = _base_context(active_page="schedules")
+    return render(request, "admin/schedules.html", ctx)
 
+
+# ============================================================================
+#  API endpoints
+# ============================================================================
 
 @require_POST
 def api_generate_schedule(request):
     """
-    Trigger schedule generation via AJAX. Returns JSON with success status and log output.
+    Stream schedule generation + ranking progress via Server-Sent Events.
+
+    Accepts optional JSON body:
+        {
+            "gen":  { block_size, max_retries, max_recursion_depth, enforce_capacity, skip_electives },
+            "rank": { base_score, penalty_per_30min_gap, penalty_per_30min_sleep,
+                      max_gap_allowed_mins, min_overnight_rest_hrs }
+        }
     """
+    import json as _json
+    from django.http import StreamingHttpResponse
+    from .services.schedule_builder import ScheduleBuilder, DEFAULT_CONFIG
+    from .services.ranking import ScheduleRanker, DEFAULT_RANKING_CONFIG
+
     try:
-        from .services.schedule_builder import ScheduleBuilder
+        body = _json.loads(request.body or b"{}")
+        gen_body  = body.get("gen",  body)   # fall back to flat body for backwards compat
+        rank_body = body.get("rank", {})
+        gen_config  = {k: gen_body[k]  for k in DEFAULT_CONFIG         if k in gen_body}
+        rank_config = {k: rank_body[k] for k in DEFAULT_RANKING_CONFIG if k in rank_body}
+    except Exception:
+        gen_config = {}
+        rank_config = {}
 
-        # Capture stdout to return as log
-        log_buffer = io.StringIO()
+    def event_stream():
+        import json as _j
+        from queue import SimpleQueue
+        import threading
 
-        with redirect_stdout(log_buffer):
-            builder = ScheduleBuilder()
-            builder.generate_schedule()
-            builder.export_schedule_to_txt()
-            builder.export_visual_grid()
+        q = SimpleQueue()
 
-        log_output = log_buffer.getvalue()
+        def callback(kind, msg, pct):
+            q.put((kind, msg, pct))
 
-        return JsonResponse(
-            {
-                "success": True,
-                "log": log_output,
-                "message": "Schedule generated successfully.",
-            }
-        )
+        def run():
+            overall_success = False
+            try:
+                builder = ScheduleBuilder(config=gen_config, progress_callback=callback)
+                builder.generate_schedule()
+                builder.export_schedule_to_txt()
+                builder.export_visual_grid()
 
-    except Exception as e:
-        return JsonResponse(
-            {
-                "success": False,
-                "error": str(e),
-                "log": f"ERROR: {str(e)}\n",
-            },
-            status=500,
-        )
+                callback("info", "\n=== STARTING BLOCK RANKING ===", pct=92)
+                ranker = ScheduleRanker(config=rank_config, progress_callback=callback)
+                ranker.rank_all_blocks()
+                ranker.export_ranking_report()
+                callback("success", "=== RANKING COMPLETE ===", pct=99)
+
+                overall_success = True
+            except Exception as exc:
+                callback("error", f"ERROR: {exc}", 100)
+            finally:
+                q.put(("__done__", overall_success))
+
+        t = threading.Thread(target=run, daemon=True)
+        t.start()
+
+        while True:
+            item = q.get()
+            if isinstance(item, tuple) and len(item) == 2 and item[0] == "__done__":
+                success = item[1]
+                payload = _j.dumps({"type": "done", "message": "", "pct": 100, "success": success})
+                yield f"data: {payload}\n\n"
+                break
+            kind, msg, pct = item
+            payload = _j.dumps({"type": kind, "message": msg, "pct": pct})
+            yield f"data: {payload}\n\n"
+
+    response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
+    response["Cache-Control"] = "no-cache"
+    response["X-Accel-Buffering"] = "no"
+    return response
 
 
 @require_POST
 def api_rank_blocks(request):
     """
-    Trigger block ranking via AJAX. Returns JSON with success status.
+    Standalone rank-only endpoint, streaming SSE.
+    Accepts optional flat JSON ranking config body.
     """
+    import json as _json
+    from django.http import StreamingHttpResponse
+    from .services.ranking import ScheduleRanker, DEFAULT_RANKING_CONFIG
+
     try:
-        from .services.ranking import ScheduleRanker
+        body        = _json.loads(request.body or b"{}")
+        rank_config = {k: body[k] for k in DEFAULT_RANKING_CONFIG if k in body}
+    except Exception:
+        rank_config = {}
 
-        log_buffer = io.StringIO()
+    def event_stream():
+        import json as _j
+        from queue import SimpleQueue
+        import threading
 
-        with redirect_stdout(log_buffer):
-            ranker = ScheduleRanker()
-            ranker.rank_all_blocks()
-            ranker.export_ranking_report()
+        q = SimpleQueue()
 
-        log_output = log_buffer.getvalue()
+        def callback(kind, msg, pct):
+            q.put((kind, msg, pct))
 
-        return JsonResponse(
-            {
-                "success": True,
-                "log": log_output,
-                "message": "Ranking complete.",
-            }
-        )
+        def run():
+            overall_success = False
+            try:
+                ranker = ScheduleRanker(config=rank_config, progress_callback=callback)
+                ranker.rank_all_blocks()
+                ranker.export_ranking_report()
+                overall_success = True
+            except Exception as exc:
+                callback("error", f"ERROR: {exc}", 100)
+            finally:
+                q.put(("__done__", overall_success))
 
-    except Exception as e:
-        return JsonResponse(
-            {
-                "success": False,
-                "error": str(e),
-            },
-            status=500,
-        )
+        t = threading.Thread(target=run, daemon=True)
+        t.start()
+
+        while True:
+            item = q.get()
+            if isinstance(item, tuple) and len(item) == 2 and item[0] == "__done__":
+                success = item[1]
+                payload = _j.dumps({"type": "done", "message": "", "pct": 100, "success": success})
+                yield f"data: {payload}\n\n"
+                break
+            kind, msg, pct = item
+            payload = _j.dumps({"type": kind, "message": msg, "pct": pct})
+            yield f"data: {payload}\n\n"
+
+    response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
+    response["Cache-Control"] = "no-cache"
+    response["X-Accel-Buffering"] = "no"
+    return response
 
 
 @require_GET
 def api_program_data(request, program_id):
-    """
-    Return JSON data for a program (blocks, terms, courses) for AJAX consumption.
-    """
+    """Full program → blocks → terms → courses snapshot."""
     program = get_object_or_404(Program, pk=program_id)
-    blocks = Block.objects.filter(program=program).order_by("block_name")
-
-    data = {
-        "program": {
-            "id": program.id,
-            "name": program.program_name,
-            "enrolled": program.enrolled,
-        },
-        "blocks": [],
-    }
-
-    for block in blocks:
-        block_info = {
-            "id": block.id,
-            "name": block.block_name,
-            "ranking": block.ranking,
-            "size": block.size,
-            "terms": [],
-        }
-
-        terms = Term.objects.filter(block=block).order_by("term_name")
-        for term in terms:
-            courses = _get_block_courses_json(term)
-            block_info["terms"].append(
-                {
-                    "id": term.id,
-                    "name": term.term_name,
-                    "courses": courses,
-                }
-            )
-
-        data["blocks"].append(block_info)
-
-    return JsonResponse(data)
+    return JsonResponse(get_program_data_json(program))
 
 
 @require_GET
 def api_block_timetable(request, block_id):
-    """
-    Return JSON timetable data for a specific block (all terms).
-    """
     block = get_object_or_404(Block, pk=block_id)
-    terms = Term.objects.filter(block=block).order_by("term_name")
-
-    data = {
-        "block": {
-            "id": block.id,
-            "name": block.block_name,
-            "program": block.program.program_name,
-            "ranking": block.ranking,
-            "size": block.size,
-        },
-        "terms": [],
-    }
-
-    for term in terms:
-        courses = _get_block_courses_json(term)
-        data["terms"].append(
-            {
-                "id": term.id,
-                "name": term.term_name,
-                "courses": courses,
-            }
-        )
-
-    return JsonResponse(data)
+    terms_data = [
+        {
+            "id": t.id,
+            "name": t.term_name,
+            "courses": get_term_courses_json(t),
+        }
+        for t in Term.objects.filter(block=block).order_by("term_name")
+    ]
+    return JsonResponse(
+        {
+            "block": {
+                "id": block.id,
+                "name": block.block_name,
+                "program": block.program.program_name,
+                "ranking": block.ranking,
+                "size": block.size,
+            },
+            "terms": terms_data,
+        }
+    )
 
 
 @require_GET
 def api_rankings_data(request):
-    """
-    Return JSON of all block rankings.
-    """
     blocks = Block.objects.select_related("program").all().order_by("-ranking")
-
-    data = []
-    for block in blocks:
-        data.append(
-            {
-                "id": block.id,
-                "block_name": block.block_name,
-                "program_name": block.program.program_name,
-                "ranking": block.ranking,
-                "size": block.size,
-            }
-        )
-
-    return JsonResponse({"rankings": data})
+    return JsonResponse(
+        {
+            "rankings": [
+                {
+                    "id": b.id,
+                    "block_name": b.block_name,
+                    "program_name": b.program.program_name,
+                    "ranking": b.ranking,
+                    "size": b.size,
+                }
+                for b in blocks
+            ]
+        }
+    )
 
 
 @require_GET
 def api_stats(request):
-    """
-    Return JSON summary statistics for the dashboard.
-    """
-    total_programs = Program.objects.count()
-    total_enrolled = Program.objects.aggregate(s=Sum("enrolled"))["s"] or 0
-    total_blocks = Block.objects.count()
-    total_scheduled = TermCourses.objects.count()
-    unique_courses = Course.objects.values("course_code").distinct().count()
-    avg_ranking = Block.objects.aggregate(avg=Avg("ranking"))["avg"] or 0
-
     return JsonResponse(
         {
-            "total_programs": total_programs,
-            "total_enrolled": total_enrolled,
-            "total_blocks": total_blocks,
-            "total_scheduled": total_scheduled,
-            "unique_courses": unique_courses,
-            "avg_ranking": round(avg_ranking),
+            "total_programs":  Program.objects.count(),
+            "total_enrolled":  Program.objects.aggregate(s=Sum("enrolled"))["s"] or 0,
+            "total_blocks":    Block.objects.count(),
+            "total_scheduled": TermCourses.objects.count(),
+            "unique_courses":  Course.objects.values("course_code").distinct().count(),
+            "avg_ranking":     round(Block.objects.aggregate(avg=Avg("ranking"))["avg"] or 0),
         }
     )
+
+
+# ── Schedule Builder APIs ────────────────────────────────────────────────────
+
+@require_GET
+def api_schedule_requirements(request, program_id):
+    program = _json_404(Program, pk=program_id)
+    if isinstance(program, JsonResponse):
+        return program
+    return JsonResponse(get_program_requirements(program))
+
+
+@require_GET
+def api_course_sections(request):
+    code = request.GET.get("code", "").strip()
+    if not code:
+        return JsonResponse({"sections": []})
+    search_all = request.GET.get("all", "0") == "1"
+    return JsonResponse({"sections": get_course_sections(code, search_all)})
+
+
+@require_POST
+def api_update_term(request):
+    """
+    Save the schedule for a single term.
+
+    Expects JSON body:
+        {
+            "term_id":         42,
+            "current_courses": [{"course_code": "MATH 1004", "section": "A"}, ...]
+        }
+
+    Uses a full-replace strategy via schedule_service.apply_term_schedule so
+    the save is always idempotent regardless of how many times the user has
+    switched views between edits.
+
+    Response:
+        {
+            "success": true,
+            "enrollment_updates": {"MATH 1004|A": 120, "PHYS 1004|B": 95, ...}
+        }
+    enrollment_updates contains the new enrolled count for every section
+    whose enrollment changed — the frontend uses this to refresh its local
+    sections cache without a round-trip.
+    """
+    try:
+        body    = json.loads(request.body)
+        term_id = body.get("term_id")
+        current = body.get("current_courses", [])
+
+        if not term_id:
+            return JsonResponse({"success": False, "error": "term_id is required."}, status=400)
+
+        try:
+            term = Term.objects.select_related("block").get(pk=term_id)
+        except Term.DoesNotExist:
+            return JsonResponse({"success": False, "error": "Term not found."}, status=404)
+
+        enrollment_updates = apply_term_schedule(term, current)
+        return JsonResponse({"success": True, "enrollment_updates": enrollment_updates})
+
+    except json.JSONDecodeError:
+        return JsonResponse({"success": False, "error": "Invalid JSON body."}, status=400)
+    except Exception as exc:
+        return JsonResponse({"success": False, "error": str(exc)}, status=500)
