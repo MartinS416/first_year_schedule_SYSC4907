@@ -16,7 +16,6 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
 
 from .models import Block, Course, Program, ProgramCourse, Term, TermCourses
-
 from .services.schedule_service import (
     apply_term_schedule,
     get_course_sections,

@@ -120,7 +120,7 @@ class ScheduleBuilder:
         # Per-program summary for compatibility with existing reporting
         for program in programs:
             blocks = list(Block.objects.filter(program=program))
-            # Use initial (pre-optimization) stats for before_*
+            # Use initial (pre-optimization) stats for before values
             before_avg_prog = initial_program_stats[program.program_name]['avg']
             before_high_prog = initial_program_stats[program.program_name]['high']
             before_low_prog = initial_program_stats[program.program_name]['low']
