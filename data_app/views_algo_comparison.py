@@ -6,10 +6,18 @@ from django.db import transaction
 
 
 def algo_comparison_view(request):
-    # Pick the first program as an example
-    program = Program.objects.order_by('program_name').first()
+    # Allow program selection via GET parameter
+    all_programs = Program.objects.order_by('program_name')
+    program_id = request.GET.get('program_id')
+    if program_id:
+        try:
+            program = Program.objects.get(id=program_id)
+        except Program.DoesNotExist:
+            program = None
+    else:
+        program = all_programs.first()
     if not program:
-        return render(request, 'algo_comparison.html', {'error': 'No programs found.'})
+        return render(request, 'algo_comparison.html', {'error': 'No programs found.', 'programs': all_programs})
 
     # Prepare results for both algorithms
     greedy_result = None
@@ -77,8 +85,12 @@ def algo_comparison_view(request):
 
     return render(request, 'algo_comparison.html', {
         'program': program,
+        'programs': all_programs,
         'greedy_result': greedy_result,
         'optimized_result': optimized_result,
         'greedy_score': greedy_score,
         'optimized_score': optimized_score,
+        'sidebar_programs': all_programs,
+        'active_page': 'algo-comparison',
+        'active_program_id': program.id if program else None,
     })
