@@ -96,6 +96,23 @@ class ScheduleBuilder:
                     continue
                 codes_a = set(tc.course_code for tc in courses_a)
                 codes_b = set(tc.course_code for tc in courses_b)
+                # --- Capacity check for swapped-in courses ---
+                # Get block sizes for each term
+                block_a = term_a.block
+                block_b = term_b.block
+                block_size_a = block_a.size if hasattr(block_a, 'size') and block_a.size else self.BLOCK_SIZE
+                block_size_b = block_b.size if hasattr(block_b, 'size') and block_b.size else self.BLOCK_SIZE
+
+                # Get all possible bundles for the swapped-in courses in the target terms
+                bundles_cb_in_a = self.get_course_bundles(cb.course_code, term_a.term_name)
+                bundles_ca_in_b = self.get_course_bundles(ca.course_code, term_b.term_name)
+                # Only allow swap if at least one bundle for each can accommodate the block size
+                valid_cb_in_a = any(self._has_capacity(bundle, block_size_a) for bundle in bundles_cb_in_a)
+                valid_ca_in_b = any(self._has_capacity(bundle, block_size_b) for bundle in bundles_ca_in_b)
+                if not (valid_cb_in_a and valid_ca_in_b):
+                    self._emit(f"  [SKIP] Swap would create unschedulable course due to bundle capacity.", "warning")
+                    continue
+
                 if cb.course_code not in codes_a and ca.course_code not in codes_b:
                     self._emit(f"  Attempting random swap: {ca.course_code} (Term {term_a}) <-> {cb.course_code} (Term {term_b})", "info")
                     # Try swap
