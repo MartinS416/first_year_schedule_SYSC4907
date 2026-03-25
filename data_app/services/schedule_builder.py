@@ -41,6 +41,12 @@ class ScheduleBuilder:
         MAX_GLOBAL_ITER = opt_cfg.get("max_global_iter", 10)
         MAX_RANDOM_SWAPS = opt_cfg.get("max_random_swaps", 30)
         EARLY_STOP_LIMIT = opt_cfg.get("early_stop_limit", 5)
+        acceptance_mode = opt_cfg.get("acceptance_mode", 'improve_only')
+        self._emit(f"Optimization settings:", "info")
+        self._emit(f"  max_global_iter: {MAX_GLOBAL_ITER}", "info")
+        self._emit(f"  max_random_swaps: {MAX_RANDOM_SWAPS}", "info")
+        self._emit(f"  early_stop_limit: {EARLY_STOP_LIMIT}", "info")
+        self._emit(f"  acceptance_mode: {acceptance_mode}", "info")
         total_actions = 0
         programs = Program.objects.all()
         pct_prog = 0

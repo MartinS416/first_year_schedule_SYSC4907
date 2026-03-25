@@ -47,7 +47,15 @@ def api_optimize_schedule(request):
 
     try:
         body = _json.loads(request.body or b"{}")
-        config = {k: body[k] for k in DEFAULT_CONFIG if k in body}
+        opt_body = body.get("opt", body)
+        config = {k: opt_body[k] for k in DEFAULT_CONFIG if k in opt_body}
+
+        opt_keys = ["max_global_iter", "max_random_swaps", "early_stop_limit", "acceptance_mode"]
+        optimization_config = {k: opt_body[k] for k in opt_keys if k in opt_body}
+        if optimization_config:
+            config["optimization_config"] = optimization_config
+        if "optimization_config" in opt_body and isinstance(opt_body["optimization_config"], dict):
+            config["optimization_config"].update(opt_body["optimization_config"])
     except Exception:
         config = {}
 
