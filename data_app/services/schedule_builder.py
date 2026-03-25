@@ -29,7 +29,8 @@ class ScheduleBuilder:
 
     def optimize_schedule(self):
         """
-        Enhanced optimizer: Lower threshold, more iterations, and detailed progress reporting.
+        Optimizes the schedule by randomly swapping courses between terms to improve overall scores.
+        Only swaps that improve the schedule are kept. Stops after a set number of passes or if no improvement is found for several rounds.
         """
         self._emit("\n==============================", "info")
         self._emit("=== GLOBAL SCHEDULE OPTIMIZATION ===", "info")
