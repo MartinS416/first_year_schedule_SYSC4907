@@ -29,44 +29,38 @@ class ScheduleBuilder:
 
     def optimize_schedule(self):
         """
-        Optimizes the schedule by randomly swapping courses between terms to improve overall scores.
-        Only swaps that improve the schedule are kept. Stops after a set number of passes or if no improvement is found for several rounds.
+        Optimizes the schedule by replacing bundles for required courses, 
+        trying alternative section combinations for the same course while keeping all required courses in place 
+        and only applying changes that improve the overall ranking.
         """
         self._emit("\n==============================", "info")
         self._emit("=== GLOBAL SCHEDULE OPTIMIZATION ===", "info")
         self._emit("==============================\n", "info", pct=0)
-        import time
         from data_app.services.ranking import ScheduleRanker
-        # Load optimization config (with defaults)
         opt_cfg = getattr(self, 'OPTIMIZATION_CONFIG', DEFAULT_CONFIG["optimization_config"])
         MAX_GLOBAL_ITER = opt_cfg.get("max_global_iter", 10)
         MAX_RANDOM_SWAPS = opt_cfg.get("max_random_swaps", 30)
         EARLY_STOP_LIMIT = opt_cfg.get("early_stop_limit", 5)
-        acceptance_mode = opt_cfg.get("acceptance_mode", 'improve_only')
         self._emit(f"Optimization settings:", "info")
         self._emit(f"  max_global_iter: {MAX_GLOBAL_ITER}", "info")
         self._emit(f"  max_random_swaps: {MAX_RANDOM_SWAPS}", "info")
         self._emit(f"  early_stop_limit: {EARLY_STOP_LIMIT}", "info")
-        self._emit(f"  acceptance_mode: {acceptance_mode}", "info")
         total_actions = 0
         programs = Program.objects.all()
-        pct_prog = 0
         ranker = ScheduleRanker()
-        # GLOBAL OPTIMIZER: optimize across all blocks, all programs, both terms
-        import random
+        ranker.rank_all_blocks()
         all_blocks = list(Block.objects.all())
         all_terms = list(Term.objects.all())
-        # --- CAPTURE TRUE PRE-OPTIMIZATION VALUES ---
-        initial_block_scores = [ranker.score_block(b) for b in all_blocks]
+        # --- Read initial rankings from DB, not in-memory ---
+        initial_block_scores = [b.ranking for b in all_blocks]
         initial_avg = sum(initial_block_scores) / len(initial_block_scores) if initial_block_scores else 0
         initial_high = max(initial_block_scores) if initial_block_scores else 0
         initial_low = min(initial_block_scores) if initial_block_scores else 0
         self._emit(f"Initial total average score: {initial_avg:.2f}", "info")
-        # Also capture per-program pre-optimization stats
         initial_program_stats = {}
         for program in programs:
             blocks = list(Block.objects.filter(program=program))
-            scores = [ranker.score_block(b) for b in blocks]
+            scores = [b.ranking for b in blocks]
             avg_prog = sum(scores) / len(scores) if scores else 0
             high_prog = max(scores) if scores else 0
             low_prog = min(scores) if scores else 0
@@ -75,11 +69,13 @@ class ScheduleBuilder:
                 'high': high_prog,
                 'low': low_prog
             }
-        MAX_GLOBAL_ITER = 10
-        MAX_RANDOM_SWAPS = 30
         improved = True
         iteration = 0
         no_improve_count = 0
+        # --- Quick mode config ---
+        quick_mode_terms = self.config.get('quick_mode_terms', 2)
+        quick_mode_courses = self.config.get('quick_mode_courses', 2)
+        import random
         while improved and iteration < MAX_GLOBAL_ITER and no_improve_count < EARLY_STOP_LIMIT:
             improved = False
             iteration += 1
@@ -88,79 +84,211 @@ class ScheduleBuilder:
             all_scores_before = [ranker.score_block(b) for b in all_blocks]
             total_avg_before = sum(all_scores_before) / len(all_scores_before) if all_scores_before else 0
             self._emit(f"\n--- GLOBAL OPTIMIZATION PASS {iteration} ---", "info")
-            swaps_this_pass = 0
-            for _ in range(MAX_RANDOM_SWAPS):
-                term_a, term_b = random.sample(all_terms, 2)
-                if term_a == term_b:
-                    continue
-                courses_a = list(TermCourses.objects.filter(term=term_a))
-                courses_b = list(TermCourses.objects.filter(term=term_b))
-                if not courses_a or not courses_b:
-                    continue
-                ca = random.choice(courses_a)
-                cb = random.choice(courses_b)
-                if ca.course_code == cb.course_code:
-                    continue
-                codes_a = set(tc.course_code for tc in courses_a)
-                codes_b = set(tc.course_code for tc in courses_b)
-                # --- Capacity check for swapped-in courses ---
-                # Get block sizes for each term
-                block_a = term_a.block
-                block_b = term_b.block
-                block_size_a = block_a.size if hasattr(block_a, 'size') and block_a.size else self.BLOCK_SIZE
-                block_size_b = block_b.size if hasattr(block_b, 'size') and block_b.size else self.BLOCK_SIZE
+            actions_this_pass = 0
+            # --- Bundle Optimization: Same-course replacement for required courses ---
+            self._emit(f"Bundle replacement for required courses...", "info")
+            terms_to_optimize = all_terms
+            if quick_mode_terms is not None and quick_mode_terms < len(all_terms):
+                terms_to_optimize = random.sample(all_terms, quick_mode_terms)
+            for t_idx, term in enumerate(terms_to_optimize):
+                self._emit(
+                    f"  Term {t_idx+1}/{len(terms_to_optimize)}: {term.block.program.program_name} - {term.block.block_name} ({term.term_name})",
+                    "info"
+                )
+                required_codes = list(ProgramCourse.objects.filter(program=term.block.program, term=term.term_name).values_list('course_code', flat=True))
+                courses_to_optimize = required_codes
+                if quick_mode_courses is not None and quick_mode_courses < len(required_codes):
+                    courses_to_optimize = random.sample(required_codes, quick_mode_courses)
+                for c_idx, course_code in enumerate(courses_to_optimize):
+                    self._emit(f"    Course {c_idx+1}/{len(courses_to_optimize)}: {course_code}", "info")
+                    scheduled_links = list(TermCourses.objects.filter(term=term, course_code=course_code))
+                    if not scheduled_links:
+                        continue
+                    scheduled_sections = set((link.course_code, link.section) for link in scheduled_links)
+                    bundles = self.get_course_bundles(course_code, term.term_name)
+                    best_bundle = None
+                    best_score = ranker.score_block(term.block)
+                    original_score = best_score
+                    for bundle in bundles:
+                        # Skip if it's the current bundle
+                        bundle_sections = set((c.course_code, c.section) for c in bundle)
+                        if bundle_sections == scheduled_sections:
+                            continue
+                        # Remove current bundle
+                        for link in scheduled_links:
+                            try:
+                                old_course = Course.objects.get(course_code=link.course_code, section=link.section)
+                                Course.objects.filter(pk=old_course.pk).update(
+                                    enrolled=models.F('enrolled') - term.block.size
+                                )
+                            except Course.DoesNotExist:
+                                pass
 
-                # Get all possible bundles for the swapped-in courses in the target terms
-                bundles_cb_in_a = self.get_course_bundles(cb.course_code, term_a.term_name)
-                bundles_ca_in_b = self.get_course_bundles(ca.course_code, term_b.term_name)
-                # Only allow swap if at least one bundle for each can accommodate the block size
-                valid_cb_in_a = any(self._has_capacity(bundle, block_size_a) for bundle in bundles_cb_in_a)
-                valid_ca_in_b = any(self._has_capacity(bundle, block_size_b) for bundle in bundles_ca_in_b)
-                if not (valid_cb_in_a and valid_ca_in_b):
-                    self._emit(f"  [SKIP] Swap would create unschedulable course due to bundle capacity.", "warning")
-                    continue
+                            TermCourses.objects.filter(
+                                term=term,
+                                course_code=link.course_code,
+                                section=link.section
+                            ).delete()
+                        # Add new bundle
+                        for c in bundle:
+                            TermCourses.objects.create(
+                                term=term,
+                                course_code=c.course_code,
+                                section=c.section
+                            )
+                            Course.objects.filter(pk=c.pk).update(
+                                enrolled=models.F('enrolled') + term.block.size
+                            )
+                        # Check hard constraints: capacity, no conflicts
+                        valid = True
+                        if not self._has_capacity(bundle, term.block.size if hasattr(term.block, 'size') and term.block.size else self.BLOCK_SIZE):
+                            valid = False
+                        score = ranker.score_block(term.block)
+                        if valid and score > best_score:
+                            best_score = score
+                            best_bundle = bundle
+                        # Remove candidate bundle (decrement)
+                        for c in bundle:
+                            Course.objects.filter(pk=c.pk).update(
+                                enrolled=models.F('enrolled') - term.block.size
+                            )
+                            TermCourses.objects.filter(
+                                term=term,
+                                course_code=c.course_code,
+                                section=c.section
+                            ).delete()
 
-                if cb.course_code not in codes_a and ca.course_code not in codes_b:
-                    self._emit(f"  Attempting random swap: {ca.course_code} (Term {term_a}) <-> {cb.course_code} (Term {term_b})", "info")
-                    # Try swap
-                    TermCourses.objects.filter(term=term_a, course_code=ca.course_code, section=ca.section).delete()
-                    TermCourses.objects.filter(term=term_b, course_code=cb.course_code, section=cb.section).delete()
-                    TermCourses.objects.create(term=term_a, course_code=cb.course_code, section=cb.section)
-                    TermCourses.objects.create(term=term_b, course_code=ca.course_code, section=ca.section)
-                    # Check global improvement
-                    all_blocks_after = list(Block.objects.all())
-                    all_scores_after = [ranker.score_block(b) for b in all_blocks_after]
-                    total_avg_after = sum(all_scores_after) / len(all_scores_after) if all_scores_after else 0
-                    if total_avg_after > total_avg_before:
-                        total_actions += 1
-                        improved = True
-                        swaps_this_pass += 1
-                        no_improve_count = 0
-                        self._emit(f"    Swap accepted! Total avg improved: {total_avg_before:.2f} → {total_avg_after:.2f}", "success")
-                    else:
-                        # Revert
-                        TermCourses.objects.filter(term=term_a, course_code=cb.course_code, section=cb.section).delete()
-                        TermCourses.objects.filter(term=term_b, course_code=ca.course_code, section=ca.section).delete()
-                        TermCourses.objects.create(term=term_a, course_code=ca.course_code, section=ca.section)
-                        TermCourses.objects.create(term=term_b, course_code=cb.course_code, section=cb.section)
-                        self._emit(f"    Swap reverted (no improvement)", "warning")
-            self._emit(f"--- End of pass {iteration}: {swaps_this_pass} swaps accepted ---", "info")
+                        # Restore original bundle (increment)
+                        for link in scheduled_links:
+                            TermCourses.objects.create(
+                                term=term,
+                                course_code=link.course_code,
+                                section=link.section
+                            )
+                            try:
+                                old_course = Course.objects.get(course_code=link.course_code, section=link.section)
+                                Course.objects.filter(pk=old_course.pk).update(
+                                    enrolled=models.F('enrolled') + term.block.size
+                                )
+                            except Course.DoesNotExist:
+                                pass
+                    # If a better bundle was found, apply it
+                    if best_bundle is None:
+                        continue
+
+                    bundle_sections = set((c.course_code, c.section) for c in best_bundle)
+                    if bundle_sections != scheduled_sections:
+                        # Remove current
+                        for link in scheduled_links:
+                            try:
+                                old_course = Course.objects.get(
+                                    course_code=link.course_code,
+                                    section=link.section
+                                )
+                                Course.objects.filter(pk=old_course.pk).update(
+                                    enrolled=models.F('enrolled') - term.block.size
+                                )
+                            except Course.DoesNotExist:
+                                pass
+
+                            TermCourses.objects.filter(
+                                term=term,
+                                course_code=link.course_code,
+                                section=link.section
+                            ).delete()
+
+                        # Add best
+                        for c in best_bundle:
+                            TermCourses.objects.create(
+                                term=term,
+                                course_code=c.course_code,
+                                section=c.section
+                            )
+                            Course.objects.filter(pk=c.pk).update(
+                                enrolled=models.F('enrolled') + term.block.size
+                            )
+
+                        # Final safety check
+                        valid = True
+
+                        if not self._has_capacity(
+                            best_bundle,
+                            term.block.size if hasattr(term.block, 'size') and term.block.size else self.BLOCK_SIZE
+                        ):
+                            valid = False
+
+                        scheduled_codes = set(
+                            TermCourses.objects.filter(term=term).values_list('course_code', flat=True)
+                        )
+                        required_codes_set = set(
+                            ProgramCourse.objects.filter(
+                                program=term.block.program,
+                                term=term.term_name
+                            ).values_list('course_code', flat=True)
+                        )
+
+                        if not required_codes_set.issubset(scheduled_codes):
+                            valid = False
+
+                        if valid:
+                            improved = True
+                            actions_this_pass += 1
+
+                            self._emit(
+                                f"    Bundle replacement for {course_code} in "
+                                f"{term.block.program.program_name} - {term.block.block_name} ({term.term_name}): "
+                                f"{original_score} -> {best_score}",
+                                "success"
+                            )
+                        else:
+                            # Revert if somehow invalid
+                            # Remove best_bundle from term and decrement enrolled
+                            for c in best_bundle:
+                                Course.objects.filter(pk=c.pk).update(
+                                    enrolled=models.F('enrolled') - term.block.size
+                                )
+                                TermCourses.objects.filter(
+                                    term=term,
+                                    course_code=c.course_code,
+                                    section=c.section
+                                ).delete()
+
+                            # Restore original scheduled bundle and increment enrolled
+                            for link in scheduled_links:
+                                TermCourses.objects.create(
+                                    term=term,
+                                    course_code=link.course_code,
+                                    section=link.section
+                                )
+                                try:
+                                    old_course = Course.objects.get(
+                                        course_code=link.course_code,
+                                        section=link.section
+                                    )
+                                    Course.objects.filter(pk=old_course.pk).update(
+                                        enrolled=models.F('enrolled') + term.block.size
+                                    )
+                                except Course.DoesNotExist:
+                                    pass
+            total_actions += actions_this_pass
+            self._emit(f"--- End of pass {iteration}: {actions_this_pass} actions accepted ---", "info")
             if not improved:
                 no_improve_count += 1
             else:
                 no_improve_count = 0
         # After global optimization, update all block rankings to reflect the latest scores
         ranker.rank_all_blocks()
+        # --- Always re-fetch blocks from DB for after-stats ---
         all_blocks = list(Block.objects.all())
         after_scores = [b.ranking for b in all_blocks]
         after_avg = sum(after_scores) / len(after_scores) if after_scores else 0
         after_high = max(after_scores) if after_scores else 0
         after_low = min(after_scores) if after_scores else 0
-        # Per-program summary for compatibility with existing reporting
         summary_stats = []
         for program in programs:
             blocks = list(Block.objects.filter(program=program))
-            # Use initial (pre-optimization) stats for before values
+            # Always re-fetch before/after from DB, not in-memory
+            before_scores_prog = [b.ranking for b in blocks]
             before_avg_prog = initial_program_stats[program.program_name]['avg']
             before_high_prog = initial_program_stats[program.program_name]['high']
             before_low_prog = initial_program_stats[program.program_name]['low']
@@ -178,15 +306,12 @@ class ScheduleBuilder:
                 'after_low': after_low_prog
             })
         self._emit(f"\n==============================", "info")
-        self._emit(f"Total swaps accepted during optimization: {total_actions}", "info", pct=95)
+        self._emit(f"Total actions accepted during optimization: {total_actions}", "info", pct=95)
         self._emit(f"==============================\n", "info")
-        # Re-rank all blocks and generate ranking report after optimization
         self._emit("\nRanking all blocks after optimization...", "info", pct=97)
         ranker_with_progress = __import__('data_app.services.ranking', fromlist=['ScheduleRanker']).ScheduleRanker(progress_callback=self._progress)
         ranker_with_progress.rank_all_blocks()
         ranker_with_progress.export_ranking_report()
-        # Print summary at the end
-        # Use initial (pre-optimization) values for totals
         total_before_avg = initial_avg
         total_before_high = initial_high
         total_before_low = initial_low
@@ -222,6 +347,7 @@ class ScheduleBuilder:
                             pct: 0-100 integer (None if not meaningful)
         """
         cfg = {**DEFAULT_CONFIG, **(config or {})}
+        self.config              = cfg
         self.BLOCK_SIZE          = int(cfg["block_size"])
         self.MAX_RETRIES         = int(cfg["max_retries"])
         self.MAX_RECURSION_DEPTH = int(cfg["max_recursion_depth"])
