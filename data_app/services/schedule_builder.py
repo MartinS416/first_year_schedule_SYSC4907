@@ -17,10 +17,12 @@ DEFAULT_CONFIG = {
     "max_recursion_depth": 3,     # kick-and-repair recursion limit
     "enforce_capacity":    True,  # reject sections that are over capacity
     "skip_electives":      True,  # exclude courses with "Elective" in the code
+    "quick_mode_terms":    2,     # Number of terms to optimize per pass (quick mode)
+    "quick_mode_courses":  2,     # Number of courses to optimize per term (quick mode)
     "optimization_config": {
-        "max_global_iter": 10,      # Number of global optimization passes
-        "max_random_swaps": 30,     # Number of random swaps per pass
-        "early_stop_limit": 5       # Non-improving rounds before stopping
+        "max_global_iter": 2,      # Number of global optimization passes
+        "max_random_swaps": 10,     # Number of random swaps per pass
+        "early_stop_limit": 1       # Rounds without improvement before stopping
     }
 }
 
@@ -34,7 +36,7 @@ class ScheduleBuilder:
         and only applying changes that improve the overall ranking.
         """
         self._emit("\n==============================", "info")
-        self._emit("=== GLOBAL SCHEDULE OPTIMIZATION ===", "info")
+        self._emit("=== SCHEDULE OPTIMIZATION ===", "info")
         self._emit("==============================\n", "info", pct=0)
         from data_app.services.ranking import ScheduleRanker
         opt_cfg = getattr(self, 'OPTIMIZATION_CONFIG', DEFAULT_CONFIG["optimization_config"])
@@ -73,8 +75,8 @@ class ScheduleBuilder:
         iteration = 0
         no_improve_count = 0
         # --- Quick mode config ---
-        quick_mode_terms = self.config.get('quick_mode_terms', 2)
-        quick_mode_courses = self.config.get('quick_mode_courses', 2)
+        quick_mode_terms = self.config.get('quick_mode_terms', DEFAULT_CONFIG["quick_mode_terms"])
+        quick_mode_courses = self.config.get('quick_mode_courses', DEFAULT_CONFIG["quick_mode_courses"])
         import random
         while improved and iteration < MAX_GLOBAL_ITER and no_improve_count < EARLY_STOP_LIMIT:
             improved = False
@@ -83,7 +85,7 @@ class ScheduleBuilder:
             all_terms = list(Term.objects.all())
             all_scores_before = [ranker.score_block(b) for b in all_blocks]
             total_avg_before = sum(all_scores_before) / len(all_scores_before) if all_scores_before else 0
-            self._emit(f"\n--- GLOBAL OPTIMIZATION PASS {iteration} ---", "info")
+            self._emit(f"\n--- OPTIMIZATION PASS {iteration} ---", "info")
             actions_this_pass = 0
             # --- Bundle Optimization: Same-course replacement for required courses ---
             self._emit(f"Bundle replacement for required courses...", "info")

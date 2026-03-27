@@ -50,7 +50,7 @@ def api_optimize_schedule(request):
         opt_body = body.get("opt", body)
         config = {k: opt_body[k] for k in DEFAULT_CONFIG if k in opt_body}
 
-        opt_keys = ["max_global_iter", "max_random_swaps", "early_stop_limit", "acceptance_mode"]
+        opt_keys = ["max_global_iter", "max_random_swaps", "early_stop_limit"]
         optimization_config = {k: opt_body[k] for k in opt_keys if k in opt_body}
         if optimization_config:
             config["optimization_config"] = optimization_config
