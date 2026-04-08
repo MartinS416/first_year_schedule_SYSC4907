@@ -54,6 +54,7 @@ class ScheduleBuilder:
         all_blocks = list(Block.objects.all())
         all_terms = list(Term.objects.all())
         # --- Read initial rankings from DB, not in-memory ---
+        self._emit("Step 1/3 — Reading initial scores…", "info", pct=5)
         initial_block_scores = [b.ranking for b in all_blocks]
         initial_avg = sum(initial_block_scores) / len(initial_block_scores) if initial_block_scores else 0
         initial_high = max(initial_block_scores) if initial_block_scores else 0
@@ -88,6 +89,7 @@ class ScheduleBuilder:
             self._emit(f"\n--- OPTIMIZATION PASS {iteration} ---", "info")
             actions_this_pass = 0
             # --- Bundle Optimization: Same-course replacement for required courses ---
+            self._emit("Step 2/3 — Running optimization passes…", "info", pct=5)
             self._emit(f"Bundle replacement for required courses...", "info")
             terms_to_optimize = all_terms
             if quick_mode_terms is not None and quick_mode_terms < len(all_terms):
@@ -279,6 +281,7 @@ class ScheduleBuilder:
             else:
                 no_improve_count = 0
         # After global optimization, update all block rankings to reflect the latest scores
+        self._emit("Step 3/3 — Finalizing and ranking blocks…", "info", pct=5)
         ranker.rank_all_blocks()
         # --- Always re-fetch blocks from DB for after-stats ---
         all_blocks = list(Block.objects.all())
