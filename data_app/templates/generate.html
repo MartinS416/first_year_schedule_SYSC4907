@@ -82,7 +82,6 @@
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
                     Run
                 </button>
-                <div class="pipeline-step-badge">Coming Soon</div>
             </div>
 
             <!-- Arrow -->
@@ -286,6 +285,88 @@
         </div>
     </div>
 
+
+    <!-- Optimization Settings -->
+    <div class="card settings-panel">
+        <div class="card-header settings-panel-header" onclick="togglePanel('opt')">
+            <div style="display:flex;align-items:center;gap:var(--space-2);flex:1;">
+                <div class="settings-panel-icon" style="background:var(--warning-100);color:var(--warning-600);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                </div>
+                <span class="settings-panel-title">Optimization Settings</span>
+                <span id="opt-modified-badge" class="pill pill-warning" style="display:none;font-size:10px;">Modified</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:var(--space-2);">
+                <button class="btn btn-ghost btn-sm" id="btn-reset-opt" onclick="event.stopPropagation();resetOptSettings()" style="display:none;font-size:11px;">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 .49-3.31"></path></svg>
+                    Reset
+                </button>
+                <svg id="opt-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;flex-shrink:0;color:var(--gray-400);"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+        </div>
+        <div id="opt-settings-body" class="card-body settings-panel-body">
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="opt-max-passes">Max Optimization Passes</label>
+                    <span class="setting-default">Default: 2</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="opt-max-passes" class="setting-range" min="1" max="50" step="1" value="2" oninput="onOptChange()">
+                    <span class="setting-value-badge" id="opt-max-passes-val">2</span>
+                </div>
+                <p class="setting-desc">Number of global optimization passes (higher = more thorough, slower).</p>
+            </div>
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="opt-swaps-per-pass">Swaps Per Pass</label>
+                    <span class="setting-default">Default: 10</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="opt-swaps-per-pass" class="setting-range" min="1" max="200" step="1" value="10" oninput="onOptChange()">
+                    <span class="setting-value-badge" id="opt-swaps-per-pass-val">10</span>
+                </div>
+                <p class="setting-desc">Number of random swaps attempted per pass.</p>
+            </div>
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="opt-early-stop">Early Stop Limit</label>
+                    <span class="setting-default">Default: 1</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="opt-early-stop" class="setting-range" min="1" max="20" step="1" value="1" oninput="onOptChange()">
+                    <span class="setting-value-badge" id="opt-early-stop-val">1</span>
+                </div>
+                <p class="setting-desc">Stop if this many passes yield no improvement.</p>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="opt-quick-mode-terms">Terms per Pass</label>
+                    <span class="setting-default">Default: 2</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="opt-quick-mode-terms" class="setting-range" min="1" max="104" step="1" value="2" oninput="onOptChange()">
+                    <span class="setting-value-badge" id="opt-quick-mode-terms-val">2 terms/pass</span>
+                </div>
+                <p class="setting-desc">Number of terms to optimize per optimization pass (lower = faster, higher = more thorough).</p>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-label-row">
+                    <label class="setting-label" for="opt-quick-mode-courses">Courses per Term</label>
+                    <span class="setting-default">Default: 2</span>
+                </div>
+                <div class="setting-control-row">
+                    <input type="range" id="opt-quick-mode-courses" class="setting-range" min="1" max="6" step="1" value="2" oninput="onOptChange()">
+                    <span class="setting-value-badge" id="opt-quick-mode-courses-val">2 courses/term</span>
+                </div>
+                <p class="setting-desc">Number of required courses to optimize per term (lower = faster, higher = more thorough).</p>
+                </div>
+                <p class="setting-desc">Stop if this many passes yield no improvement.</p>
+            </div>
+        </div>
+    </div>
+
 </div><!-- /.settings-row -->
 
 <!-- ══ STYLES ════════════════════════════════════════════════════════════════ -->
@@ -427,7 +508,54 @@
     };
 
     /* ── Panel open/close state ── */
-    var panelOpen = { gen: true, rank: true };
+    var panelOpen = { gen: true, rank: true, opt: true };
+    /* ── Optimization defaults ── */
+    var OPT_DEFAULTS = {
+        max_global_iter: 2,
+        max_random_swaps: 10,
+        early_stop_limit: 1,
+        quick_mode_terms: 2,
+        quick_mode_courses: 2,
+        acceptance_mode: false // false = only accept improvements
+    };
+    function readOptSettings() {
+        return {
+            max_global_iter: parseInt(document.getElementById('opt-max-passes').value),
+            max_random_swaps: parseInt(document.getElementById('opt-swaps-per-pass').value),
+            early_stop_limit: parseInt(document.getElementById('opt-early-stop').value),
+            quick_mode_terms: parseInt(document.getElementById('opt-quick-mode-terms').value),
+            quick_mode_courses: parseInt(document.getElementById('opt-quick-mode-courses').value),
+        };
+    }
+
+    function syncOptLabels() {
+        var s = readOptSettings();
+        document.getElementById('opt-max-passes-val').textContent = s.max_global_iter;
+        document.getElementById('opt-swaps-per-pass-val').textContent = s.max_random_swaps;
+        document.getElementById('opt-early-stop-val').textContent = s.early_stop_limit;
+        document.getElementById('opt-quick-mode-terms-val').textContent = s.quick_mode_terms + ' terms/pass';
+        document.getElementById('opt-quick-mode-courses-val').textContent = s.quick_mode_courses + ' courses/term';
+        var mod = (
+            s.max_global_iter !== OPT_DEFAULTS.max_global_iter ||
+            s.max_random_swaps !== OPT_DEFAULTS.max_random_swaps ||
+            s.early_stop_limit !== OPT_DEFAULTS.early_stop_limit ||
+            s.quick_mode_terms !== OPT_DEFAULTS.quick_mode_terms ||
+            s.quick_mode_courses !== OPT_DEFAULTS.quick_mode_courses
+        );
+        document.getElementById('opt-modified-badge').style.display = mod ? '' : 'none';
+        document.getElementById('btn-reset-opt').style.display      = mod ? '' : 'none';
+    }
+
+    window.onOptChange = syncOptLabels;
+
+    window.resetOptSettings = function () {
+        document.getElementById('opt-max-passes').value = OPT_DEFAULTS.max_global_iter;
+        document.getElementById('opt-swaps-per-pass').value = OPT_DEFAULTS.max_random_swaps;
+        document.getElementById('opt-early-stop').value = OPT_DEFAULTS.early_stop_limit;
+        document.getElementById('opt-quick-mode-terms').value = OPT_DEFAULTS.quick_mode_terms;
+        document.getElementById('opt-quick-mode-courses').value = OPT_DEFAULTS.quick_mode_courses;
+        syncOptLabels();
+    };
 
     window.togglePanel = function (key) {
         panelOpen[key] = !panelOpen[key];
@@ -655,9 +783,28 @@
         });
     };
 
-    /* ── Optimize (stub) ── */
+    /* ── Optimize ── */
     window.handleOptimize = function () {
-        showToast('Optimize is coming soon!', 'info');
+        if (isRunning) return;
+        isRunning = true;
+        setAllDisabled(true);
+        consoleEl.innerHTML = '';
+        consoleEl.style.display = 'block';
+        progBar.className = 'prog-bar';
+        setProgress(0, 'Starting optimization…', '');
+        appendToConsole('> Starting schedule optimization…', 'console-line-info');
+
+        streamPost('{% url "api_optimize_schedule" %}', {
+            gen:  readGenSettings(),
+            rank: readRankSettings(),
+            opt:  readOptSettings()
+        })
+        .catch(function (err) {
+            appendToConsole('> NETWORK ERROR: ' + err.message, 'console-line-error');
+            setProgressFinal(false);
+            showToast('Network error: ' + err.message, 'error');
+            onStreamDone(false);
+        });
     };
 
     /* ── Rank (standalone) ── */
@@ -683,6 +830,7 @@
     /* Init */
     syncGenLabels();
     syncRankLabels();
+    syncOptLabels();
 
 })();
 </script>

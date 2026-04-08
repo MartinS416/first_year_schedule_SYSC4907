@@ -15,6 +15,13 @@ class ScheduleRanker:
     Ranks blocks based on schedule quality (0-100).
     """
 
+    def score_block(self, block):
+        """
+        Public method to get the current score for a block (without saving).
+        """
+        score, _ = self._calculate_block_score_and_report(block)
+        return score
+
     def __init__(self, config=None, progress_callback=None):
         """
         config            — dict of penalty weights (missing keys fall back to DEFAULT_RANKING_CONFIG).

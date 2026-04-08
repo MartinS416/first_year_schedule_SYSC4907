@@ -26,6 +26,80 @@ from .services.schedule_service import (
     ranking_class,
 )
 
+# Import ScheduleBuilder for optimization endpoint
+from .services.schedule_builder import ScheduleBuilder, DEFAULT_CONFIG
+# ============================================================================
+#  API endpoints
+# ============================================================================
+
+from django.views.decorators.csrf import csrf_exempt
+
+# --- Optimization API ---
+@require_POST
+@csrf_exempt
+def api_optimize_schedule(request):
+    """
+    Optimize the generated schedule. Streams progress via SSE.
+    Accepts optional JSON config body.
+    """
+    import json as _json
+    from django.http import StreamingHttpResponse
+
+    try:
+        body = _json.loads(request.body or b"{}")
+        opt_body = body.get("opt", body)
+        config = {k: opt_body[k] for k in DEFAULT_CONFIG if k in opt_body}
+
+        opt_keys = ["max_global_iter", "max_random_swaps", "early_stop_limit"]
+        optimization_config = {k: opt_body[k] for k in opt_keys if k in opt_body}
+        if optimization_config:
+            config["optimization_config"] = optimization_config
+        if "optimization_config" in opt_body and isinstance(opt_body["optimization_config"], dict):
+            config["optimization_config"].update(opt_body["optimization_config"])
+    except Exception:
+        config = {}
+
+    def event_stream():
+        import json as _j
+        from queue import SimpleQueue
+        import threading
+
+        q = SimpleQueue()
+
+        def callback(kind, msg, pct):
+            q.put((kind, msg, pct))
+
+        def run():
+            overall_success = False
+            try:
+                builder = ScheduleBuilder(config=config, progress_callback=callback)
+                builder.optimize_schedule()
+                callback("success", "=== OPTIMIZATION COMPLETE ===", pct=100)
+                overall_success = True
+            except Exception as exc:
+                callback("error", f"ERROR: {exc}", 100)
+            finally:
+                q.put(("__done__", overall_success))
+
+        t = threading.Thread(target=run, daemon=True)
+        t.start()
+
+        while True:
+            item = q.get()
+            if isinstance(item, tuple) and len(item) == 2 and item[0] == "__done__":
+                success = item[1]
+                payload = _j.dumps({"type": "done", "message": "", "pct": 100, "success": success})
+                yield f"data: {payload}\n\n"
+                break
+            kind, msg, pct = item
+            payload = _j.dumps({"type": kind, "message": msg, "pct": pct})
+            yield f"data: {payload}\n\n"
+
+    response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
+    response["Cache-Control"] = "no-cache"
+    response["X-Accel-Buffering"] = "no"
+    return response
+
 
 # ---------------------------------------------------------------------------
 #  Shared helpers
